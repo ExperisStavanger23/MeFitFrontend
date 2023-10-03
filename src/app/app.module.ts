@@ -7,6 +7,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle"
 import { MatButtonModule } from "@angular/material/button"
 import { KeycloakAngularModule, KeycloakService } from "keycloak-angular"
 import { environment } from "src/environment/environment"
+import { NavBarComponent } from "./components/nav-bar/nav-bar.component"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -25,7 +26,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavBarComponent],
   imports: [
     BrowserModule,
     KeycloakAngularModule,
