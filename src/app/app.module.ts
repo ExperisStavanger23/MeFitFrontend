@@ -8,6 +8,8 @@ import { MatButtonModule } from "@angular/material/button"
 import { KeycloakAngularModule, KeycloakService } from "keycloak-angular"
 import { environment } from "src/environment/environment"
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component"
+import { MatToolbarModule } from "@angular/material/toolbar"
+import { MatIconModule } from "@angular/material/icon"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -34,6 +36,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NoopAnimationsModule,
     MatSlideToggleModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   providers: [
     {

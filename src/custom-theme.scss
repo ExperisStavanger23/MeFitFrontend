@@ -21,6 +21,14 @@ $MeFitFrontend-theme: mat.define-light-theme((
   )
 ));
 
+$primary-color: map-get($MeFitFrontend-primary, 500);
+$accent-color: map-get($MeFitFrontend-accent, 500);
+$warn-color: map-get($MeFitFrontend-warn, 500);
+:root {
+  --primary-color: #{$primary-color};
+  --accent-color: #{$accent-color};
+  --warn-color: #{$warn-color};
+}
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
