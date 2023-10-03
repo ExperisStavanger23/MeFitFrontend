@@ -1,12 +1,13 @@
 import { APP_INITIALIZER, NgModule } from "@angular/core"
 import { BrowserModule } from "@angular/platform-browser"
-
 import { AppRoutingModule } from "./app-routing.module"
 import { AppComponent } from "./app.component"
-
+import { NoopAnimationsModule } from "@angular/platform-browser/animations"
+import { MatSlideToggleModule } from "@angular/material/slide-toggle"
+import { MatButtonModule } from "@angular/material/button"
 import { KeycloakAngularModule, KeycloakService } from "keycloak-angular"
 import { environment } from "src/environment/environment"
-console.log(environment.keycloakUrl)
+
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
@@ -25,7 +26,14 @@ function initializeKeycloak(keycloak: KeycloakService) {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, KeycloakAngularModule],
+  imports: [
+    BrowserModule,
+    KeycloakAngularModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+  ],
   providers: [
     {
       provide: APP_INITIALIZER,

@@ -1,0 +1,28 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use './assets/theming/palette' as palette;
+// Include the common styles for Angular Material. 
+@include mat.core();
+
+// Define the palettes
+$MeFitFrontend-primary: mat.define-palette(palette.$primary);
+$MeFitFrontend-accent: mat.define-palette(palette.$accent);
+$MeFitFrontend-warn: mat.define-palette(palette.$warn);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$MeFitFrontend-theme: mat.define-light-theme((
+  color: (
+    primary: $MeFitFrontend-primary,
+    accent: $MeFitFrontend-accent,
+    warn: $MeFitFrontend-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($MeFitFrontend-theme);
+
