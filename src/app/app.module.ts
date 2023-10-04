@@ -27,6 +27,7 @@ import { MatTableModule } from "@angular/material/table"
 import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { NgChartsModule } from "ng2-charts"
 import { BarChartComponent } from "./components/bar-chart/bar-chart.component"
+import { DetailsCardComponent } from "./components/details-card/details-card.component"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -56,6 +57,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     InfoCardComponent,
     DashboardPage,
     BarChartComponent,
+    DetailsCardComponent,
   ],
   imports: [
     BrowserModule,
