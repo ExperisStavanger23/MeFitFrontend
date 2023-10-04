@@ -16,7 +16,11 @@ import { MatInputModule } from "@angular/material/input"
 import { MatFormFieldModule } from "@angular/material/form-field"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { MatDatepickerModule } from "@angular/material/datepicker"
-import { MatNativeDateModule } from "@angular/material/core"
+import { MatNativeDateModule } from "@angular/material/core";
+import { ProgramsPage } from './pages/programs/programs.page';
+import { WorkoutsPage } from './pages/workouts/workouts.page';
+import { ExercisesPage } from './pages/exercises/exercises.page';
+import { ProfilePage } from './pages/profile/profile.page'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -35,7 +39,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, OnboardingPage, NavBarComponent],
+  declarations: [AppComponent, OnboardingPage, NavBarComponent, ProgramsPage, WorkoutsPage, ExercisesPage, ProfilePage],
   imports: [
     BrowserModule,
     KeycloakAngularModule,

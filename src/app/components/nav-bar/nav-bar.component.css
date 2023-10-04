@@ -35,8 +35,9 @@
   margin-left: 30px;
 }
 
-.nav-buttons > button {
+.nav-buttons > a {
   margin-right: 10px;
+  text-decoration: none;
 }
 
 .mat-mdc-raised-button {
