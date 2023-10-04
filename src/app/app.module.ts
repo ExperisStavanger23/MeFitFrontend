@@ -23,7 +23,8 @@ import { ExercisesPage } from "./pages/exercises/exercises.page"
 import { ProfilePage } from "./pages/profile/profile.page"
 import { InfoCardComponent } from "./components/info-card/info-card.component"
 import { MatCardModule } from "@angular/material/card"
-import { MatTableModule } from "@angular/material/table"
+import { MatTableModule } from "@angular/material/table";
+import { DetailsCardComponent } from './components/details-card/details-card.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -51,6 +52,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ExercisesPage,
     ProfilePage,
     InfoCardComponent,
+    DetailsCardComponent,
   ],
   imports: [
     BrowserModule,

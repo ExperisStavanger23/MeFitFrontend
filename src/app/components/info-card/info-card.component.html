@@ -1,5 +1,5 @@
 <div class="info-card-container">
-  <mat-card class="info-card">
+  <mat-card class="info-card" (click)="emitId()">
     <img
       mat-card-image
       src="https://hips.hearstapps.com/hmg-prod/images/running-track-1667904802.jpg?crop=0.668xw:1.00xh;0.0737xw,0&resize=1200:*" />
@@ -18,7 +18,7 @@
       </ng-container>
     </div>
   </mat-card>
-  <div class="card-add-button">
+  <div class="card-add-button" (click)="add()">
     <div class="green-background"></div>
     <mat-icon class="add-icon">add</mat-icon>
   </div>

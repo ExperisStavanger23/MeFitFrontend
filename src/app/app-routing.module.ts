@@ -5,15 +5,16 @@ import { ProgramsPage } from "./pages/programs/programs.page"
 import { WorkoutsPage } from "./pages/workouts/workouts.page"
 import { ExercisesPage } from "./pages/exercises/exercises.page"
 import { ProfilePage } from "./pages/profile/profile.page"
-import { InfoCardComponent } from "./components/info-card/info-card.component"
+import { DetailsCardComponent } from "./components/details-card/details-card.component"
 
 const routes: Routes = [
   { path: "onboarding", component: OnboardingPage },
   { path: "programs", component: ProgramsPage },
+  { path: "programs/:id", component: DetailsCardComponent },
   { path: "workouts", component: WorkoutsPage },
+  { path: "workouts/:id", component: DetailsCardComponent },
   { path: "Exercises", component: ExercisesPage },
   { path: "profile", component: ProfilePage },
-  { path: "", component: InfoCardComponent },
 ]
 
 @NgModule({
