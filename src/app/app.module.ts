@@ -10,6 +10,13 @@ import { environment } from "src/environment/environment"
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component"
 import { MatToolbarModule } from "@angular/material/toolbar"
 import { MatIconModule } from "@angular/material/icon"
+import { OnboardingPage } from "./pages/onboarding/onboarding.page"
+import { MatSelectModule } from "@angular/material/select"
+import { MatInputModule } from "@angular/material/input"
+import { MatFormFieldModule } from "@angular/material/form-field"
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { MatDatepickerModule } from "@angular/material/datepicker"
+import { MatNativeDateModule } from "@angular/material/core"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -28,7 +35,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent],
+  declarations: [AppComponent, OnboardingPage, NavBarComponent],
   imports: [
     BrowserModule,
     KeycloakAngularModule,
@@ -38,6 +45,13 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     {

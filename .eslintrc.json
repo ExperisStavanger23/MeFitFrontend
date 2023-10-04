@@ -38,7 +38,8 @@
           {
             "endOfLine": "auto"
           }
-        ]
+        ],
+        "@angular-eslint/component-class-suffix": 0
       }
     },
     {

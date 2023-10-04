@@ -1,0 +1,28 @@
+p {
+    margin: 5px;
+}
+
+.onboarding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F4F5F7;
+}
+
+.onboarding-text {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.onboarding-form {
+    background-color: #FEFEFE;
+    margin: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 33%;
+
+    border-radius: 10px;
+}

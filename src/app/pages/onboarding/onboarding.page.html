@@ -1,0 +1,55 @@
+<div class="onboarding">
+    <div class="onboarding-text">
+        <h1>Welcome</h1>
+        <p>Please fill in som info so we can get you started</p>
+        <p>you can change info later</p>
+    </div>
+    <form class="onboarding-form" [formGroup]="form" (submit)="handleSubmit($event)">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput type="text" name="Name" formControlName="name" >
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Experience</mat-label>
+            <mat-select matInput type="text" formControlName="experience">
+                <mat-option value="option1"> Option1</mat-option>
+                <mat-option value="option2"> Option2</mat-option>
+                <mat-option value="option3"> Option3</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <mat-select matInput type="text" formControlName="gender">
+                <mat-option value="male"> Male</mat-option>
+                <mat-option value="female"> Female</mat-option>
+                <mat-option value="other"> Other</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Weight (kg)</mat-label>
+            <input matInput type="text" formControlName="weight">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Height (cm)</mat-label>
+            <input matInput type="text" formControlName="height">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Birthday (dd/MM/yyyy)</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="dd/MM/yyyy" formControlName="bDay">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        <button mat-flat-button color="accent" type="submit">Submit</button>
+    </form>
+</div>
