@@ -15,3 +15,35 @@
 .navbar-spacer {
   flex: 1 1 auto;
 }
+
+.navbar {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.logo {
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.nav-title {
+  font-weight: bold;
+}
+
+.nav-buttons {
+  margin-left: 30px;
+}
+
+.nav-buttons > a {
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.mat-mdc-raised-button {
+  --mdc-protected-button-container-color: #2d7556;
+}
+
+.user-icon {
+  margin-left: 30px;
+}
