@@ -16,11 +16,14 @@ import { MatInputModule } from "@angular/material/input"
 import { MatFormFieldModule } from "@angular/material/form-field"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { MatDatepickerModule } from "@angular/material/datepicker"
-import { MatNativeDateModule } from "@angular/material/core";
-import { ProgramsPage } from './pages/programs/programs.page';
-import { WorkoutsPage } from './pages/workouts/workouts.page';
-import { ExercisesPage } from './pages/exercises/exercises.page';
-import { ProfilePage } from './pages/profile/profile.page'
+import { MatNativeDateModule } from "@angular/material/core"
+import { ProgramsPage } from "./pages/programs/programs.page"
+import { WorkoutsPage } from "./pages/workouts/workouts.page"
+import { ExercisesPage } from "./pages/exercises/exercises.page"
+import { ProfilePage } from "./pages/profile/profile.page"
+import { InfoCardComponent } from "./components/info-card/info-card.component"
+import { MatCardModule } from "@angular/material/card"
+import { MatTableModule } from "@angular/material/table"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -39,7 +42,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, OnboardingPage, NavBarComponent, ProgramsPage, WorkoutsPage, ExercisesPage, ProfilePage],
+  declarations: [
+    AppComponent,
+    OnboardingPage,
+    NavBarComponent,
+    ProgramsPage,
+    WorkoutsPage,
+    ExercisesPage,
+    ProfilePage,
+    InfoCardComponent,
+  ],
   imports: [
     BrowserModule,
     KeycloakAngularModule,
@@ -56,6 +68,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
+    MatTableModule,
   ],
   providers: [
     {
