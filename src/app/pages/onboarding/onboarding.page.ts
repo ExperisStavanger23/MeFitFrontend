@@ -18,7 +18,7 @@ export class OnboardingPage {
       experience: [null],
       gender: [null],
       height: [null, Validators.pattern("^([5-9][0-9]|[1-2][0-9]{2}|300)$")],
-      weight: [null, Validators.pattern("^(1[0-9]{1,2}|[2-6][0-9]{1,2}|700)$")],
+      weight: [null, Validators.pattern("^([2-9][0-9]|[1-9][0-9][0-9])$")],
       bDay: [null],
     })
   }
