@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, Input, Output, EventEmitter } from "@angular/core"
 
 @Component({
   selector: "app-info-card",
@@ -6,6 +6,8 @@ import { Component } from "@angular/core"
   styleUrls: ["./info-card.component.css"],
 })
 export class InfoCardComponent {
+  @Input() id = 1
+  @Output() emitterId = new EventEmitter<number>()
   // TODO: replace with data from API
   name = "Running"
   description =
@@ -17,5 +19,8 @@ export class InfoCardComponent {
   }
   add() {
     throw new Error("Method not implemented.")
+  }
+  emitId() {
+    this.emitterId.emit(this.id)
   }
 }

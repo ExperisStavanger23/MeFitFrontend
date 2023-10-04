@@ -3,8 +3,24 @@
 html,
 body {
   height: 100%;
-}
-body {
+  background-color: #f4f5f7;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: var(--secondary-color);
 }
