@@ -14,8 +14,9 @@ const routes: Routes = [
   { path: "programs/:id", component: DetailsCardComponent },
   { path: "workouts", component: WorkoutsPage },
   { path: "workouts/:id", component: WorkoutDetailsCardComponent },
-  { path: "Exercises", component: ExercisesPage },
+  { path: "exercises", component: ExercisesPage },
   { path: "profile", component: ProfilePage },
+  { path: "dashboard", component: ProfilePage },
 ]
 
 @NgModule({
