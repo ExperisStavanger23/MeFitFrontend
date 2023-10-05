@@ -40,3 +40,15 @@ export interface RealmManagement {
 export interface Account {
   roles: string[]
 }
+
+export interface User {
+  name: string
+  bio: string
+  email: string
+  profilePicture: string
+  gender: string
+  weight: number
+  height: number
+  birthday: Date
+  roleId: number
+}

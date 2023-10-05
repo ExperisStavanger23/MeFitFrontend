@@ -44,8 +44,8 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Birthday (dd/MM/yyyy)</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="dd/MM/yyyy" formControlName="bDay">
+            <mat-label>Birthday (MM/dd/yyyy)</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="MM/dd/yyyy" formControlName="birthday">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

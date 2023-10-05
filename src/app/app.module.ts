@@ -27,6 +27,7 @@ import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { NgChartsModule } from "ng2-charts"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
 import { WorkoutDetailsCardComponent } from "./components/workout-details-card/workout-details-card.component"
+import { HttpClientModule } from "@angular/common/http"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -77,6 +78,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatCardModule,
     MatTableModule,
     NgChartsModule,
+    HttpClientModule,
   ],
   providers: [
     {

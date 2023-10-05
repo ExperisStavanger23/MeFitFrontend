@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { KeycloakService } from "keycloak-angular"
 import jwt_decode from "jwt-decode"
 import { claims } from "../../../interfaces"
+import { ApiService } from "src/app/services/api.service"
 
 @Component({
   selector: "app-onboarding",
@@ -16,7 +17,8 @@ export class OnboardingPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private keycloak: KeycloakService
+    private keycloak: KeycloakService,
+    private api: ApiService
   ) {
     this.form = fb.group({
       name: ["", Validators.required],
@@ -25,7 +27,7 @@ export class OnboardingPage implements OnInit {
       gender: [null],
       height: [null, Validators.pattern("^([5-9][0-9]|[1-2][0-9]{2}|300)$")],
       weight: [null, Validators.pattern("^([2-9][0-9]|[1-9][0-9][0-9])$")],
-      bDay: [null],
+      birthday: [null],
     })
   }
 
@@ -36,13 +38,11 @@ export class OnboardingPage implements OnInit {
       name: claims.given_name,
       email: claims.email,
     })
-
-    console.log(claims)
   }
 
-  handleSubmit(event: SubmitEvent): void {
+  async handleSubmit(event: SubmitEvent): Promise<void> {
     event.preventDefault()
-    console.log(this.form.value)
+    this.api.postUser(this.form.value)
   }
 
   private async getTokenClaims(): Promise<claims> {
