@@ -6,7 +6,6 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations"
 import { MatSlideToggleModule } from "@angular/material/slide-toggle"
 import { MatButtonModule } from "@angular/material/button"
 import { KeycloakAngularModule, KeycloakService } from "keycloak-angular"
-import { environment } from "src/environment/environment"
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component"
 import { MatToolbarModule } from "@angular/material/toolbar"
 import { MatIconModule } from "@angular/material/icon"
@@ -33,9 +32,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: environment.keycloakUrl,
-        realm: environment.keycloakRealm,
-        clientId: environment.keycloakClientId,
+        url: import.meta.env["NG_APP_keycloakUrl"],
+        realm: import.meta.env["NG_APP_keycloakRealm"],
+        clientId: import.meta.env["NG_APP_keycloakClientId"],
       },
       initOptions: {
         onLoad: "check-sso",
