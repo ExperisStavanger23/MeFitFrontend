@@ -23,6 +23,8 @@ import { ProfilePage } from "./pages/profile/profile.page"
 import { InfoCardComponent } from "./components/info-card/info-card.component"
 import { MatCardModule } from "@angular/material/card"
 import { MatTableModule } from "@angular/material/table"
+import { DashboardPage } from "./pages/dashboard/dashboard.page"
+import { NgChartsModule } from "ng2-charts"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -51,6 +53,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ExercisesPage,
     ProfilePage,
     InfoCardComponent,
+    DashboardPage,
     DetailsCardComponent,
   ],
   imports: [
@@ -71,6 +74,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatNativeDateModule,
     MatCardModule,
     MatTableModule,
+    NgChartsModule,
   ],
   providers: [
     {
