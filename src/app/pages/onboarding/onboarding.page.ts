@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { KeycloakService } from "keycloak-angular"
 import jwt_decode from "jwt-decode"
+import { claims } from "../../../interfaces"
 
 @Component({
   selector: "app-onboarding",
@@ -17,15 +18,7 @@ export class OnboardingPage implements OnInit {
     private fb: FormBuilder,
     private keycloak: KeycloakService
   ) {
-    console.log("Constructor")
-    this.form = fb.group({})
-  }
-
-  async ngOnInit(): Promise<void> {
-    console.log("onInit")
-
-    await this.getTokenClaims()
-    this.form = this.fb.group({
+    this.form = fb.group({
       name: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
       experience: [null],
@@ -34,8 +27,17 @@ export class OnboardingPage implements OnInit {
       weight: [null, Validators.pattern("^([2-9][0-9]|[1-9][0-9][0-9])$")],
       bDay: [null],
     })
+  }
 
-    console.log("endOnInit")
+  async ngOnInit(): Promise<void> {
+    const claims = await this.getTokenClaims()
+    this.form.setValue({
+      ...this.form.value,
+      name: claims.given_name,
+      email: claims.email,
+    })
+
+    console.log(claims)
   }
 
   handleSubmit(event: SubmitEvent): void {
@@ -43,9 +45,9 @@ export class OnboardingPage implements OnInit {
     console.log(this.form.value)
   }
 
-  private async getTokenClaims(): Promise<object> {
+  private async getTokenClaims(): Promise<claims> {
     const token = await this.keycloak.getToken()
-    const claims: object = jwt_decode(token)
-    return {}
+    const claims: claims = jwt_decode(token)
+    return claims
   }
 }
