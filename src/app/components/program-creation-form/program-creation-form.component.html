@@ -1,0 +1,53 @@
+<form class="program-form" [formGroup]="form" (submit)="handleSubmit($event)">
+  <mat-form-field>
+    <mat-label>Program name</mat-label>
+    <input matInput type="text" name="Name" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Program description</mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="10"
+      formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Experience level</mat-label>
+    <mat-select matInput type="text" formControlName="experienceLevel">
+      <mat-option value="option1"> Option1</mat-option>
+      <mat-option value="option2"> Option2</mat-option>
+      <mat-option value="option3"> Option3</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Image (insert image url)</mat-label>
+    <input matInput type="text" name="ImageUrl" formControlName="imageUrl" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Workouts</mat-label>
+    <input matInput type="text" name="ImageUrl" formControlName="workouts" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <input matInput type="text" name="ImageUrl" formControlName="category" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Duration (days)</mat-label>
+    <input matInput type="text" name="ImageUrl" formControlName="duration" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Tags</mat-label>
+    <input matInput type="text" name="ImageUrl" formControlName="tags" />
+  </mat-form-field>
+
+  <button mat-flat-button color="accent" type="submit">Submit</button>
+</form>

@@ -27,6 +27,9 @@ import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { NgChartsModule } from "ng2-charts"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
 import { WorkoutDetailsCardComponent } from "./components/workout-details-card/workout-details-card.component"
+import { CreationPage } from "./pages/creation/creation.page"
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { ProgramCreationFormComponent } from './components/program-creation-form/program-creation-form.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -57,6 +60,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     DashboardPage,
     DetailsCardComponent,
     WorkoutDetailsCardComponent,
+    CreationPage,
+    ProgramCreationFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +82,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatCardModule,
     MatTableModule,
     NgChartsModule,
+    MatCheckboxModule,
   ],
   providers: [
     {

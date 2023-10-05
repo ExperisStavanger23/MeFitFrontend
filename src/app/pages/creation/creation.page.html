@@ -1,0 +1,29 @@
+<div class="creation-container">
+  <div>
+    <h1>Welcome to the creation page</h1>
+    <p>
+      Underneath you can create a program or an workout. Please start by
+      choosing the type you want to create
+    </p>
+  </div>
+  <div>
+    <mat-checkbox
+      class="example-margin"
+      [checked]="createProgram"
+      (change)="setCreateProgram($event.checked)">
+      Program
+    </mat-checkbox>
+    <mat-checkbox
+      class="example-margin"
+      [checked]="createWorkout"
+      (change)="setCreateWorkout($event.checked)">
+      Workout
+    </mat-checkbox>
+  </div>
+
+  <div id="create-program">
+    <h3>Create program</h3>
+    <app-program-creation-form
+      class="creation-form"></app-program-creation-form>
+  </div>
+</div>
