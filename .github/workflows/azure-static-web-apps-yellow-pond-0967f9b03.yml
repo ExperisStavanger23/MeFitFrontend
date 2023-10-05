@@ -1,36 +1,45 @@
-name: Azure Static Web Apps CI/CD
+name: Build and Deploy
 
 on:
   push:
     branches:
       - deploy
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - deploy
 
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  build_and_deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
-      - name: Install Dependencies and Build
+          node-version: 18.x
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Set Environment Variables
         run: |
-          npm install
-          npm run build --prod
+          echo "NG_APP_keycloakUrl=${{ secrets.NG_APP_keycloakUrl }}" >> .env.production
+          echo "NG_APP_keycloakRealm=${{ secrets.NG_APP_keycloakRealm }}" >> .env.production
+          echo "NG_APP_keycloakClientId=${{ secrets.NG_APP_keycloakClientId }}" >> .env.production
+        env:
+          NG_APP_keycloakUrl: ${{ secrets.NG_APP_keycloakUrl }}
+          NG_APP_keycloakRealm: ${{ secrets.NG_APP_keycloakRealm }}
+          NG_APP_keycloakClientId: ${{ secrets.NG_APP_keycloakClientId }}
+
+      - name: Build Angular App
+        run: npm run build --prod
+        env:
+          NODE_ENV: production
+
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_YELLOW_POND_0967F9B03 }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "./dist/me-fit-frontend"
+          app_location: "./dist/me-fit-frontend" # Update to the correct location of your build artifacts
