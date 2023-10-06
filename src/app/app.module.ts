@@ -28,9 +28,13 @@ import { NgChartsModule } from "ng2-charts"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
 import { WorkoutDetailsCardComponent } from "./components/workout-details-card/workout-details-card.component"
 import { CreationPage } from "./pages/creation/creation.page"
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { ProgramCreationFormComponent } from './components/program-creation-form/program-creation-form.component';
-import { WorkoutCreationFormComponent } from './components/workout-creation-form/workout-creation-form.component'
+import { MatCheckboxModule } from "@angular/material/checkbox"
+import { ProgramCreationFormComponent } from "./components/program-creation-form/program-creation-form.component"
+import { WorkoutCreationFormComponent } from "./components/workout-creation-form/workout-creation-form.component"
+import { ExerciseCreationFormComponent } from "./components/exercise-creation-form/exercise-creation-form.component"
+import { ExerciseDetailsCardComponent } from "./components/exercise-details-card/exercise-details-card.component"
+import { HttpClientModule } from "@angular/common/http"
+import { ExerciseInfoCardComponent } from "./components/exercise-info-card/exercise-info-card.component"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -64,6 +68,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CreationPage,
     ProgramCreationFormComponent,
     WorkoutCreationFormComponent,
+    ExerciseCreationFormComponent,
+    ExerciseDetailsCardComponent,
+    ExerciseInfoCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +92,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatTableModule,
     NgChartsModule,
     MatCheckboxModule,
+    HttpClientModule,
   ],
   providers: [
     {
