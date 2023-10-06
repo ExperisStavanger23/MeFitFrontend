@@ -1,0 +1,24 @@
+p {
+  margin: 5px;
+}
+#create-program {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+.creation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f5f7;
+  & > div {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+.creation-form {
+  width: 100%;
+}

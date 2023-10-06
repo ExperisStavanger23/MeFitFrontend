@@ -1,0 +1,21 @@
+.program-form {
+  box-sizing: border-box;
+  background-color: #fefefe;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.set-rep-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  & > h3 {
+    text-align: center;
+    text-transform: capitalize;
+  }
+}
