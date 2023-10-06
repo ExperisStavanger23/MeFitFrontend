@@ -13,4 +13,8 @@ export class ApiWorkoutService {
   getAllWorkouts(): Observable<Workout[]> {
     return this.http.get<Workout[]>(`${this.apiUrlBase}/Workout`)
   }
+
+  getWorkoutById(id: number): Observable<Workout> {
+    return this.http.get<Workout>(`${this.apiUrlBase}/Workout/${id}`)
+  }
 }

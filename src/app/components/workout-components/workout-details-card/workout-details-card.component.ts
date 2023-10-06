@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
-import { ApiExercisesService } from "src/app/services/api-exercises.service"
+import { ApiWorkoutService } from "src/app/services/api-workout.service"
+import { Workout } from "src/interfaces"
 import { Exercise } from "src/types"
 
 @Component({
@@ -11,26 +12,38 @@ import { Exercise } from "src/types"
 export class WorkoutDetailsCardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private apiExercisesService: ApiExercisesService
+    private apiWorkoutService: ApiWorkoutService
   ) {}
 
   id!: number
-  exercise!: Exercise
+  workout: Workout = {
+    id: 0,
+    name: "",
+    description: "",
+    category: 0,
+    recommendedLevel: 0,
+    duration: 0,
+    image: "",
+    exercises: [],
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params["id"]
-    this.apiExercisesService
-      .getExerciseById(this.id)
-      .subscribe((exercise: Exercise) => {
-        console.log(exercise)
-
-        this.exercise = {
-          id: exercise.id,
-          name: exercise.name,
-          description: exercise.description,
-          image: exercise.image,
-          video: exercise.video,
+    this.apiWorkoutService
+      .getWorkoutById(this.id)
+      .subscribe((workout: Workout) => {
+        this.workout = {
+          id: workout.id,
+          name: workout.name,
+          description: workout.description,
+          image: workout.image,
+          category: workout.category,
+          recommendedLevel: workout.recommendedLevel,
+          duration: workout.duration,
+          exercises: workout.exercises,
         }
       })
+    console.log(this.workout)
+    //TODO: this should work, but backend fetch is not working missing DTO maps....🤷‍♂️
   }
 }

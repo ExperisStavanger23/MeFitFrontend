@@ -88,15 +88,6 @@ export interface Workout {
   image: string
   exercises: Exercise[]
 }
-
-export interface workout {
-  id: number
-  name: string
-  duration: number
-  description: string
-  imageUrl: string
-  exercises: Exercise[]
-}
 export interface Exercise {
   id: number
   name: string
