@@ -1,0 +1,29 @@
+<form class="program-form" [formGroup]="form" (submit)="handleSubmit($event)">
+  <mat-form-field>
+    <mat-label>Program name</mat-label>
+    <input matInput type="text" name="Name" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Program description</mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="10"
+      formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Image (insert image url)</mat-label>
+    <input matInput type="text" name="ImageUrl" formControlName="imageUrl" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Video (insert video url)</mat-label>
+    <input matInput type="text" name="VideoUrl" formControlName="videoUrl" />
+  </mat-form-field>
+
+  <button mat-flat-button color="accent" type="submit">Submit</button>
+</form>
