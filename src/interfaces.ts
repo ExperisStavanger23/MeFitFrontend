@@ -1,4 +1,4 @@
-export interface claims {
+export interface Claims {
   exp: number
   iat: number
   auth_time: number
@@ -39,4 +39,41 @@ export interface RealmManagement {
 
 export interface Account {
   roles: string[]
+}
+
+export interface PostUser {
+  id: string
+  name: string
+  bio: string
+  email: string
+  profilePicture: string
+  gender: string
+  weight: number
+  height: number
+  birthday: Date
+  roleId?: number
+}
+
+export interface User {
+  id: number
+  name: string
+  bio: string
+  email: string
+  profilePicture: string
+  experienceLvl: number
+  gender: string
+  weight: number
+  height: number
+  birthday: string
+  role: Role
+  goals: number[]
+  created: number[]
+  userExercises: number[]
+  userWorkouts: number[]
+  userPrograms: number[]
+}
+
+export interface Role {
+  id: number
+  roleTitle: string
 }
