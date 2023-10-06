@@ -8,7 +8,7 @@ import { ProfilePage } from "./pages/profile/profile.page"
 import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
 import { CreationPage } from "./pages/creation/creation.page"
-import { ExerciseDetailsCardComponent } from "./components/exercise-details-card/exercise-details-card.component"
+import { ExerciseDetailsCardComponent } from "./components/exercise-components/exercise-details-card/exercise-details-card.component"
 
 const routes: Routes = [
   { path: "onboarding", component: OnboardingPage },

@@ -77,3 +77,37 @@ export interface Role {
   id: number
   roleTitle: string
 }
+
+export interface Workout {
+  id: number
+  name: string
+  description: string
+  category: number
+  recommendedLevel: number
+  duration: number
+  image: string
+  exercises: Exercise[]
+}
+
+export interface workout {
+  id: number
+  name: string
+  duration: number
+  description: string
+  imageUrl: string
+  exercises: Exercise[]
+}
+export interface Exercise {
+  id: number
+  name: string
+  description: string
+  image: string
+  video: string
+}
+
+export interface ExerciseSetRep {
+  id: number
+  name: string
+  sets: number
+  reps: number
+}
