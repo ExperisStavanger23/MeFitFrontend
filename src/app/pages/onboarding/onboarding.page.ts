@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { KeycloakService } from "keycloak-angular"
-import jwt_decode from "jwt-decode"
-import { claims } from "../../../interfaces"
-import { ApiService } from "src/app/services/api.service"
+import { PostUser } from "src/interfaces"
+import { UserApiService } from "src/app/services/user-api.service"
+import { getTokenClaims } from "src/helper-functions"
 
 @Component({
   selector: "app-onboarding",
@@ -18,7 +18,7 @@ export class OnboardingPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private keycloak: KeycloakService,
-    private api: ApiService
+    private userApi: UserApiService
   ) {
     this.form = fb.group({
       name: ["", Validators.required],
@@ -32,7 +32,7 @@ export class OnboardingPage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const claims = await this.getTokenClaims()
+    const claims = getTokenClaims(await this.keycloak.getToken())
     this.form.setValue({
       ...this.form.value,
       name: claims.given_name,
@@ -42,12 +42,25 @@ export class OnboardingPage implements OnInit {
 
   async handleSubmit(event: SubmitEvent): Promise<void> {
     event.preventDefault()
-    this.api.postUser(this.form.value)
-  }
+    const claims = getTokenClaims(await this.keycloak.getToken())
 
-  private async getTokenClaims(): Promise<claims> {
-    const token = await this.keycloak.getToken()
-    const claims: claims = jwt_decode(token)
-    return claims
+    const birthday = dateformater(this.form.value.birthday)
+
+    const userToPost: PostUser = {
+      ...this.form.value,
+      bio: "",
+      profilePicture: "",
+      birthday: birthday,
+      id: claims.sub,
+    }
+
+    this.userApi.postUser(userToPost)
   }
+}
+
+function dateformater(date: Date): string {
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = date.getDate().toString().padStart(2, "0")
+  return `${year}-${month}-${day}`
 }
