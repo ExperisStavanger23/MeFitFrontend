@@ -34,8 +34,9 @@ import { ProgramCreationFormComponent } from "./components/program-creation-form
 import { WorkoutCreationFormComponent } from "./components/workout-creation-form/workout-creation-form.component"
 import { ExerciseCreationFormComponent } from "./components/exercise-creation-form/exercise-creation-form.component"
 import { ExerciseDetailsCardComponent } from "./components/exercise-details-card/exercise-details-card.component"
-import { HttpClientModule } from "@angular/common/http"
 import { ExerciseInfoCardComponent } from "./components/exercise-info-card/exercise-info-card.component"
+import { MatDialogModule } from "@angular/material/dialog";
+import { EditInfoComponent } from './components/profile-components/edit-info/edit-info.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -72,6 +73,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ExerciseCreationFormComponent,
     ExerciseDetailsCardComponent,
     ExerciseInfoCardComponent,
+    EditInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HttpClientModule,
     MatCheckboxModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [
     {

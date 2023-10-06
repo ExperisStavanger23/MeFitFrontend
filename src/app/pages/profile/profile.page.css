@@ -1,3 +1,9 @@
+img {
+    height: 100%;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+}
+
 .profile-page {
     padding: 30px;
 }
@@ -8,14 +14,25 @@
     justify-content: space-between;
     align-items: center;
     padding: 50px;
+    position: relative;
     
 }
-.profile-img {
 
+.left {
+    display:flex;
+    align-items: center;
+}
+
+.profile-img {
     height: 200px;
 }
-.profile-info {
 
+.profile-info {
+    margin-left: 30px;
+}
+.info-span {
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 .profile-bio {
@@ -27,8 +44,16 @@
     max-height: 200px;
 }
 
-img {
-    height: 100%;
-    border: 1px solid var(--primary-color);
-    border-radius: 50%;
+
+.edit-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: inherit;
+}
+.edit-btn:hover {
+    cursor: pointer;
+    background-color: rgb(214, 214, 214);
 }

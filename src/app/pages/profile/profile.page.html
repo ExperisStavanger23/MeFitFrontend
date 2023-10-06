@@ -1,14 +1,17 @@
 <div class="profile-page">
     <div class="profile-card">
-        <div class="profile-img">
-            <img src="{{user.profilePicture}}" alt="pfp">
-        </div>
-
-        <div class="profile-info">
-            <p>Name: {{user.name}}</p>
-            <p>Email: {{user.email}}</p>
-            <p>Hight: {{user.height}}cm</p>
-            <p>Weight: {{user.weight}}kg</p>
+        <button class="edit-btn" (click)="openDialog()"><mat-icon>edit</mat-icon></button>
+        <div class="left">
+            <div class="profile-img">
+                <img src="{{user.profilePicture}}" alt="pfp">
+            </div>
+    
+            <div class="profile-info">
+                <p><span class="info-span">Name:</span> {{user.name}}</p>
+                <p><span class="info-span">Email:</span> {{user.email}}</p>
+                <p><span class="info-span">Hight:</span> {{user.height}}cm</p>
+                <p><span class="info-span">Weight:</span> {{user.weight}}kg</p>
+            </div>
         </div>
 
         <div class="profile-bio">
@@ -16,5 +19,18 @@
             <p>{{user.bio}}</p>
         </div>
     </div>
+
+    <!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+    <div mat-dialog-content>
+    <p>What's your favorite animal?</p>
+    <mat-form-field>
+        <mat-label>Favorite Animal</mat-label>
+        <input matInput [(ngModel)]="data.animal">
+    </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+    </div> -->
 </div>
 
