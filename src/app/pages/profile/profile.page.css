@@ -1,0 +1,34 @@
+.profile-page {
+    padding: 30px;
+}
+
+.profile-card {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    
+}
+.profile-img {
+
+    height: 200px;
+}
+.profile-info {
+
+}
+
+.profile-bio {
+    max-width: 400px;
+}
+
+.profile-bio > p {
+    overflow-y: scroll;
+    max-height: 200px;
+}
+
+img {
+    height: 100%;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+}
