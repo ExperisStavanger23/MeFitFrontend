@@ -13,3 +13,10 @@ export type exercise = {
   imageUrl: string
   tags: string[]
 }
+
+export type exerciseSetRep = {
+  id: number
+  name: string
+  sets: number
+  reps: number
+}

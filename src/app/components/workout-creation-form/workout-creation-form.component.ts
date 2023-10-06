@@ -1,13 +1,6 @@
 import { Component } from "@angular/core"
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms"
-import { exercise } from "src/types"
-
-export type exerciseSetRep = {
-  id: number
-  name: string
-  sets: number
-  reps: number
-}
+import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { exercise, exerciseSetRep } from "src/types"
 
 @Component({
   selector: "app-workout-creation-form",
@@ -55,7 +48,6 @@ export class WorkoutCreationFormComponent {
   }
 
   addSelectedExercise(selectedExerciseIds: number[]) {
-    console.log(selectedExerciseIds)
     this.selectedExercisesSetRep = []
     selectedExerciseIds.forEach(exerciseId => {
       const exercise = this.exercises.find(ex => ex.id === exerciseId)
