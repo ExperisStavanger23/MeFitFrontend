@@ -19,6 +19,12 @@
       (change)="setCreateWorkout($event.checked)">
       Workout
     </mat-checkbox>
+    <mat-checkbox
+      class="example-margin"
+      [checked]="createExercise"
+      (change)="setCreateExercise($event.checked)">
+      Exercise
+    </mat-checkbox>
   </div>
 
   <div id="create-program">
@@ -31,6 +37,11 @@
       <h2>Create workout</h2>
       <app-workout-creation-form
         class="creation-form"></app-workout-creation-form>
+    </ng-container>
+    <ng-container *ngIf="createExercise">
+      <h2>Create exercise</h2>
+      <app-exercise-creation-form
+        class="creation-form"></app-exercise-creation-form>
     </ng-container>
   </div>
 </div>

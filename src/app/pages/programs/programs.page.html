@@ -2,6 +2,7 @@
   <ng-container *ngFor="let id of ids">
     <app-info-card
       [id]="id"
-      (emitterId)="setSelectedId($event)"></app-info-card>
+      (emitterId)="setSelectedId($event)"
+      [canAdd]="true"></app-info-card>
   </ng-container>
 </div>

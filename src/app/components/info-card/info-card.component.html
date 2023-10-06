@@ -18,7 +18,7 @@
       </ng-container>
     </div>
   </mat-card>
-  <div class="card-add-button" (click)="add()">
+  <div class="card-add-button" (click)="add()" *ngIf="canAdd">
     <div class="green-background"></div>
     <mat-icon class="add-icon">add</mat-icon>
   </div>

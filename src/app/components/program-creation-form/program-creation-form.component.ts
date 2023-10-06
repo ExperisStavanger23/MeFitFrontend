@@ -25,9 +25,9 @@ export class ProgramCreationFormComponent {
         id: 1,
         name: "pushups",
         description: "pushups",
-        imageUrl:
+        image:
           "https://hips.hearstapps.com/hmg-prod/images/muscular-man-doing-push-ups-during-home-workout-royalty-free-image-1678105289.jpg?crop=0.668xw:1.00xh;0.106xw,0&resize=1200:*",
-        tags: ["chest", "arms"],
+        video: "",
       },
     ],
   }
