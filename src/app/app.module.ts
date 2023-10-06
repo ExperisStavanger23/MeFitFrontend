@@ -29,7 +29,8 @@ import { DetailsCardComponent } from "./components/details-card/details-card.com
 import { WorkoutDetailsCardComponent } from "./components/workout-details-card/workout-details-card.component"
 import { CreationPage } from "./pages/creation/creation.page"
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { ProgramCreationFormComponent } from './components/program-creation-form/program-creation-form.component'
+import { ProgramCreationFormComponent } from './components/program-creation-form/program-creation-form.component';
+import { WorkoutCreationFormComponent } from './components/workout-creation-form/workout-creation-form.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -62,6 +63,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     WorkoutDetailsCardComponent,
     CreationPage,
     ProgramCreationFormComponent,
+    WorkoutCreationFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,8 +22,15 @@
   </div>
 
   <div id="create-program">
-    <h3>Create program</h3>
-    <app-program-creation-form
-      class="creation-form"></app-program-creation-form>
+    <ng-container *ngIf="createProgram">
+      <h2>Create program</h2>
+      <app-program-creation-form class="creation-form">
+      </app-program-creation-form>
+    </ng-container>
+    <ng-container *ngIf="createWorkout">
+      <h2>Create workout</h2>
+      <app-workout-creation-form
+        class="creation-form"></app-workout-creation-form>
+    </ng-container>
   </div>
 </div>
