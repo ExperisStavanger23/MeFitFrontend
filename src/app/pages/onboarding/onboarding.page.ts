@@ -1,17 +1,23 @@
-import { Component } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { KeycloakService } from "keycloak-angular"
+import jwt_decode from "jwt-decode"
+import { claims } from "../../../interfaces"
 
 @Component({
   selector: "app-onboarding",
   templateUrl: "./onboarding.page.html",
   styleUrls: ["./onboarding.page.css"],
 })
-export class OnboardingPage {
+export class OnboardingPage implements OnInit {
   form: FormGroup
   minDate = new Date(1950, 1, 1)
   maxDate = new Date().getFullYear()
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private keycloak: KeycloakService
+  ) {
     this.form = fb.group({
       name: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
@@ -23,13 +29,25 @@ export class OnboardingPage {
     })
   }
 
+  async ngOnInit(): Promise<void> {
+    const claims = await this.getTokenClaims()
+    this.form.setValue({
+      ...this.form.value,
+      name: claims.given_name,
+      email: claims.email,
+    })
+
+    console.log(claims)
+  }
+
   handleSubmit(event: SubmitEvent): void {
     event.preventDefault()
     console.log(this.form.value)
   }
-}
 
-export interface UserModel {
-  name: string
-  email: string
+  private async getTokenClaims(): Promise<claims> {
+    const token = await this.keycloak.getToken()
+    const claims: claims = jwt_decode(token)
+    return claims
+  }
 }
