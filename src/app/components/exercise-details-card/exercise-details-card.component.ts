@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core"
+import { Component } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 
 @Component({
-  selector: "app-details-card",
-  templateUrl: "./details-card.component.html",
-  styleUrls: ["./details-card.component.css"],
+  selector: "app-exercise-details-card",
+  templateUrl: "./exercise-details-card.component.html",
+  styleUrls: ["./exercise-details-card.component.css"],
 })
-export class DetailsCardComponent implements OnInit {
+export class ExerciseDetailsCardComponent {
   id = 0
   constructor(private route: ActivatedRoute) {}
 
@@ -24,7 +24,8 @@ export class DetailsCardComponent implements OnInit {
   orderOfKeys: string[] = ["level", "Category", "Workouts", "Duration"]
   imgUrl =
     "https://hips.hearstapps.com/hmg-prod/images/running-track-1667904802.jpg?crop=0.668xw:1.00xh;0.0737xw,0&resize=1200:*"
-  workouts = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  exercises = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   tags = ["running", "endurance", "cardio"]
   creator = "John Doe"
+  videoUrl = "https://youtu.be/bt5b9x9N0KU"
 }

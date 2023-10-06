@@ -10,8 +10,6 @@ import { workout } from "src/types"
 export class ExerciseCreationFormComponent {
   form: FormGroup
 
-  //TODO: replace with data from database/api
-
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
       name: ["", Validators.required],
