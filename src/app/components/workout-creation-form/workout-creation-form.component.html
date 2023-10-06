@@ -45,17 +45,23 @@
 
   <div>
     <h3>Selected exercises</h3>
-    <div *ngFor="let exercise of selectedExercises">
+    <div *ngFor="let exercise of selectedExercisesSetRep; let i = index">
       <p>{{ exercise.name }}</p>
       <mat-form-field>
         <mat-label>Sets</mat-label>
-        <input matInput type="number" />
+        <input
+          matInput
+          type="number"
+          formControlName="sets_{{ exercise.id }}" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Reps</mat-label>
-        <input matInput type="number" />
+        <input
+          matInput
+          type="number"
+          formControlName="reps_{{ exercise.id }}" />
       </mat-form-field>
-      <button mat-icon-button (click)="removeExercise(exercise.id)">
+      <button mat-icon-button (click)="removeExercise(i)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
