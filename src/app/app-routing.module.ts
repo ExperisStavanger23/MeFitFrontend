@@ -8,6 +8,7 @@ import { ProfilePage } from "./pages/profile/profile.page"
 import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
 import { WorkoutDetailsCardComponent } from "./components/workout-details-card/workout-details-card.component"
+import { CreationPage } from "./pages/creation/creation.page"
 
 const routes: Routes = [
   { path: "onboarding", component: OnboardingPage },
@@ -16,8 +17,9 @@ const routes: Routes = [
   { path: "programs/:id", component: DetailsCardComponent },
   { path: "workouts", component: WorkoutsPage },
   { path: "workouts/:id", component: WorkoutDetailsCardComponent },
-  { path: "Exercises", component: ExercisesPage },
+  { path: "exercises", component: ExercisesPage },
   { path: "profile", component: ProfilePage },
+  { path: "creation", component: CreationPage },
 ]
 
 @NgModule({
