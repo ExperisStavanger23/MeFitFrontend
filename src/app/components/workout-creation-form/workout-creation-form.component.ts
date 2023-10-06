@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
-import { exercise, exerciseSetRep } from "src/types"
+import { Exercise, ExerciseSetRep } from "src/types"
 
 @Component({
   selector: "app-workout-creation-form",
@@ -9,30 +9,30 @@ import { exercise, exerciseSetRep } from "src/types"
 })
 export class WorkoutCreationFormComponent {
   form: FormGroup
-  selectedExercisesSetRep: exerciseSetRep[] = []
+  selectedExercisesSetRep: ExerciseSetRep[] = []
 
   //TODO: replace with data from database/api
   experienceLevels = ["Beginner", "Intermediate", "Advanced"]
   workoutCategories = ["Strength", "Cardio", "Yoga"]
 
-  exercise: exercise = {
+  exercise: Exercise = {
     id: 1,
     name: "pushups",
     description: "pushups",
-    imageUrl:
+    image:
       "https://hips.hearstapps.com/hmg-prod/images/muscular-man-doing-push-ups-during-home-workout-royalty-free-image-1678105289.jpg?crop=0.668xw:1.00xh;0.106xw,0&resize=1200:*",
-    tags: ["chest", "arms"],
+    video: "",
   }
-  exercise2: exercise = {
+  exercise2: Exercise = {
     id: 2,
     name: "situps",
     description: "situps",
-    imageUrl:
+    image:
       "https://hips.hearstapps.com/hmg-prod/images/muscular-man-doing-push-ups-during-home-workout-royalty-free-image-1678105289.jpg?crop=0.668xw:1.00xh;0.106xw,0&resize=1200:*",
-    tags: ["abs", "core"],
+    video: "",
   }
 
-  exercises: exercise[] = [this.exercise, this.exercise2]
+  exercises: Exercise[] = [this.exercise, this.exercise2]
 
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
@@ -74,7 +74,7 @@ export class WorkoutCreationFormComponent {
     event.preventDefault()
 
     // Create an array to store the exercises with sets and reps
-    const exercisesWithSetsReps: exerciseSetRep[] = []
+    const exercisesWithSetsReps: ExerciseSetRep[] = []
 
     // Loop through the selected exercises and retrieve sets and reps from the form
     for (const selectedExercise of this.selectedExercisesSetRep) {

@@ -1,31 +1,36 @@
-import { Component } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
+import { ApiExercisesService } from "src/app/services/api-exercises.service"
+import { Exercise } from "src/types"
 
 @Component({
   selector: "app-workout-details-card",
   templateUrl: "./workout-details-card.component.html",
   styleUrls: ["./workout-details-card.component.css"],
 })
-export class WorkoutDetailsCardComponent {
-  id = 0
-  constructor(private route: ActivatedRoute) {}
+export class WorkoutDetailsCardComponent implements OnInit {
+  constructor(
+    private route: ActivatedRoute,
+    private apiExercisesService: ApiExercisesService
+  ) {}
+
+  id!: number
+  exercise!: Exercise
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params["id"]
-  }
+    this.apiExercisesService
+      .getExerciseById(this.id)
+      .subscribe((exercise: Exercise) => {
+        console.log(exercise)
 
-  name = "Running"
-  description =
-    "Running is a method of terrestrial locomotion allowing humans and other animals to move rapidly on foot."
-  stats: Record<string, string> = {
-    level: "intermediate",
-    Category: "Endurance",
+        this.exercise = {
+          id: exercise.id,
+          name: exercise.name,
+          description: exercise.description,
+          image: exercise.image,
+          video: exercise.video,
+        }
+      })
   }
-  orderOfKeys: string[] = ["level", "Category", "Workouts", "Duration"]
-  imgUrl =
-    "https://hips.hearstapps.com/hmg-prod/images/running-track-1667904802.jpg?crop=0.668xw:1.00xh;0.0737xw,0&resize=1200:*"
-  exercises = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  tags = ["running", "endurance", "cardio"]
-  creator = "John Doe"
-  videoUrl = "https://youtu.be/bt5b9x9N0KU"
 }

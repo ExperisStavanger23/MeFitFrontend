@@ -4,17 +4,17 @@ export type workout = {
   duration: number
   description: string
   imageUrl: string
-  exercises: exercise[]
+  exercises: Exercise[]
 }
-export type exercise = {
+export type Exercise = {
   id: number
   name: string
   description: string
-  imageUrl: string
-  tags: string[]
+  image: string
+  video: string
 }
 
-export type exerciseSetRep = {
+export type ExerciseSetRep = {
   id: number
   name: string
   sets: number
