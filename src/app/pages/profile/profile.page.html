@@ -1,9 +1,9 @@
-<div class="profile-page">
+<div class="profile-page" *ngIf="user | async as user">
     <div class="profile-card">
-        <button class="edit-btn" (click)="openDialog()"><mat-icon>edit</mat-icon></button>
+        <button class="edit-btn"><a routerLink="/profile/edit"><mat-icon>edit</mat-icon></a></button>
         <div class="left">
             <div class="profile-img">
-                <img src="{{user.profilePicture}}" alt="pfp">
+                <img src="{{user.profilePicture}}" alt="ProfilePicture">
             </div>
     
             <div class="profile-info">
@@ -19,18 +19,5 @@
             <p>{{user.bio}}</p>
         </div>
     </div>
-
-    <!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
-    <div mat-dialog-content>
-    <p>What's your favorite animal?</p>
-    <mat-form-field>
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="data.animal">
-    </mat-form-field>
-    </div>
-    <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-    </div> -->
 </div>
 

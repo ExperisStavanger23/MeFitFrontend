@@ -23,7 +23,7 @@ export class OnboardingPage implements OnInit {
     this.form = fb.group({
       name: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      experience: [null],
+      experienceLvl: [null],
       gender: [null],
       height: [null, Validators.pattern("^([5-9][0-9]|[1-2][0-9]{2}|300)$")],
       weight: [null, Validators.pattern("^([2-9][0-9]|[1-9][0-9][0-9])$")],

@@ -35,8 +35,8 @@ import { WorkoutCreationFormComponent } from "./components/workout-creation-form
 import { ExerciseCreationFormComponent } from "./components/exercise-creation-form/exercise-creation-form.component"
 import { ExerciseDetailsCardComponent } from "./components/exercise-details-card/exercise-details-card.component"
 import { ExerciseInfoCardComponent } from "./components/exercise-info-card/exercise-info-card.component"
-import { MatDialogModule } from "@angular/material/dialog";
-import { EditInfoComponent } from './components/profile-components/edit-info/edit-info.component'
+import { MatDialogModule } from "@angular/material/dialog"
+import { ProfileEditPage } from "./pages/profile-edit/profile-edit.page"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -73,7 +73,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ExerciseCreationFormComponent,
     ExerciseDetailsCardComponent,
     ExerciseInfoCardComponent,
-    EditInfoComponent,
+    ProfileEditPage,
   ],
   imports: [
     BrowserModule,
