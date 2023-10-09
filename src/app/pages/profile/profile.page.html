@@ -19,5 +19,25 @@
             <p>{{user.bio}}</p>
         </div>
     </div>
+    <div class="profile-card">
+        <p>Goal in progress</p>
+        <p>4 workouts per week</p>
+    </div>
+
+    <div class="profile-card" (click)="handleWhOpen()">
+        <p>Workout history</p>
+        <p>40 total workouts</p>
+        <!-- <mat-icon *ngIf="whOpen; else elseBlock">expand_less</mat-icon>
+        <ng-template #elseBlock>
+            <mat-icon>expand_more</mat-icon>
+        </ng-template> -->
+    </div>
+    <!-- <div *ngIf="whOpen">workouts here list down</div>  // TODO list workouts here or inside card? -->
+
+    <div class="profile-card">
+        <p>Goals history</p>
+        <p>12 goal Completed</p>
+    </div>
+
 </div>
 

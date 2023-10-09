@@ -5,6 +5,17 @@ img {
 
 .profile-page {
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-page > *:not(:first-child) > p {
+    margin: 0;
+}
+.profile-page > *:not(:first-child) {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .profile-card {
@@ -14,6 +25,7 @@ img {
     align-items: center;
     padding: 50px;
     position: relative;
+    border-radius: 10px;
     
 }
 
