@@ -4,10 +4,19 @@
       <img src="{{ workout.image }}" />
     </div>
     <div class="info-container">
-      <h3>{{ workout.name }} {{ workout.id }}</h3>
+      <h3>{{ workout.name }}</h3>
       <p>{{ workout.description }}</p>
-      <p>{{ workout.exercises }}</p>
+      <ng-container *ngFor="let exercise of workout.exercises">
+        <div class="exercise-container">
+          <h4>{{ exercise.name }}</h4>
+          <div>
+            <p>Reps: {{ exercise.reps }}</p>
+            <p>Sets: {{ exercise.sets }}</p>
+          </div>
+          <p>Description: {{ exercise.description }}</p>
+        </div>
+      </ng-container>
     </div>
-    <button mat-raised-button color="primary">Add</button>
   </div>
+  <button mat-raised-button color="primary">Add</button>
 </div>

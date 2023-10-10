@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
 import { Workout } from "src/interfaces"
-import { Exercise } from "src/types"
 
 @Component({
   selector: "app-workout-details-card",

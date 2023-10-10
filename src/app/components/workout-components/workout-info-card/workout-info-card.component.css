@@ -19,6 +19,7 @@
   border-radius: 20px;
   box-shadow: none;
   z-index: 1;
+  width: 100%;
 }
 img {
   height: 100%;
