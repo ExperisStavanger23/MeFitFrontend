@@ -86,7 +86,7 @@ export interface Program {
   recommendedLevel: number
   duration: number
   image: string
-  workouts: Workout[]
+  workout: Workout[]
 }
 
 export interface Workout {

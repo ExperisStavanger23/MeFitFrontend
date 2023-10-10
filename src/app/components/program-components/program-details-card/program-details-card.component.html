@@ -6,7 +6,7 @@
     <div class="info-container">
       <h3>{{ program.name }}</h3>
       <p>{{ program.description }}</p>
-      <ng-container *ngFor="let workouts of program.workouts">
+      <ng-container *ngFor="let workouts of program.workout">
         <div class="exercise-container" (click)="goToDetails()">
           <h4>{{ workouts.name }}</h4>
           <p>Description: {{ workouts.description }}</p>
@@ -29,7 +29,7 @@
       </div>
       <div>
         <p>Workouts:</p>
-        <p>{{ program.workouts.length }}</p>
+        <p>{{ program.workout.length }}</p>
       </div>
     </div>
   </div>

@@ -23,7 +23,7 @@ export class ProgramDetailsCardComponent implements OnInit {
     recommendedLevel: 0,
     duration: 0,
     image: "",
-    workouts: [],
+    workout: [],
   }
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class ProgramDetailsCardComponent implements OnInit {
           category: program.category,
           recommendedLevel: program.recommendedLevel,
           duration: program.duration,
-          workouts: program.workouts,
+          workout: program.workout,
         }
       })
   }
