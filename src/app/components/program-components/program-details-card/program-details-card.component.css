@@ -79,3 +79,16 @@ button {
     margin: 0;
   }
 }
+
+.information {
+  margin: 1em 10px 0 0;
+  & > div {
+    font-weight: bold;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+}

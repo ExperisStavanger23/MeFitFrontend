@@ -42,7 +42,6 @@ export class ProgramDetailsCardComponent implements OnInit {
           workouts: program.workouts,
         }
       })
-    console.log(this.program)
   }
 
   goToDetails() {

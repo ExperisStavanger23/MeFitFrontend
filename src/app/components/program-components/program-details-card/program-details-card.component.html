@@ -10,8 +10,27 @@
         <div class="exercise-container" (click)="goToDetails()">
           <h4>{{ workouts.name }}</h4>
           <p>Description: {{ workouts.description }}</p>
+          <p>Duration: {{ workouts.duration }}</p>
         </div>
       </ng-container>
+    </div>
+    <div class="information">
+      <div>
+        <p>Recommended level:</p>
+        <p>{{ program.recommendedLevel }}</p>
+      </div>
+      <div>
+        <p>Category:</p>
+        <p>{{ program.category }}</p>
+      </div>
+      <div>
+        <p>Duration:</p>
+        <p>{{ program.duration }}</p>
+      </div>
+      <div>
+        <p>Workouts:</p>
+        <p>{{ program.workouts.length }}</p>
+      </div>
     </div>
   </div>
   <button mat-raised-button color="primary">Add</button>
