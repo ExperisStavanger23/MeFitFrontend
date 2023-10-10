@@ -19,12 +19,14 @@
   border-radius: 20px;
   box-shadow: none;
   z-index: 1;
+  width: 100%;
 }
 img {
   height: 100%;
   width: 30%;
   object-fit: cover;
   border-radius: inherit;
+  aspect-ratio: 16/4;
 }
 .card-info {
   padding-left: 10px;
