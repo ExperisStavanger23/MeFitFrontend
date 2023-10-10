@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core"
-import { ActivatedRoute } from "@angular/router"
+import { ActivatedRoute, Router } from "@angular/router"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
 import { Workout } from "src/interfaces"
 
@@ -11,6 +11,7 @@ import { Workout } from "src/interfaces"
 export class WorkoutDetailsCardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private apiWorkoutService: ApiWorkoutService
   ) {}
 
@@ -43,6 +44,9 @@ export class WorkoutDetailsCardComponent implements OnInit {
         }
       })
     console.log(this.workout)
-    //TODO: this should work, but backend fetch is not working missing DTO maps....🤷‍♂️
+  }
+
+  goToDetails() {
+    this.router.navigate(["/exercises", this.id])
   }
 }

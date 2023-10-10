@@ -36,6 +36,8 @@ import { ExerciseCreationFormComponent } from "./components/exercise-components/
 import { ExerciseDetailsCardComponent } from "./components/exercise-components/exercise-details-card/exercise-details-card.component"
 import { ExerciseInfoCardComponent } from "./components/exercise-components/exercise-info-card/exercise-info-card.component"
 import { WorkoutInfoCardComponent } from "./components/workout-components/workout-info-card/workout-info-card.component"
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner"
+import { SafePipeService } from "./services/safe-pipe.service"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -73,6 +75,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ExerciseDetailsCardComponent,
     ExerciseInfoCardComponent,
     WorkoutInfoCardComponent,
+    SafePipeService,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +99,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HttpClientModule,
     MatCheckboxModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

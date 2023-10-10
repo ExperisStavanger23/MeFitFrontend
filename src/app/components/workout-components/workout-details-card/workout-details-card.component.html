@@ -7,7 +7,7 @@
       <h3>{{ workout.name }}</h3>
       <p>{{ workout.description }}</p>
       <ng-container *ngFor="let exercise of workout.exercises">
-        <div class="exercise-container">
+        <div class="exercise-container" (click)="goToDetails()">
           <h4>{{ exercise.name }}</h4>
           <div>
             <p>Reps: {{ exercise.reps }}</p>
