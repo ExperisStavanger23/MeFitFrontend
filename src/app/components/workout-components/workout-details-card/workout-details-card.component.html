@@ -1,0 +1,22 @@
+<div class="details-container">
+  <div class="information-container">
+    <div class="image-container">
+      <img src="{{ workout.image }}" />
+    </div>
+    <div class="info-container">
+      <h3>{{ workout.name }}</h3>
+      <p>{{ workout.description }}</p>
+      <ng-container *ngFor="let exercise of workout.exercises">
+        <div class="exercise-container" (click)="goToDetails()">
+          <h4>{{ exercise.name }}</h4>
+          <div>
+            <p>Reps: {{ exercise.reps }}</p>
+            <p>Sets: {{ exercise.sets }}</p>
+          </div>
+          <p>Description: {{ exercise.description }}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <button mat-raised-button color="primary">Add</button>
+</div>
