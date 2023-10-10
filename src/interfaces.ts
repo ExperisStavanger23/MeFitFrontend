@@ -78,6 +78,17 @@ export interface Role {
   roleTitle: string
 }
 
+export interface Program {
+  id: number
+  name: string
+  description: string
+  category: number
+  recommendedLevel: number
+  duration: number
+  image: string
+  workouts: Workout[]
+}
+
 export interface Workout {
   id: number
   name: string
