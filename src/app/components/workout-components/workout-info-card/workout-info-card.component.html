@@ -1,0 +1,13 @@
+<div class="info-card-container">
+  <mat-card class="info-card" (click)="emitId()">
+    <img mat-card-image src="{{ workout.image }}" />
+    <div class="card-info">
+      <h3>{{ workout.name }}</h3>
+      <p>{{ workout.description }}</p>
+    </div>
+  </mat-card>
+  <div class="card-add-button" (click)="add()" *ngIf="canAdd">
+    <div class="green-background"></div>
+    <mat-icon class="add-icon">add</mat-icon>
+  </div>
+</div>
