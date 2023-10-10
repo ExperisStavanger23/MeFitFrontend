@@ -24,15 +24,17 @@
         <p>4 workouts per week</p>
     </div>
 
-    <div class="profile-card" (click)="handleWhOpen()">
-        <p>Workout history</p>
-        <p>40 total workouts</p>
-        <!-- <mat-icon *ngIf="whOpen; else elseBlock">expand_less</mat-icon>
-        <ng-template #elseBlock>
-            <mat-icon>expand_more</mat-icon>
-        </ng-template> -->
+    <div class="profile-dropdown" (click)="handleWhOpen()">
+        <div class="dropdown-header">
+            <p>Workout history</p>
+            <p>40 total workouts</p>
+            <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock">expand_less</mat-icon>
+            <ng-template #elseBlock>
+                <mat-icon class="a-icon">expand_more</mat-icon>
+            </ng-template>
+        </div>
+        <div *ngIf="whOpen">workouts here list down</div>
     </div>
-    <!-- <div *ngIf="whOpen">workouts here list down</div>  // TODO list workouts here or inside card? -->
 
     <div class="profile-card">
         <p>Goals history</p>

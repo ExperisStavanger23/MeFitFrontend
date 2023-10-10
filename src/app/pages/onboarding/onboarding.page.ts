@@ -52,6 +52,7 @@ export class OnboardingPage implements OnInit {
       profilePicture: "",
       birthday: birthday,
       id: claims.sub,
+      experienceLvl: parseInt(this.form.value.experienceLvl),
     }
 
     this.userApi.postUser(userToPost)

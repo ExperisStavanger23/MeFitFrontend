@@ -13,6 +13,7 @@ import { User } from "src/interfaces"
 })
 export class ProfileEditPage implements OnInit {
   form: FormGroup
+  loading = false
   constructor(
     private fb: FormBuilder,
     private userService: UserApiService,
@@ -67,6 +68,11 @@ export class ProfileEditPage implements OnInit {
     }
 
     this.userService.updateUser(userToUpdate)
-    this.router.navigate(["/profile"])
+    this.loading = true
+    // TODO better waiting
+    setTimeout(() => {
+      console.log("timeout")
+      this.router.navigate(["/profile"])
+    }, 500)
   }
 }

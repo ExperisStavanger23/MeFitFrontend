@@ -40,6 +40,10 @@
             <input matInput type="text" formControlName="profilePicture">
         </mat-form-field>
 
-        <button mat-flat-button color="accent" type="submit">Submit</button>
+
+        <button mat-flat-button color="accent" [disabled]="loading" type="submit">
+            <p *ngIf="loading; else elseBlock">Loading...</p>
+            <ng-template #elseBlock>Submit</ng-template>
+        </button>
     </form>
 </div>
