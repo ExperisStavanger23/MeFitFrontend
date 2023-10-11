@@ -20,8 +20,8 @@ export class WorkoutDetailsCardComponent implements OnInit {
     id: 0,
     name: "",
     description: "",
-    category: 0,
-    recommendedLevel: 0,
+    category: "",
+    recommendedLevel: "",
     duration: 0,
     image: "",
     exercises: [],
@@ -43,10 +43,9 @@ export class WorkoutDetailsCardComponent implements OnInit {
           exercises: workout.exercises,
         }
       })
-    console.log(this.workout)
   }
 
-  goToDetails() {
-    this.router.navigate(["/exercises", this.id])
+  goToDetails(exerciseId: number) {
+    this.router.navigate(["/exercises", exerciseId])
   }
 }
