@@ -33,6 +33,7 @@
         <mat-form-field>
             <mat-label>Bio</mat-label>
             <input matInput type="text" formControlName="bio">
+            <mat-error *ngIf="this.form.get('bio')?.hasError('maxlength')">Bio to long max length 250</mat-error>
         </mat-form-field>
 
         <mat-form-field>

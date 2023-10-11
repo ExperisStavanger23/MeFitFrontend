@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { PostUser, User } from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
-import { Observable } from "rxjs"
+import { BehaviorSubject, Observable } from "rxjs"
 // import jwt_decode from "jwt-decode"
 
 @Injectable({
@@ -10,6 +10,7 @@ import { Observable } from "rxjs"
 })
 export class UserApiService {
   apiUrlBase = "http://localhost:5212/api/v1"
+  user = new BehaviorSubject<User>({})
 
   constructor(
     private http: HttpClient,
@@ -30,7 +31,10 @@ export class UserApiService {
   }
 
   getUser(id: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrlBase}/User/${id}`)
+    this.http.get<User>(`${this.apiUrlBase}/User/${id}`).subscribe(user => {
+      this.user.next(user)
+    })
+    return this.user.asObservable()
   }
 
   updateUser(user: User): void {
@@ -44,5 +48,6 @@ export class UserApiService {
     this.http
       .put(`${this.apiUrlBase}/User/${user.id}`, body, { headers })
       .subscribe()
+    this.user.next(user)
   }
 }
