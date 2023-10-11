@@ -1,4 +1,4 @@
-<div class="onboarding">
+<div *ngIf="!loading" class="onboarding">
     <div class="onboarding-text">
         <h1>Welcome</h1>
         <p>Please fill in som info so we can get you started</p>
@@ -13,6 +13,11 @@
         <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Bio</mat-label>
+            <input matInput type="text" name="Bio" formControlName="bio" >
         </mat-form-field>
 
         <mat-form-field>
