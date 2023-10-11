@@ -14,24 +14,31 @@
     <a routerLink="/exercises" mat-button routerLinkActive="selected"
       >Exercises</a
     >
-    <a routerLink="/profile" mat-button routerLinkActive="selected">Profile</a>
     <a routerLink="/creation" mat-button routerLinkActive="selected"
-      >Creation</a
+    >Creation</a
     >
     
   </div>
   <span class="navbar-spacer"></span>
 
   <ng-container
-    *ngIf="isLoggedIn | async; then loggedIn; else loggedOut"></ng-container>
-
+  *ngIf="isLoggedIn | async; then loggedIn; else loggedOut"></ng-container>
+  
   <ng-template #loggedIn>
-    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    
+    <mat-icon class="menu" [matMenuTriggerFor]="menu">list</mat-icon>
+    <mat-menu #menu="matMenu">
+      <a routerLink="/profile" mat-menu-item routerLinkActive="selected">Profile</a>
+
+      <button mat-menu-item (click)="logout()" style="color: rgb(255, 84, 84);">Logout</button>
+    </mat-menu>
+    
+    <img class="pfp" src="https://avatars.githubusercontent.com/u/60463942?v=4" alt="logo" width="50px" />
+    
   </ng-template>
 
   <ng-template #loggedOut>
     <button class="login-btn" mat-raised-button (click)="login()">Login</button>
   </ng-template>
 
-  <mat-icon class="user-icon">account_circle</mat-icon>
 </mat-toolbar>

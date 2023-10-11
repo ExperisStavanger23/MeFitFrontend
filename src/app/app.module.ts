@@ -39,6 +39,7 @@ import { ExerciseDetailsCardComponent } from "./components/exercise-components/e
 import { ExerciseInfoCardComponent } from "./components/exercise-components/exercise-info-card/exercise-info-card.component"
 import { WorkoutInfoCardComponent } from "./components/workout-components/workout-info-card/workout-info-card.component"
 import { SafePipeService } from "./services/safe-pipe.service"
+import { MatMenuModule } from "@angular/material/menu"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -102,6 +103,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatCheckboxModule,
     HttpClientModule,
     MatDialogModule,
+    MatMenuModule,
   ],
   providers: [
     {
