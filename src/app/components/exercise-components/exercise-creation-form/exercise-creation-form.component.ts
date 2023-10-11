@@ -58,9 +58,10 @@ export class ExerciseCreationFormComponent {
       .subscribe((response: boolean) => {
         if (response) {
           this.snackBar.open("Exercise created successfully", "Created", {
-            duration: 1000,
+            duration: 3000,
             panelClass: "snackbar-success",
           })
+          this.form.reset()
         } else {
           this.snackBar.open("Exercise creation failed", "Failed", {
             duration: 1000,
