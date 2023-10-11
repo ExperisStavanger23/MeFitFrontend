@@ -30,13 +30,14 @@ import { WorkoutDetailsCardComponent } from "./components/workout-components/wor
 import { HttpClientModule } from "@angular/common/http"
 import { CreationPage } from "./pages/creation/creation.page"
 import { MatCheckboxModule } from "@angular/material/checkbox"
+import { MatDialogModule } from "@angular/material/dialog"
+import { ProfileEditPage } from "./pages/profile-edit/profile-edit.page"
 import { ProgramCreationFormComponent } from "./components/program-components/program-creation-form/program-creation-form.component"
 import { WorkoutCreationFormComponent } from "./components/workout-components/workout-creation-form/workout-creation-form.component"
 import { ExerciseCreationFormComponent } from "./components/exercise-components/exercise-creation-form/exercise-creation-form.component"
 import { ExerciseDetailsCardComponent } from "./components/exercise-components/exercise-details-card/exercise-details-card.component"
 import { ExerciseInfoCardComponent } from "./components/exercise-components/exercise-info-card/exercise-info-card.component"
 import { WorkoutInfoCardComponent } from "./components/workout-components/workout-info-card/workout-info-card.component"
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner"
 import { SafePipeService } from "./services/safe-pipe.service"
 import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
@@ -77,6 +78,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ExerciseCreationFormComponent,
     ExerciseDetailsCardComponent,
     ExerciseInfoCardComponent,
+    ProfileEditPage,
     WorkoutInfoCardComponent,
     SafePipeService,
     ProgramInfoCardComponent,
@@ -104,8 +106,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HttpClientModule,
     MatCheckboxModule,
     HttpClientModule,
-    MatProgressSpinnerModule,
+    MatDialogModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {
