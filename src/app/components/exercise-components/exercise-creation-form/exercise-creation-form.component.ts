@@ -11,7 +11,8 @@ import { Exercise } from "src/types"
 })
 export class ExerciseCreationFormComponent {
   form: FormGroup
-  created = false
+  creating = false
+  valid = false
 
   constructor(
     private fb: FormBuilder,
@@ -22,12 +23,27 @@ export class ExerciseCreationFormComponent {
     this.form = fb.group({
       name: ["", Validators.required],
       description: ["", [Validators.required]],
-      imageUrl: [""],
+      imageUrl: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(
+            /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
+          ),
+        ],
+      ],
       videoUrl: [""],
+    })
+    this.form.valueChanges.subscribe(() => {
+      this.valid =
+        this.form.get("name")?.value &&
+        this.form.get("description")?.value &&
+        this.isImageUrlValid(this.form.get("imageUrl")?.value)
     })
   }
 
   handleSubmit(event: SubmitEvent): void {
+    this.creating = true
     event.preventDefault()
     console.log(this.form.value)
     const exercise: Exercise = {
@@ -42,10 +58,23 @@ export class ExerciseCreationFormComponent {
       .subscribe((response: boolean) => {
         if (response) {
           this.snackBar.open("Exercise created successfully", "Created", {
-            duration: 200000,
+            duration: 1000,
             panelClass: "snackbar-success",
+          })
+        } else {
+          this.snackBar.open("Exercise creation failed", "Failed", {
+            duration: 1000,
+            panelClass: "snackbar-fail",
           })
         }
       })
+    this.creating = false
+  }
+
+  // This function checks if the URL is a valid image URL
+  private isImageUrlValid(url: string): boolean {
+    const pattern =
+      /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
+    return pattern.test(url)
   }
 }
