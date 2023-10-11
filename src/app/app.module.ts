@@ -40,6 +40,9 @@ import { ExerciseInfoCardComponent } from "./components/exercise-components/exer
 import { WorkoutInfoCardComponent } from "./components/workout-components/workout-info-card/workout-info-card.component"
 import { SafePipeService } from "./services/safe-pipe.service"
 import { MatMenuModule } from "@angular/material/menu"
+import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
+import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
+import { MatSnackBarModule } from "@angular/material/snack-bar"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -79,6 +82,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProfileEditPage,
     WorkoutInfoCardComponent,
     SafePipeService,
+    ProgramInfoCardComponent,
+    ProgramDetailsCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +109,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HttpClientModule,
     MatDialogModule,
     MatMenuModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

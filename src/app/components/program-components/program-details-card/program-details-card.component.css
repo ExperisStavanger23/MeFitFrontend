@@ -79,6 +79,7 @@ button {
     margin: 0;
   }
 }
+
 .information {
   margin: 1em 10px 0 0;
   & > div {
@@ -90,10 +91,4 @@ button {
     gap: 50px;
     border-bottom: 2px solid #e0e0e0;
   }
-}
-
-.exercises {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }

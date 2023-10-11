@@ -24,3 +24,17 @@ body {
   border-radius: 8px;
   background-color: var(--secondary-color);
 }
+
+.mat-mdc-snack-bar-container {
+  --mat-mdc-snack-bar-button-color: #ffffff;
+  --mdc-snackbar-supporting-text-color: white;
+  --mdc-snackbar-container-color: var(--accent-color);
+
+  &.snackbar-fail {
+    --mat-snack-bar-button-color: var(--warn-color);
+  }
+
+  &.snackbar-success {
+    --mat-snack-bar-button-color: var(--primary-color);
+  }
+}

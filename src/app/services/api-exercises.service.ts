@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { Observable } from "rxjs"
+import { Observable, of } from "rxjs"
 import { Exercise } from "src/types"
+import { catchError, map } from "rxjs/operators"
 
 @Injectable({
   providedIn: "root",
@@ -11,18 +12,30 @@ export class ApiExercisesService {
 
   constructor(private http: HttpClient) {}
 
-  postExercise(exercise: Exercise): void {
+  postExercise(exercise: Exercise): Observable<boolean> {
     const body = JSON.stringify(exercise)
 
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
     })
 
-    this.http
+    return this.http
       .post<Exercise>(`${this.apiUrlBase}/Exercise`, body, {
         headers,
       })
-      .subscribe()
+      .pipe(
+        map((response: Exercise) => {
+          console.log("Response:", response)
+
+          const success = Object.prototype.hasOwnProperty.call(response, "id")
+
+          return success
+        }),
+        catchError((error: any) => {
+          console.error("Error:", error)
+          return of(false)
+        })
+      )
   }
 
   getAllExercises(): Observable<Exercise[]> {
