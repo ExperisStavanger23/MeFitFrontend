@@ -52,10 +52,11 @@ export interface PostUser {
   height: number
   birthday: Date
   roleId?: number
+  experienceLvl: number
 }
 
 export interface User {
-  id: number
+  id: string
   name: string
   bio: string
   email: string

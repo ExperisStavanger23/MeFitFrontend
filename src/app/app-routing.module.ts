@@ -8,6 +8,7 @@ import { ProfilePage } from "./pages/profile/profile.page"
 import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
 import { CreationPage } from "./pages/creation/creation.page"
+import { ProfileEditPage } from "./pages/profile-edit/profile-edit.page"
 import { ExerciseDetailsCardComponent } from "./components/exercise-components/exercise-details-card/exercise-details-card.component"
 import { WorkoutDetailsCardComponent } from "./components/workout-components/workout-details-card/workout-details-card.component"
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: "exercises", component: ExercisesPage },
   { path: "exercises/:id", component: ExerciseDetailsCardComponent },
   { path: "profile", component: ProfilePage },
+  { path: "profile/edit", component: ProfileEditPage },
   { path: "creation", component: CreationPage },
 ]
 
