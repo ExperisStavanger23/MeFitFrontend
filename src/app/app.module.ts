@@ -41,7 +41,6 @@ import { SafePipeService } from "./services/safe-pipe.service"
 import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 import { MatSnackBarModule } from "@angular/material/snack-bar"
-import { SnackbarComponent } from "./components/snackbar/snackbar.component"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -82,7 +81,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
     SafePipeService,
     ProgramInfoCardComponent,
     ProgramDetailsCardComponent,
-    SnackbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { MatSnackBar } from "@angular/material/snack-bar"
 import { ApiExercisesService } from "src/app/services/api-exercises.service"
 import { Exercise } from "src/types"
-import { SnackbarComponent } from "../../snackbar/snackbar.component"
 
 @Component({
   selector: "app-exercise-creation-form",
@@ -17,6 +16,7 @@ export class ExerciseCreationFormComponent {
   constructor(
     private fb: FormBuilder,
     private apiExercisesService: ApiExercisesService,
+
     public snackBar: MatSnackBar
   ) {
     this.form = fb.group({
@@ -41,12 +41,9 @@ export class ExerciseCreationFormComponent {
       .postExercise(exercise)
       .subscribe((response: boolean) => {
         if (response) {
-          this.snackBar.openFromComponent(SnackbarComponent, {
-            duration: 1000,
-            data: {
-              description: "Exercise created successfully",
-              color: "blue",
-            },
+          this.snackBar.open("Exercise created successfully", "Created", {
+            duration: 200000,
+            panelClass: "snackbar-success",
           })
         }
       })
