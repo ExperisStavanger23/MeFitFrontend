@@ -91,3 +91,9 @@ button {
     border-bottom: 2px solid #e0e0e0;
   }
 }
+
+.exercises {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

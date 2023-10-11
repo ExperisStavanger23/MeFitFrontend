@@ -1,5 +1,9 @@
-import { Component } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { MatSnackBar } from "@angular/material/snack-bar"
+import { ApiExercisesService } from "src/app/services/api-exercises.service"
+import { ApiWorkoutService } from "src/app/services/api-workout.service"
+import { PostWorkout, SetReps, Workout } from "src/interfaces"
 import { Exercise, ExerciseSetRep } from "src/types"
 
 @Component({
@@ -7,44 +11,40 @@ import { Exercise, ExerciseSetRep } from "src/types"
   templateUrl: "./workout-creation-form.component.html",
   styleUrls: ["./workout-creation-form.component.css"],
 })
-export class WorkoutCreationFormComponent {
+export class WorkoutCreationFormComponent implements OnInit {
   form: FormGroup
   selectedExercisesSetRep: ExerciseSetRep[] = []
 
   //TODO: replace with data from database/api
   experienceLevels = ["Beginner", "Intermediate", "Advanced"]
-  workoutCategories = ["Strength", "Cardio", "Yoga"]
+  workoutCategories = ["StressReduction", "MuscleGain", "Bulking"]
 
-  exercise: Exercise = {
-    id: 1,
-    name: "pushups",
-    description: "pushups",
-    image:
-      "https://hips.hearstapps.com/hmg-prod/images/muscular-man-doing-push-ups-during-home-workout-royalty-free-image-1678105289.jpg?crop=0.668xw:1.00xh;0.106xw,0&resize=1200:*",
-    video: "",
-  }
-  exercise2: Exercise = {
-    id: 2,
-    name: "situps",
-    description: "situps",
-    image:
-      "https://hips.hearstapps.com/hmg-prod/images/muscular-man-doing-push-ups-during-home-workout-royalty-free-image-1678105289.jpg?crop=0.668xw:1.00xh;0.106xw,0&resize=1200:*",
-    video: "",
-  }
+  exercises: Exercise[] = []
 
-  exercises: Exercise[] = [this.exercise, this.exercise2]
-
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private apiWorkoutsService: ApiWorkoutService,
+    private apiExerciseService: ApiExercisesService,
+    public snackBar: MatSnackBar
+  ) {
     this.form = fb.group({
       name: ["", Validators.required],
       description: ["", Validators.required],
-      experienceLevel: [null, Validators.required],
+      experienceLevel: ["", Validators.required],
       imageUrl: [""],
       workouts: [[]],
-      category: [null, Validators.required],
-      duration: [null, Validators.required],
+      category: ["", Validators.required],
+      duration: [0, Validators.required],
       tags: [null],
     })
+  }
+
+  ngOnInit(): void {
+    this.apiExerciseService
+      .getAllExercises()
+      .subscribe((exercises: Exercise[]) => {
+        this.exercises = exercises
+      })
   }
 
   addSelectedExercise(selectedExerciseIds: number[]) {
@@ -74,7 +74,7 @@ export class WorkoutCreationFormComponent {
     event.preventDefault()
 
     // Create an array to store the exercises with sets and reps
-    const exercisesWithSetsReps: ExerciseSetRep[] = []
+    const exercisesWithSetsReps: SetReps[] = []
 
     // Loop through the selected exercises and retrieve sets and reps from the form
     for (const selectedExercise of this.selectedExercisesSetRep) {
@@ -85,17 +85,45 @@ export class WorkoutCreationFormComponent {
       const reps = this.form.get(repsControlName)?.value || 0
 
       exercisesWithSetsReps.push({
-        id: selectedExercise.id,
+        exerciseId: selectedExercise.id,
+        workoutId: 0,
         name: selectedExercise.name,
         sets,
         reps,
       })
     }
 
-    // Now, exercisesWithSetsReps contains the selected exercises with sets and reps
-    console.log(exercisesWithSetsReps)
+    const workoutToPost: PostWorkout = {
+      name: this.form.value.name,
+      description: this.form.value.description,
+      category: this.form.value.category[0],
+      recommendedLevel: this.form.value.experienceLevel,
+      duration: this.form.value.duration,
+      image: this.form.value.imageUrl,
+      workoutExercises: exercisesWithSetsReps,
+    }
+    console.log(workoutToPost)
 
-    // You can also access other form values using this.form.value
-    console.log(this.form.value)
+    this.apiWorkoutsService
+      .postWorkout(workoutToPost)
+      .subscribe((response: boolean) => {
+        if (response) {
+          this.snackBar.open("Exercise created successfully", "Created", {
+            duration: 3000,
+            panelClass: "snackbar-success",
+          })
+          this.form.reset()
+        } else {
+          this.snackBar.open("Exercise creation failed", "Failed", {
+            duration: 1000,
+            panelClass: "snackbar-fail",
+          })
+        }
+      })
+    // Now, exercisesWithSetsReps contains the selected exercises with sets and reps
+    // console.log(exercisesWithSetsReps)
+
+    // // You can also access other form values using this.form.value
+    // console.log(this.form.value)
   }
 }

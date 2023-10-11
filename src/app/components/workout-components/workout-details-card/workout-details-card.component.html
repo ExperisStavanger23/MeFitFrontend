@@ -6,16 +6,19 @@
     <div class="info-container">
       <h3>{{ workout.name }}</h3>
       <p>{{ workout.description }}</p>
-      <ng-container *ngFor="let exercise of workout.exercises">
-        <div class="exercise-container" (click)="goToDetails()">
-          <h4>{{ exercise.name }}</h4>
-          <div>
-            <p>Reps: {{ exercise.reps }}</p>
-            <p>Sets: {{ exercise.sets }}</p>
+      <div class="exercises">
+        <ng-container *ngFor="let exercise of workout.exercises">
+          <div
+            class="exercise-container"
+            (click)="goToDetails(exercise.exerciseId)">
+            <h4>{{ exercise.name }}</h4>
+            <div>
+              <p>Reps: {{ exercise.reps }}</p>
+              <p>Sets: {{ exercise.sets }}</p>
+            </div>
           </div>
-          <p>Description: {{ exercise.description }}</p>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
     <div class="information">
       <div>
