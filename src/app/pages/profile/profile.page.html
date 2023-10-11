@@ -1,1 +1,45 @@
-<p>profile works!</p>
+<div class="profile-page" *ngIf="user | async as user">
+    <div class="profile-card">
+        <button class="edit-btn"><a routerLink="/profile/edit"><mat-icon>edit</mat-icon></a></button>
+        <div class="left">
+            <div class="profile-img">
+                <img src="{{user.profilePicture}}" alt="ProfilePicture">
+            </div>
+    
+            <div class="profile-info">
+                <p><span class="info-span">Name:</span> {{user.name}}</p>
+                <p><span class="info-span">Email:</span> {{user.email}}</p>
+                <p><span class="info-span">Hight:</span> {{user.height}}cm</p>
+                <p><span class="info-span">Weight:</span> {{user.weight}}kg</p>
+            </div>
+        </div>
+
+        <div class="profile-bio">
+            <h2>Bio</h2>
+            <p>{{user.bio}}</p>
+        </div>
+    </div>
+    <div class="profile-card">
+        <p>Goal in progress</p>
+        <p>4 workouts per week</p>
+    </div>
+
+    <div class="profile-dropdown" (click)="handleWhOpen()">
+        <div class="dropdown-header">
+            <p>Workout history</p>
+            <p>40 total workouts</p>
+            <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock">expand_less</mat-icon>
+            <ng-template #elseBlock>
+                <mat-icon class="a-icon">expand_more</mat-icon>
+            </ng-template>
+        </div>
+        <div *ngIf="whOpen">workouts here list down</div>
+    </div>
+
+    <div class="profile-card">
+        <p>Goals history</p>
+        <p>12 goal Completed</p>
+    </div>
+
+</div>
+

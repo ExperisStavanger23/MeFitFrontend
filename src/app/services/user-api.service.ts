@@ -39,6 +39,10 @@ export class UserApiService {
     })
 
     const body = JSON.stringify(user)
-    this.http.put(`${this.apiUrlBase}/User/${user.id}`, body, { headers })
+    console.log("in user update service")
+    console.log(body)
+    this.http
+      .put(`${this.apiUrlBase}/User/${user.id}`, body, { headers })
+      .subscribe()
   }
 }
