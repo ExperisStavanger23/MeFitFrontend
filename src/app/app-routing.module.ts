@@ -10,6 +10,7 @@ import { CreationPage } from "./pages/creation/creation.page"
 import { ProfileEditPage } from "./pages/profile-edit/profile-edit.page"
 import { ExerciseDetailsCardComponent } from "./components/exercise-components/exercise-details-card/exercise-details-card.component"
 import { WorkoutDetailsCardComponent } from "./components/workout-components/workout-details-card/workout-details-card.component"
+import { AuthGuard } from "./guard/auth.guard"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: "workouts/:id", component: WorkoutDetailsCardComponent },
   { path: "exercises", component: ExercisesPage },
   { path: "exercises/:id", component: ExerciseDetailsCardComponent },
-  { path: "profile", component: ProfilePage },
+  { path: "profile", component: ProfilePage, canActivate: [AuthGuard] },
   { path: "profile/edit", component: ProfileEditPage },
   { path: "creation", component: CreationPage },
 ]

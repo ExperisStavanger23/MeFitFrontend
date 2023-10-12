@@ -56,22 +56,22 @@ export interface PostUser {
 }
 
 export interface User {
-  id: string
-  name: string
-  bio: string
-  email: string
-  profilePicture: string
-  experienceLvl: number
-  gender: string
-  weight: number
-  height: number
-  birthday: string
-  role: Role
-  goals: number[]
-  created: number[]
-  userExercises: number[]
-  userWorkouts: number[]
-  userPrograms: number[]
+  id?: string
+  name?: string
+  bio?: string
+  email?: string
+  profilePicture?: string
+  experienceLvl?: number
+  gender?: string
+  weight?: number
+  height?: number
+  birthday?: string
+  role?: Role
+  goals?: number[]
+  created?: number[]
+  userExercises?: number[]
+  userWorkouts?: number[]
+  userPrograms?: number[]
 }
 
 export interface Role {

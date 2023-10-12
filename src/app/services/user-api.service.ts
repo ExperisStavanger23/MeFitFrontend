@@ -1,36 +1,52 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { PostUser, User } from "src/interfaces"
+import { User } from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
-import { Observable } from "rxjs"
-// import jwt_decode from "jwt-decode"
+import { BehaviorSubject, Observable } from "rxjs"
 
 @Injectable({
   providedIn: "root",
 })
 export class UserApiService {
   apiUrlBase = "http://localhost:5212/api/v1"
+  private _user$ = new BehaviorSubject<User>({})
+  private _userExists$ = new BehaviorSubject<boolean>(false)
 
   constructor(
     private http: HttpClient,
     private keycloak: KeycloakService
   ) {}
 
-  async postUser(userToPost: PostUser): Promise<void> {
+  get user$(): Observable<User> {
+    return this._user$.asObservable()
+  }
+  get userExists$(): Observable<boolean> {
+    return this._userExists$.asObservable()
+  }
+
+  postUser(userToPost: User): void {
     const body = JSON.stringify(userToPost)
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
     })
 
     this.http
-      .post<PostUser>(`${this.apiUrlBase}/User`, body, {
+      .post<User>(`${this.apiUrlBase}/User`, body, {
         headers,
       })
-      .subscribe()
+      .subscribe(user => {
+        console.log(user)
+      })
+
+    this._user$.next(userToPost)
   }
 
-  getUser(id: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrlBase}/User/${id}`)
+  setUser(id: string): void {
+    this.http.get<User>(`${this.apiUrlBase}/User/${id}`).subscribe({
+      next: user => {
+        this._user$.next(user)
+      },
+    })
   }
 
   updateUser(user: User): void {
@@ -39,10 +55,13 @@ export class UserApiService {
     })
 
     const body = JSON.stringify(user)
-    console.log("in user update service")
-    console.log(body)
     this.http
       .put(`${this.apiUrlBase}/User/${user.id}`, body, { headers })
       .subscribe()
+    this._user$.next(user)
+  }
+
+  userExists(id: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrlBase}/User/${id}`)
   }
 }
