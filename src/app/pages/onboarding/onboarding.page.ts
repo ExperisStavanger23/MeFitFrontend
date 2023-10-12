@@ -1,13 +1,10 @@
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { KeycloakService } from "keycloak-angular"
-import { PostUser } from "src/interfaces"
+import { User } from "src/interfaces"
 import { UserApiService } from "src/app/services/user-api.service"
 import { getTokenClaims } from "src/helper-functions"
-import { InvalidTokenError } from "jwt-decode"
 import { Router } from "@angular/router"
-import { firstValueFrom } from "rxjs"
-import { HttpErrorResponse } from "@angular/common/http"
 
 @Component({
   selector: "app-onboarding",
@@ -43,32 +40,34 @@ export class OnboardingPage implements OnInit {
       ],
       birthday: [null, Validators.required],
       bio: ["", Validators.maxLength(250)],
+      profilePicture: [""],
     })
   }
 
   async ngOnInit(): Promise<void> {
-    try {
-      const claims = getTokenClaims(await this.keycloak.getToken())
-      this.form.setValue({
-        ...this.form.value,
-        name: claims.given_name,
-        email: claims.email,
+    if (!(await this.keycloak.isLoggedIn())) {
+      this.keycloak.login({
+        redirectUri: window.location.origin + "/onboarding",
       })
-    } catch (err) {
-      if (err instanceof InvalidTokenError) {
-        this.keycloak.login()
-      }
+      return
     }
 
-    try {
-      const claims = getTokenClaims(await this.keycloak.getToken())
-      await firstValueFrom(this.userApi.getUser(claims.sub))
-      this.router.navigate(["/dashboard"])
-    } catch (err) {
-      if (err instanceof HttpErrorResponse) {
-        console.log("user Not found in db. Procede with onboarding")
-      }
-    }
+    const claims = getTokenClaims(await this.keycloak.getToken())
+    this.userApi.userExists(claims.sub).subscribe({
+      next: () => {
+        console.log("user exixsts redirect")
+      },
+      error: () => {
+        console.log("error user deos not exists procede")
+      },
+    })
+
+    this.form.setValue({
+      ...this.form.value,
+      name: claims.given_name,
+      email: claims.email,
+    })
+
     this.loading = false
   }
 
@@ -82,14 +81,12 @@ export class OnboardingPage implements OnInit {
 
     const birthday = dateformater(this.form.value.birthday)
 
-    const userToPost: PostUser = {
+    const userToPost: User = {
       ...this.form.value,
-      profilePicture: "",
       birthday: birthday,
       id: claims.sub,
       experienceLvl: parseInt(this.form.value.experienceLvl),
     }
-    console.log(userToPost)
     this.userApi.postUser(userToPost)
 
     setTimeout(() => {
