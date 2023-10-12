@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core"
 import { UserApiService } from "src/app/services/user-api.service"
 import { User } from "src/interfaces"
 import { MatDialog } from "@angular/material/dialog"
-import { getTokenClaims } from "src/helper-functions"
 import { KeycloakService } from "keycloak-angular"
 import { EMPTY, Observable } from "rxjs"
 
@@ -20,11 +19,8 @@ export class ProfilePage implements OnInit {
     private keycloak: KeycloakService
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    const user = this.userService.getUser(
-      getTokenClaims(await this.keycloak.getToken()).sub
-    )
-    this.user = user
+  ngOnInit(): void {
+    this.user = this.userService.user$
   }
 
   handleWhOpen(): void {

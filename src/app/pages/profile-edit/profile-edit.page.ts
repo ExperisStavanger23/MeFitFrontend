@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { Router } from "@angular/router"
-import { KeycloakService } from "keycloak-angular"
 import { firstValueFrom } from "rxjs"
 import { UserApiService } from "src/app/services/user-api.service"
-import { getTokenClaims } from "src/helper-functions"
 import { User } from "src/interfaces"
 @Component({
   selector: "app-profile-edit",
@@ -17,7 +15,6 @@ export class ProfileEditPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserApiService,
-    private keycloak: KeycloakService,
     private router: Router
   ) {
     this.form = fb.group({
@@ -32,9 +29,7 @@ export class ProfileEditPage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const user = this.userService.getUser(
-      getTokenClaims(await this.keycloak.getToken()).sub
-    )
+    const user = this.userService.user$
     const data = await firstValueFrom(user)
     this.form.setValue({
       name: data.name,
@@ -53,9 +48,7 @@ export class ProfileEditPage implements OnInit {
       console.log("form is invalid")
       return
     }
-    const user = this.userService.getUser(
-      getTokenClaims(await this.keycloak.getToken()).sub
-    )
+    const user = this.userService.user$
     const data = await firstValueFrom(user)
     const userToUpdate: User = {
       ...data,
@@ -70,9 +63,8 @@ export class ProfileEditPage implements OnInit {
     this.userService.updateUser(userToUpdate)
     this.loading = true
     // TODO better waiting
-    setTimeout(() => {
-      console.log("timeout")
-      this.router.navigate(["/profile"])
-    }, 500)
+    // setTimeout(() => {
+    this.router.navigate(["/profile"])
+    // }, 500)
   }
 }
