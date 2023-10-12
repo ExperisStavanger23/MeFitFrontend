@@ -28,6 +28,9 @@ export class NavBarComponent implements OnInit {
         next: () => {
           this.userApi.setUser(claims.sub)
         },
+        error: () => {
+          this.router.navigate(["/onboarding"])
+        },
       })
 
       this.user = this.userApi.user$
