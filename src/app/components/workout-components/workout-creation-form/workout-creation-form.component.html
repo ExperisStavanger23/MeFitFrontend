@@ -43,7 +43,7 @@
     </mat-select>
   </mat-form-field>
 
-  <div>
+  <div *ngIf="selectedExercisesSetRep.length > 0">
     <h3>Selected exercises</h3>
     <div
       *ngFor="let exercise of selectedExercisesSetRep; let i = index"
