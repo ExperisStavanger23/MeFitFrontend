@@ -34,24 +34,17 @@ export class ExerciseCreationFormComponent {
       ],
       videoUrl: [""],
     })
-    this.form.valueChanges.subscribe(() => {
-      this.valid =
-        this.form.get("name")?.value &&
-        this.form.get("description")?.value &&
-        this.isImageUrlValid(this.form.get("imageUrl")?.value)
-    })
   }
 
   handleSubmit(event: SubmitEvent): void {
     this.creating = true
     event.preventDefault()
-    console.log(this.form.value)
     const exercise: Exercise = {
       id: 0,
       name: this.form.value.name,
       description: this.form.value.description,
       image: this.form.value.imageUrl,
-      video: this.form.value.videoUrl,
+      video: this.embedYouTubeURL(this.form.value.videoUrl),
     }
     this.apiExercisesService
       .postExercise(exercise)
@@ -72,10 +65,18 @@ export class ExerciseCreationFormComponent {
     this.creating = false
   }
 
-  // This function checks if the URL is a valid image URL
-  private isImageUrlValid(url: string): boolean {
-    const pattern =
-      /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
-    return pattern.test(url)
+  private embedYouTubeURL(originalURL: string) {
+    const regex =
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]+)/
+
+    const match = originalURL.match(regex)
+
+    if (match && match[1]) {
+      const videoId = match[1]
+      const embeddedURL = `https://www.youtube.com/embed/${videoId}`
+      return embeddedURL
+    } else {
+      return ""
+    }
   }
 }
