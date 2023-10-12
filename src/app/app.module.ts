@@ -108,7 +108,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HttpClientModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule,
   ],
   providers: [
     {

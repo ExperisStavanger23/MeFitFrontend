@@ -87,7 +87,7 @@ export interface Program {
   recommendedLevel: number
   duration: number
   image: string
-  workout: Workout[]
+  workouts: Workout[]
 }
 
 export interface Workout {
@@ -135,4 +135,13 @@ export interface SetReps {
   sets: number
   reps: number
   name: string
+}
+export interface PostProgram {
+  name: "string"
+  description: "string"
+  category: "string"
+  recommendedLevel: "string"
+  image: "string"
+  duration: number
+  workoutIds: number[]
 }
