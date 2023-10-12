@@ -71,7 +71,7 @@ export interface User {
   created?: number[]
   userExercises?: number[]
   userWorkouts?: number[]
-  userPrograms?: number[]
+  userPrograms?: Program[]
 }
 
 export interface Role {

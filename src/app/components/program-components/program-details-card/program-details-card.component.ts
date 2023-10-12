@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, Router } from "@angular/router"
 import { ApiProgramService } from "src/app/services/api-program.service"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
+import { UserApiService } from "src/app/services/user-api.service"
 import { Program } from "src/interfaces"
 
 @Component({
@@ -14,7 +15,8 @@ export class ProgramDetailsCardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiProgramService: ApiProgramService,
-    private apiWorkoutService: ApiWorkoutService
+    private apiWorkoutService: ApiWorkoutService,
+    private apiUserService: UserApiService
   ) {}
   id!: number
   program: Program = {
@@ -48,5 +50,10 @@ export class ProgramDetailsCardComponent implements OnInit {
 
   goToDetails(id: number) {
     this.router.navigate(["/workouts", id])
+  }
+
+  handleAdd(programId: number): void {
+    console.log(`handle add program: ${programId}`)
+    this.apiUserService.addProgram(programId)
   }
 }

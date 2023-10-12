@@ -64,4 +64,17 @@ export class UserApiService {
   userExists(id: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrlBase}/User/${id}`)
   }
+
+  addProgram(programId: number): void {
+    if (this._user$.value.userPrograms === undefined) {
+      console.log("UserApiService: user programs is undefined")
+      return
+    }
+    // TODO add userPrograms in interfacees and use that in userProgram
+    console.log(`userservice add program: ${programId}`)
+    console.log(this._user$.value.userPrograms)
+    for (const program of this._user$.value.userPrograms) {
+      console.log(program.id)
+    }
+  }
 }
