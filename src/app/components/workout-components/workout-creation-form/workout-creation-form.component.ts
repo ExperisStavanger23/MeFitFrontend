@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { MatSnackBar } from "@angular/material/snack-bar"
 import { ApiExercisesService } from "src/app/services/api-exercises.service"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
-import { PostWorkout, SetReps, Workout } from "src/interfaces"
+import { PostWorkout, SetReps } from "src/interfaces"
 import { Exercise, ExerciseSetRep } from "src/types"
 
 @Component({
@@ -13,6 +13,7 @@ import { Exercise, ExerciseSetRep } from "src/types"
 })
 export class WorkoutCreationFormComponent implements OnInit {
   form: FormGroup
+  creating = false
   selectedExercisesSetRep: ExerciseSetRep[] = []
 
   //TODO: replace with data from database/api
@@ -31,11 +32,18 @@ export class WorkoutCreationFormComponent implements OnInit {
       name: ["", Validators.required],
       description: ["", Validators.required],
       experienceLevel: ["", Validators.required],
-      imageUrl: [""],
+      imageUrl: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(
+            /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
+          ),
+        ],
+      ],
       workouts: [[]],
       category: ["", Validators.required],
       duration: [0, Validators.required],
-      tags: [null],
     })
   }
 
@@ -71,8 +79,8 @@ export class WorkoutCreationFormComponent implements OnInit {
   }
 
   handleSubmit(event: Event): void {
+    this.creating = true
     event.preventDefault()
-
     // Create an array to store the exercises with sets and reps
     const exercisesWithSetsReps: SetReps[] = []
 
@@ -92,7 +100,6 @@ export class WorkoutCreationFormComponent implements OnInit {
         reps,
       })
     }
-
     const workoutToPost: PostWorkout = {
       name: this.form.value.name,
       description: this.form.value.description,
@@ -102,7 +109,6 @@ export class WorkoutCreationFormComponent implements OnInit {
       image: this.form.value.imageUrl,
       workoutExercises: exercisesWithSetsReps,
     }
-    console.log(workoutToPost)
 
     this.apiWorkoutsService
       .postWorkout(workoutToPost)
@@ -120,10 +126,12 @@ export class WorkoutCreationFormComponent implements OnInit {
           })
         }
       })
-    // Now, exercisesWithSetsReps contains the selected exercises with sets and reps
-    // console.log(exercisesWithSetsReps)
+    this.creating = false
+  }
 
-    // // You can also access other form values using this.form.value
-    // console.log(this.form.value)
+  private isImageUrlValid(url: string): boolean {
+    const pattern =
+      /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
+    return pattern.test(url)
   }
 }
