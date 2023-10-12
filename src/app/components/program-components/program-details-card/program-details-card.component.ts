@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, Router } from "@angular/router"
 import { ApiProgramService } from "src/app/services/api-program.service"
+import { ApiWorkoutService } from "src/app/services/api-workout.service"
 import { Program } from "src/interfaces"
 
 @Component({
@@ -12,7 +13,8 @@ export class ProgramDetailsCardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiProgramService: ApiProgramService
+    private apiProgramService: ApiProgramService,
+    private apiWorkoutService: ApiWorkoutService
   ) {}
   id!: number
   program: Program = {
@@ -23,7 +25,7 @@ export class ProgramDetailsCardComponent implements OnInit {
     recommendedLevel: 0,
     duration: 0,
     image: "",
-    workout: [],
+    workouts: [],
   }
 
   ngOnInit(): void {
@@ -39,12 +41,12 @@ export class ProgramDetailsCardComponent implements OnInit {
           category: program.category,
           recommendedLevel: program.recommendedLevel,
           duration: program.duration,
-          workout: program.workout,
+          workouts: program.workouts,
         }
       })
   }
 
-  goToDetails() {
-    this.router.navigate(["/workouts", this.id])
+  goToDetails(id: number) {
+    this.router.navigate(["/workouts", id])
   }
 }

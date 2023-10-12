@@ -31,7 +31,7 @@
 
   <mat-form-field>
     <mat-label>Workouts</mat-label>
-    <mat-select matInput type="text" formControlName="workouts" multiple>
+    <mat-select matInput type="number" formControlName="workouts" multiple>
       <mat-option *ngFor="let workout of workouts" value="{{ workout.id }}">
         {{ workout.name }}</mat-option
       >
@@ -40,8 +40,8 @@
 
   <mat-form-field>
     <mat-label>Category</mat-label>
-    <mat-select matInput type="text" formControlName="category" multiple>
-      <mat-option *ngFor="let option of workoutCategories" value="{{ option }}">
+    <mat-select matInput type="text" formControlName="category">
+      <mat-option *ngFor="let option of programCategories" value="{{ option }}">
         {{ option }}</mat-option
       >
     </mat-select>
@@ -49,12 +49,7 @@
 
   <mat-form-field>
     <mat-label>Duration (days)</mat-label>
-    <input matInput type="text" name="ImageUrl" formControlName="duration" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Tags</mat-label>
-    <input matInput type="text" name="ImageUrl" formControlName="tags" />
+    <input matInput type="number" name="ImageUrl" formControlName="duration" />
   </mat-form-field>
 
   <button mat-flat-button color="accent" type="submit">Submit</button>
