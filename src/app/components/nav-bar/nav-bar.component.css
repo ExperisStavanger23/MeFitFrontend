@@ -64,7 +64,12 @@
   display: none;
 }
 .user-container {
-  display: block;
+  display: flex;
+  color: #fff;
+  & > a {
+    font-size: 1rem;
+    color: #fff;
+  }
 }
 
 @media (max-width: 768px) {
