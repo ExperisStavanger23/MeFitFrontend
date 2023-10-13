@@ -1,8 +1,19 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http"
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { User } from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
-import { BehaviorSubject, Observable, firstValueFrom } from "rxjs"
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  firstValueFrom,
+  map,
+  of,
+} from "rxjs"
 import { ApiProgramService } from "./api-program.service"
 import { getTokenClaims } from "src/helper-functions"
 
@@ -11,7 +22,7 @@ import { getTokenClaims } from "src/helper-functions"
 })
 export class UserApiService {
   apiUrlBase = "http://localhost:5212/api/v1"
-  _user$ = new BehaviorSubject<User>({})
+  private _user$ = new BehaviorSubject<User>({})
   private _userExists$ = new BehaviorSubject<boolean>(false)
 
   constructor(
@@ -51,12 +62,17 @@ export class UserApiService {
     this._user$.next(userToPost)
   }
 
-  setUser(id: string): void {
-    this.http.get<User>(`${this.apiUrlBase}/User/${id}`).subscribe({
-      next: user => {
-        this._user$.next(user)
-      },
-    })
+  async setUser(): Promise<void> {
+    const claims = getTokenClaims(await this.keycloak.getToken())
+    const user = await firstValueFrom(
+      this.http.get<User>(`${this.apiUrlBase}/User/${claims.sub}`).pipe(
+        map(user => {
+          return user
+        })
+      )
+    )
+
+    this._user$.next(user)
   }
 
   updateUser(user: User): void {
@@ -71,8 +87,21 @@ export class UserApiService {
     this._user$.next(user)
   }
 
-  userExists(id: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrlBase}/User/${id}`)
+  async userExists(id: string): Promise<boolean> {
+    const userExists = await firstValueFrom(
+      this.http.get<User>(`${this.apiUrlBase}/User/${id}`).pipe(
+        map(user => {
+          this._user$.next(user)
+          return true
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.log(err)
+          return of(false)
+        })
+      )
+    )
+
+    return userExists
   }
 
   addProgram(programId: number): void {
@@ -100,7 +129,7 @@ export class UserApiService {
         body,
         { headers }
       )
-      .subscribe()
+      .subscribe(() => this.setUser())
   }
 
   // getUserPrograms(userId: string): Observable<UserProgram[]> {

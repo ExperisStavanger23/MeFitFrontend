@@ -35,8 +35,8 @@ export class DashboardPage implements OnInit {
 
   user: Observable<User> = EMPTY
   constructor(private apiUserService: UserApiService) {
-    this.apiUserService.setUser(apiUserService._user$.value.id!)
-    this.user = apiUserService._user$
+    // this.apiUserService.setUser(apiUserService._user$.value.id!)
+    this.user = apiUserService.user$
   }
 
   async ngOnInit(): Promise<void> {
