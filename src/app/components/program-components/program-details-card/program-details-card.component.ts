@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, Router } from "@angular/router"
+import { EMPTY, Observable } from "rxjs"
 import { ApiProgramService } from "src/app/services/api-program.service"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
 import { UserApiService } from "src/app/services/user-api.service"
-import { Program } from "src/interfaces"
+import { Program, User } from "src/interfaces"
 
 @Component({
   selector: "app-program-details-card",
@@ -11,6 +12,7 @@ import { Program } from "src/interfaces"
   styleUrls: ["./program-details-card.component.css"],
 })
 export class ProgramDetailsCardComponent implements OnInit {
+  // userProgram: UserProgram
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -18,6 +20,8 @@ export class ProgramDetailsCardComponent implements OnInit {
     private apiWorkoutService: ApiWorkoutService,
     private apiUserService: UserApiService
   ) {}
+
+  user: Observable<User> = EMPTY
   id!: number
   program: Program = {
     id: 0,
@@ -29,8 +33,10 @@ export class ProgramDetailsCardComponent implements OnInit {
     image: "",
     workouts: [],
   }
+  disableBtn = false
 
   ngOnInit(): void {
+    console.log("programDetails onInit")
     this.id = this.route.snapshot.params["id"]
     this.apiProgramService
       .getProgramById(this.id)
@@ -46,6 +52,14 @@ export class ProgramDetailsCardComponent implements OnInit {
           workouts: program.workouts,
         }
       })
+
+    const up = this.apiUserService._user$.value.userPrograms?.find(
+      up => up.programId == this.id
+    )
+
+    if (up) {
+      this.disableBtn = true
+    }
   }
 
   goToDetails(id: number) {
@@ -55,5 +69,6 @@ export class ProgramDetailsCardComponent implements OnInit {
   handleAdd(programId: number): void {
     console.log(`handle add program: ${programId}`)
     this.apiUserService.addProgram(programId)
+    this.disableBtn = true
   }
 }
