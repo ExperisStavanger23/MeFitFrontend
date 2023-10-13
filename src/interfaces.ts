@@ -71,7 +71,7 @@ export interface User {
   goals?: number[]
   created?: number[]
   userExercises?: number[]
-  userWorkouts?: number[]
+  userWorkouts?: UserWorkout[]
   userPrograms?: UserProgram[]
 }
 
@@ -98,6 +98,14 @@ export interface Program {
   duration: number
   image: string
   workouts: Workout[]
+}
+
+export interface UserWorkout {
+  id: number
+  userId: string
+  workoutId: number
+  doneDate: string
+  workout: Workout
 }
 
 export interface Workout {
