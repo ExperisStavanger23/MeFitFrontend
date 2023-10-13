@@ -68,14 +68,13 @@ export class UserApiService {
   }
 
   addProgram(programId: number): void {
-    console.log("1")
-    if (this._user$.value.userPrograms === undefined) {
-      console.log("UserApiService: user programs is undefined")
-      return
-    }
     const programIdArray: number[] = new Array<number>(0)
-    for (const userProgram of this._user$.value.userPrograms) {
-      programIdArray.push(userProgram.programId)
+
+    if (this._user$.value.userPrograms !== undefined) {
+      console.log("UserApiService: user programs is undefined")
+      for (const userProgram of this._user$.value.userPrograms) {
+        programIdArray.push(userProgram.programId)
+      }
     }
 
     programIdArray.push(programId)
@@ -84,8 +83,9 @@ export class UserApiService {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
     })
-    console.log("2: before post")
+
     const body = JSON.stringify(programIdArray)
+
     this.http
       .put(
         `${this.apiUrlBase}/User/${this._user$.value.id}/userprogram`,
