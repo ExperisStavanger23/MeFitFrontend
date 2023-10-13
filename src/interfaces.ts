@@ -62,6 +62,7 @@ export interface User {
   email?: string
   profilePicture?: string
   experienceLvl?: number
+  workoutGoal?: number
   gender?: string
   weight?: number
   height?: number

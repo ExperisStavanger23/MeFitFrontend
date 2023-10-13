@@ -41,6 +41,7 @@ export class OnboardingPage implements OnInit {
       birthday: [null, Validators.required],
       bio: ["", Validators.maxLength(250)],
       profilePicture: [""],
+      workoutGoal: [null, Validators.required],
     })
   }
 
