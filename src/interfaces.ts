@@ -71,12 +71,21 @@ export interface User {
   created?: number[]
   userExercises?: number[]
   userWorkouts?: number[]
-  userPrograms?: Program[]
+  userPrograms?: UserProgram[]
 }
 
 export interface Role {
   id: number
   roleTitle: string
+}
+
+export interface UserProgram {
+  id: number
+  userId: number
+  programId: number
+  program: Program
+  startDate: string
+  endDate: string
 }
 
 export interface Program {

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core"
 import { User } from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
 import { BehaviorSubject, Observable } from "rxjs"
+import { ApiProgramService } from "./api-program.service"
 
 @Injectable({
   providedIn: "root",
@@ -14,7 +15,8 @@ export class UserApiService {
 
   constructor(
     private http: HttpClient,
-    private keycloak: KeycloakService
+    private keycloak: KeycloakService,
+    private apiProgramService: ApiProgramService
   ) {}
 
   get user$(): Observable<User> {
@@ -66,15 +68,34 @@ export class UserApiService {
   }
 
   addProgram(programId: number): void {
+    console.log("1")
     if (this._user$.value.userPrograms === undefined) {
       console.log("UserApiService: user programs is undefined")
       return
     }
-    // TODO add userPrograms in interfacees and use that in userProgram
-    console.log(`userservice add program: ${programId}`)
-    console.log(this._user$.value.userPrograms)
-    for (const program of this._user$.value.userPrograms) {
-      console.log(program.id)
+    const programIdArray: number[] = new Array<number>(0)
+    for (const userProgram of this._user$.value.userPrograms) {
+      programIdArray.push(userProgram.programId)
     }
+
+    programIdArray.push(programId)
+
+    // Update User's programs backend
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    })
+    console.log("2: before post")
+    const body = JSON.stringify(programIdArray)
+    this.http
+      .put(
+        `${this.apiUrlBase}/User/${this._user$.value.id}/userprogram`,
+        body,
+        { headers }
+      )
+      .subscribe()
   }
+
+  // getUserPrograms(userId: string): Observable<UserProgram[]> {
+  //   return this.http.
+  // }
 }
