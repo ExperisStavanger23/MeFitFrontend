@@ -43,26 +43,28 @@
     </mat-select>
   </mat-form-field>
 
-  <div>
+  <div *ngIf="selectedExercisesSetRep.length > 0">
     <h3>Selected exercises</h3>
     <div
       *ngFor="let exercise of selectedExercisesSetRep; let i = index"
       class="set-rep-container">
       <h3>{{ exercise.name }}</h3>
-      <mat-form-field>
-        <mat-label>Sets</mat-label>
-        <input
-          matInput
-          type="number"
-          formControlName="sets_{{ exercise.id }}" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Reps</mat-label>
-        <input
-          matInput
-          type="number"
-          formControlName="reps_{{ exercise.id }}" />
-      </mat-form-field>
+      <div class="input-container">
+        <mat-form-field>
+          <mat-label>Sets</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="sets_{{ exercise.id }}" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Reps</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="reps_{{ exercise.id }}" />
+        </mat-form-field>
+      </div>
     </div>
   </div>
 
@@ -75,5 +77,11 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-flat-button color="accent" type="submit">Submit</button>
+  <button
+    mat-flat-button
+    color="accent"
+    type="submit"
+    [disabled]="creating || form.invalid">
+    Submit
+  </button>
 </form>

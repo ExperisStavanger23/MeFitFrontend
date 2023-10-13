@@ -52,5 +52,11 @@
     <input matInput type="number" name="ImageUrl" formControlName="duration" />
   </mat-form-field>
 
-  <button mat-flat-button color="accent" type="submit">Submit</button>
+  <button
+    mat-flat-button
+    color="accent"
+    type="submit"
+    [disabled]="creating || form.invalid">
+    Submit
+  </button>
 </form>

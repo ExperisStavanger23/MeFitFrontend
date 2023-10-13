@@ -49,4 +49,10 @@ export class ProgramDetailsCardComponent implements OnInit {
   goToDetails(id: number) {
     this.router.navigate(["/workouts", id])
   }
+
+  private isImageUrlValid(url: string): boolean {
+    const pattern =
+      /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
+    return pattern.test(url)
+  }
 }
