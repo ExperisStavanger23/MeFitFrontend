@@ -59,3 +59,30 @@
   cursor: pointer;
   background-color: #2d7556;
 }
+
+.menu-button {
+  display: none;
+}
+.user-container {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .nav-buttons {
+    display: none;
+  }
+
+  .menu-button {
+    display: block;
+  }
+  .user-container {
+    display: none;
+  }
+}
+
+.user-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: content;
+  align-items: center;
+}
