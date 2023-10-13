@@ -86,3 +86,9 @@
   justify-content: content;
   align-items: center;
 }
+.logout-hamburger {
+  color: rgb(255, 84, 84);
+  & > span {
+    color: rgb(255, 84, 84);
+  }
+}
