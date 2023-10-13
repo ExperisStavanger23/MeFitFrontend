@@ -1,11 +1,11 @@
 <form class="program-form" [formGroup]="form" (submit)="handleSubmit($event)">
   <mat-form-field>
-    <mat-label>Program name</mat-label>
+    <mat-label>Exercise name</mat-label>
     <input matInput type="text" name="Name" formControlName="name" />
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Program description</mat-label>
+    <mat-label>Exercise description</mat-label>
     <textarea
       matInput
       cdkTextareaAutosize
@@ -29,7 +29,7 @@
     mat-flat-button
     color="accent"
     type="submit"
-    [disabled]="creating || !valid">
+    [disabled]="creating || form.invalid">
     Submit
   </button>
 </form>

@@ -12,6 +12,7 @@ import { PostProgram, Workout } from "src/interfaces"
 })
 export class ProgramCreationFormComponent implements OnInit {
   form: FormGroup
+  creating = false
   selectedWorkoutsIds: number[] = []
 
   //TODO: replace with data from database/api
@@ -30,7 +31,15 @@ export class ProgramCreationFormComponent implements OnInit {
       name: ["", Validators.required],
       description: ["", [Validators.required]],
       experienceLevel: [null, [Validators.required]],
-      imageUrl: [""],
+      imageUrl: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(
+            /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
+          ),
+        ],
+      ],
       workouts: [null, [Validators.required]],
       category: [null, [Validators.required]],
       duration: [null, [Validators.required]],
@@ -44,6 +53,7 @@ export class ProgramCreationFormComponent implements OnInit {
   }
 
   handleSubmit(event: SubmitEvent): void {
+    this.creating = true
     event.preventDefault()
 
     const programToPost: PostProgram = {
@@ -74,5 +84,6 @@ export class ProgramCreationFormComponent implements OnInit {
           })
         }
       })
+    this.creating = false
   }
 }
