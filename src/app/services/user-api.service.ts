@@ -10,7 +10,7 @@ import { ApiProgramService } from "./api-program.service"
 })
 export class UserApiService {
   apiUrlBase = "http://localhost:5212/api/v1"
-  private _user$ = new BehaviorSubject<User>({})
+  _user$ = new BehaviorSubject<User>({})
   private _userExists$ = new BehaviorSubject<boolean>(false)
 
   constructor(

@@ -14,7 +14,14 @@
         </div>
 
         
-        <div class="panel p2">p2 </div>
+        <div class="panel p2">
+            <p>Current Programs</p>
+            <div *ngIf="user | async as user">
+                <div *ngFor="let up of user.userPrograms">
+                    {{up.program.name}}
+                </div>
+            </div>
+        </div>
         
         <div class="panel p3">p3</div>
         
