@@ -2,8 +2,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { User } from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
-import { BehaviorSubject, Observable } from "rxjs"
+import { BehaviorSubject, Observable, firstValueFrom } from "rxjs"
 import { ApiProgramService } from "./api-program.service"
+import { getTokenClaims } from "src/helper-functions"
 
 @Injectable({
   providedIn: "root",
@@ -24,6 +25,13 @@ export class UserApiService {
   }
   get userExists$(): Observable<boolean> {
     return this._userExists$.asObservable()
+  }
+
+  async getUser(): Promise<User> {
+    console.log("user service: getUser")
+    const userId = getTokenClaims(await this.keycloak.getToken()).sub
+    const user = this.http.get<User>(`${this.apiUrlBase}/User/${userId}`)
+    return firstValueFrom(user)
   }
 
   postUser(userToPost: User): void {

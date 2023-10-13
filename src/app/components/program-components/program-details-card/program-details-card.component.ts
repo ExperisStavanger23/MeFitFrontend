@@ -35,7 +35,7 @@ export class ProgramDetailsCardComponent implements OnInit {
   }
   disableBtn = false
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log("programDetails onInit")
     this.id = this.route.snapshot.params["id"]
     this.apiProgramService
@@ -53,10 +53,8 @@ export class ProgramDetailsCardComponent implements OnInit {
         }
       })
 
-    const up = this.apiUserService._user$.value.userPrograms?.find(
-      up => up.programId == this.id
-    )
-
+    const user = await this.apiUserService.getUser()
+    const up = user.userPrograms?.find(up => up.programId == this.id)
     if (up) {
       this.disableBtn = true
     }
