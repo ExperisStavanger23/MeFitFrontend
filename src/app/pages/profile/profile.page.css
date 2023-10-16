@@ -113,6 +113,25 @@ a {
   top: -3px;
 }
 
+.workout-history-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.workout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f4f5f7;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 50%;
+}
+
 @media (max-width: 768px) {
   .left {
     flex-direction: column;
@@ -121,7 +140,8 @@ a {
   .profile-page {
     padding: 10px;
   }
-  .profile-card {
+
+  .profile-card:first-child {
     align-items: center;
     padding: 10px;
     flex-direction: column;
