@@ -28,7 +28,7 @@
     <p>{{user.workoutGoal}} workouts per week</p>
   </div>
 
-  <div class="profile-dropdown" (click)="handleWhOpen()">
+  <div class="profile-dropdown">
     <div class="dropdown-header">
       <p>Workout history</p>
       <p *ngIf="user.userWorkouts; else nullWorkouts">{{user.userWorkouts.length}} total workouts</p>
@@ -36,11 +36,11 @@
         <p>0 total workouts</p>
       </ng-template>
 
-      <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock"
+      <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock" (click)="handleWhOpen()"
         >expand_less</mat-icon
       >
       <ng-template #elseBlock>
-        <mat-icon class="a-icon">expand_more</mat-icon>
+        <mat-icon class="a-icon" (click)="handleWhOpen()">expand_more</mat-icon>
       </ng-template>
     </div>
     <div *ngIf="whOpen" class="workout-history-container">

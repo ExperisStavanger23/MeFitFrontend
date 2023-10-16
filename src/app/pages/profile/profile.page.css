@@ -78,11 +78,6 @@ a {
   border-radius: 10px;
 }
 
-.profile-dropdown:hover {
-  background-color: lightgray;
-  cursor: pointer;
-}
-
 .dropdown-header {
   display: flex;
   flex-direction: row;
@@ -109,8 +104,16 @@ a {
 
 .a-icon {
   position: absolute;
-  right: -35px;
-  top: -3px;
+  right: -38px;
+  top: -4px;
+  background-color: #d4d4d4;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.a-icon:hover {
+  cursor: pointer;
+  background-color: #b3b3b3;
 }
 
 .workout-history-container {
