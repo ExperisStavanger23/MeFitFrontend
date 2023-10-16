@@ -22,7 +22,7 @@ export class DashboardPage implements OnInit {
     datasets: [
       {
         data: [2, 5, 3, 8, 4, 5, 1],
-        label: "Month/week",
+        label: "Done Workouts",
         backgroundColor: "#324B9B",
       },
     ],
@@ -31,6 +31,13 @@ export class DashboardPage implements OnInit {
   public barOptions: ChartConfiguration["options"] = {
     responsive: true,
     maintainAspectRatio: false,
+    scales: {
+      y: {
+        ticks: {
+          stepSize: 1,
+        },
+      },
+    },
   }
 
   user: Observable<User> = EMPTY
@@ -42,16 +49,36 @@ export class DashboardPage implements OnInit {
 
     const user = await firstValueFrom(this.user)
     const [start, end] = getStartAndEndOfWeek()
-    const doneWorkoutDates: Date[] = new Array<Date>(0)
     let doneThisWeek = 0
     for (const uw of user.userWorkouts!) {
       if (uw.doneDate !== null) {
-        doneWorkoutDates.push(new Date(uw.doneDate))
         if (new Date(uw.doneDate) > start && new Date(uw.doneDate) < end) {
           doneThisWeek++
         }
       }
     }
+
+    const doneEachWeek: number[] = new Array<number>(0)
+    for (let i = 30; i >= 0; i = i - 7) {
+      const wStart = new Date()
+      const wEnd = new Date()
+      wStart.setDate(wStart.getDate() - i)
+      wEnd.setDate(wEnd.getDate() - (i - 7))
+      console.log(wStart)
+      console.log(wEnd)
+
+      let doneThatWeek = 0
+
+      for (const uw of user.userWorkouts!) {
+        if (uw.doneDate !== null) {
+          if (new Date(uw.doneDate) > wStart && new Date(uw.doneDate) < wEnd) {
+            doneThatWeek++
+          }
+        }
+      }
+      doneEachWeek.push(doneThatWeek)
+    }
+    console.log(doneEachWeek)
 
     // Update doughnutChart data
     this.doughnutChartData = {
@@ -62,6 +89,30 @@ export class DashboardPage implements OnInit {
           backgroundColor: ["#41C17C", "#DF6565"],
         },
       ],
+    }
+
+    this.barChartData = {
+      labels: ["01", "02", "03", "04", "05", "06", "07"],
+      datasets: [
+        {
+          data: doneEachWeek,
+          label: "Done Workouts",
+          backgroundColor: "#324B9B",
+        },
+      ],
+    }
+
+    this.barOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          ticks: {
+            stepSize: 1,
+          },
+          max: Math.max(...doneEachWeek) + 1,
+        },
+      },
     }
   }
 }
