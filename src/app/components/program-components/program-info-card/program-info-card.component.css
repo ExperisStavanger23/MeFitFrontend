@@ -100,3 +100,16 @@ img {
   transform: translateX(-20px);
   z-index: 0;
 }
+
+@media (max-width: 768px) {
+  img {
+    width: 40%;
+    min-width: 150px;
+  }
+  p {
+    font-size: 12px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+}
