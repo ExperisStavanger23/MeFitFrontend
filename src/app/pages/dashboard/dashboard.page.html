@@ -1,17 +1,17 @@
 <div class="dashboard">
-    <div class="container">
+  <div class="container">
+    <div class="panel p1">
+      <div class="doughnut-container">
+        <canvas
+          baseChart
+          class="chart"
+          [data]="doughnutChartData"
+          type="doughnut">
+        </canvas>
+      </div>
+    </div>
 
-        <div class="panel p1">
-            <div class="doughnut-container">
-                <canvas
-                baseChart
-                class="chart"
-                [data]="doughnutChartData"
-                type="doughnut"
-                >
-                </canvas>
-            </div>
-        </div>
+    <div class="panel p2">p2</div>
 
         
         <div class="panel p2">
@@ -34,18 +34,18 @@
         
         <div class="panel p4">p4</div>
 
-        <div class="panel p5">
-            <div class="bar-container">
-                <canvas
-                baseChart
-                class="chart"
-                [data]="barChartData"
-                [options]="barOptions"
-                type="bar"
-                >
-                </canvas>
-            </div>
-        </div>
-        
+    <div class="panel p4">p4</div>
+
+    <div class="panel p5">
+      <div class="bar-container">
+        <canvas
+          baseChart
+          class="chart"
+          [data]="barChartData"
+          [options]="barOptions"
+          type="bar">
+        </canvas>
       </div>
+    </div>
+  </div>
 </div>

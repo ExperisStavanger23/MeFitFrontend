@@ -92,3 +92,45 @@ button {
     border-bottom: 2px solid #e0e0e0;
   }
 }
+
+@media (max-width: 768px) {
+  .details-container {
+    margin: 10px;
+  }
+  .information-container {
+    margin: 0;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    & > .image-container {
+      width: 100%;
+      height: 50%;
+      max-height: 200px;
+    }
+  }
+  .info-container {
+    max-height: 300px;
+  }
+  .stat-info {
+    width: 100%;
+  }
+  .stat {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .media-container {
+    width: 100%;
+  }
+  .exercise-container {
+    width: 90%;
+  }
+  .information {
+    margin: 1em;
+  }
+  .exercises {
+    width: 90%;
+  }
+  button {
+    width: 100%;
+  }
+}
