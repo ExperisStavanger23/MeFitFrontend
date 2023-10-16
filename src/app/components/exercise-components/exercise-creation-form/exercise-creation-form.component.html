@@ -25,6 +25,15 @@
     <input matInput type="text" name="VideoUrl" formControlName="videoUrl" />
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Muscle Groups</mat-label>
+    <mat-select matInput type="text" formControlName="muscleGroup" multiple>
+      <mat-option *ngFor="let option of muscleGroups" [value]="option">
+        {{ option.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
   <button
     mat-flat-button
     color="accent"

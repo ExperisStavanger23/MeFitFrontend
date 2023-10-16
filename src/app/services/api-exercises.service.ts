@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core"
 import { Observable, of } from "rxjs"
 import { Exercise } from "src/types"
 import { catchError, map } from "rxjs/operators"
+import { MuscleGroup } from "src/interfaces"
 
 @Injectable({
   providedIn: "root",
@@ -44,5 +45,9 @@ export class ApiExercisesService {
 
   getExerciseById(id: number): Observable<Exercise> {
     return this.http.get<Exercise>(`${this.apiUrlBase}/Exercise/${id}`)
+  }
+
+  getMuscleGroups(): Observable<MuscleGroup[]> {
+    return this.http.get<MuscleGroup[]>(`${this.apiUrlBase}/Musclegroup`)
   }
 }

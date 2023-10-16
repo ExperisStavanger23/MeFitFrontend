@@ -128,12 +128,18 @@ export interface PostWorkout {
   workoutExercises: SetReps[]
 }
 
-export interface Exercise {
+export type Exercise = {
   id: number
   name: string
   description: string
   image: string
   video: string
+  muscleGroups: MuscleGroup[]
+}
+
+export type MuscleGroup = {
+  id: number
+  name: string
 }
 
 export interface ExerciseSetRep {
