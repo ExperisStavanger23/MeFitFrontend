@@ -62,21 +62,30 @@ export interface User {
   email?: string
   profilePicture?: string
   experienceLvl?: number
+  workoutGoal?: number
   gender?: string
   weight?: number
   height?: number
   birthday?: string
   role?: Role
-  goals?: number[]
   created?: number[]
   userExercises?: number[]
-  userWorkouts?: number[]
-  userPrograms?: number[]
+  userWorkouts?: UserWorkout[]
+  userPrograms?: UserProgram[]
 }
 
 export interface Role {
   id: number
   roleTitle: string
+}
+
+export interface UserProgram {
+  id: number
+  userId: number
+  programId: number
+  program: Program
+  startDate: string
+  endDate: string
 }
 
 export interface Program {
@@ -88,6 +97,14 @@ export interface Program {
   duration: number
   image: string
   workouts: Workout[]
+}
+
+export interface UserWorkout {
+  id: number
+  userId: string
+  workoutId: number
+  doneDate: string
+  workout: Workout
 }
 
 export interface Workout {

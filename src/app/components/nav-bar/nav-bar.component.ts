@@ -24,11 +24,12 @@ export class NavBarComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if (await this.isLoggedIn) {
       const claims = getTokenClaims(await this.keycloak.getToken())
-      this.userApi.userExists(claims.sub).subscribe({
-        next: () => {
-          this.userApi.setUser(claims.sub)
-        },
-      })
+      const userExists = await this.userApi.userExists(claims.sub)
+      if (userExists) {
+        this.userApi.setUser()
+      } else {
+        this.router.navigate(["/onboarding"])
+      }
 
       this.user = this.userApi.user$
     }
