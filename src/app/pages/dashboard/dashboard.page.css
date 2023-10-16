@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 .dashboard {
     background-color: #F4F5F7;
     height: calc(100vh - 64px);
@@ -27,6 +31,7 @@
     border-radius: 10px;
     background-color: #FEFEFE;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -37,10 +42,12 @@
 
 .p2 {
     grid-area: p2;
+    justify-content: unset;
 }
 
 .p3 {
     grid-area: p3;
+    justify-content: unset;
 }
 
 .p4 {
@@ -49,7 +56,20 @@
 
 .p5 {
     grid-area: p5;
-}   
+}
+
+.programs-container, .workouts-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.program, .workout { 
+    background-color: #F4F5F7;
+    padding: 10px;
+    border-radius: 10px;
+}
 
 .bar-container {
     max-height: 500px;

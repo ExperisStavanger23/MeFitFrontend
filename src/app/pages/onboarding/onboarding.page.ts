@@ -41,6 +41,7 @@ export class OnboardingPage implements OnInit {
       birthday: [null, Validators.required],
       bio: ["", Validators.maxLength(250)],
       profilePicture: [""],
+      workoutGoal: [null, Validators.required],
     })
   }
 
@@ -53,14 +54,12 @@ export class OnboardingPage implements OnInit {
     }
 
     const claims = getTokenClaims(await this.keycloak.getToken())
-    this.userApi.userExists(claims.sub).subscribe({
-      next: () => {
-        console.log("user exixsts redirect")
-      },
-      error: () => {
-        console.log("error user deos not exists procede")
-      },
-    })
+
+    const userExsists = await this.userApi.userExists(claims.sub)
+    if (userExsists) {
+      this.router.navigate(["/dashboard"])
+      return
+    }
 
     this.form.setValue({
       ...this.form.value,

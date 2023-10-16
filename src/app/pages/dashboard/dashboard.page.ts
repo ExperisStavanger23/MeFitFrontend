@@ -1,12 +1,16 @@
-import { Component } from "@angular/core"
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Component, OnInit } from "@angular/core"
 import { ChartConfiguration, ChartData } from "chart.js"
+import { EMPTY, Observable } from "rxjs"
+import { UserApiService } from "src/app/services/user-api.service"
+import { User } from "src/interfaces"
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.page.html",
   styleUrls: ["./dashboard.page.css"],
 })
-export class DashboardPage {
+export class DashboardPage implements OnInit {
   // Doughnut
   public doughnutChartData: ChartData<"doughnut"> = {
     labels: ["Completed", "Remaining"],
@@ -27,5 +31,15 @@ export class DashboardPage {
   public barOptions: ChartConfiguration["options"] = {
     responsive: true,
     maintainAspectRatio: false,
+  }
+
+  user: Observable<User> = EMPTY
+  constructor(private apiUserService: UserApiService) {
+    // this.apiUserService.setUser(apiUserService._user$.value.id!)
+    this.user = apiUserService.user$
+  }
+
+  async ngOnInit(): Promise<void> {
+    console.log("oninitn dashboard")
   }
 }
