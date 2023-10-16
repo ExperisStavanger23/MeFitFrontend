@@ -68,7 +68,6 @@ export interface User {
   height?: number
   birthday?: string
   role?: Role
-  goals?: number[]
   created?: number[]
   userExercises?: number[]
   userWorkouts?: UserWorkout[]

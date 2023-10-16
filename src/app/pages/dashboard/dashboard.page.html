@@ -15,20 +15,20 @@
 
         
         <div class="panel p2">
-            <p>Current Programs</p>
-            <div *ngIf="user | async as user">
-                <div *ngFor="let up of user.userPrograms">
+            <h3>Current Programs</h3>
+            <div *ngIf="user | async as user" class="programs-container">
+                <a *ngFor="let up of user.userPrograms" class="program" routerLink="/programs/{{up.program.id}}" mat-button>
                     {{up.program.name}}
-                </div>
+                </a>
             </div>
         </div>
         
         <div class="panel p3">
-            <p>Current Workouts</p>
-            <div *ngIf="user | async as user">
-                <div *ngFor="let uw of user.userWorkouts">
+            <h3>Current Workouts</h3>
+            <div *ngIf="user | async as user" class="workouts-container">
+                <a *ngFor="let uw of user.userWorkouts" class="workout" routerLink="/workouts/{{uw.workout.id}}" mat-button>
                     {{uw.workout.name}}
-                </div>
+                </a>
             </div>
         </div>
         
