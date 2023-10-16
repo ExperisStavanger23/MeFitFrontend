@@ -19,6 +19,10 @@
 .navbar {
   padding-left: 50px;
   padding-right: 50px;
+  @media (max-width: 768px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 .logo {
