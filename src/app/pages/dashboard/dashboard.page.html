@@ -1,52 +1,50 @@
 <div class="dashboard">
-    <div class="container">
+  <div class="container">
 
-        <div class="panel p1">
-            <h3>Workouts this week</h3>
-            <div class="doughnut-container">
-                <canvas
-                baseChart
-                class="chart"
-                [data]="doughnutChartData"
-                type="doughnut"
-                >
-                </canvas>
-            </div>
+    <div class="panel p1">
+        <h3>Workouts this week</h3>
+        <div class="doughnut-container">
+            <canvas
+            baseChart
+            class="chart"
+            [data]="doughnutChartData"
+            type="doughnut"
+            >
+            </canvas>
         </div>
+    </div>
 
-        
-        <div class="panel p2">
-            <h3>Current Programs</h3>
-            <div *ngIf="user | async as user" class="programs-container">
-                <a *ngFor="let up of user.userPrograms" class="program" routerLink="/programs/{{up.program.id}}" mat-button>
-                    {{up.program.name}}
-                </a>
-            </div>
+    
+    <div class="panel p2">
+        <h3>Current Programs</h3>
+        <div *ngIf="user | async as user" class="programs-container">
+            <a *ngFor="let up of user.userPrograms" class="program" routerLink="/programs/{{up.program.id}}" mat-button>
+                {{up.program.name}}
+            </a>
         </div>
-        
-        <div class="panel p3">
-            <h3>Current Workouts</h3>
-            <div *ngIf="user | async as user" class="workouts-container">
-                <a *ngFor="let uw of user.userWorkouts" class="workout" routerLink="/workouts/{{uw.workout.id}}" mat-button>
-                    {{uw.workout.name}}
-                </a>
-            </div>
+    </div>
+    
+    <div class="panel p3">
+        <h3>Current Workouts</h3>
+        <div *ngIf="user | async as user" class="workouts-container">
+            <a *ngFor="let uw of user.userWorkouts" class="workout" routerLink="/workouts/{{uw.workout.id}}" mat-button>
+                {{uw.workout.name}}
+            </a>
         </div>
-        
-        <div class="panel p4">p4</div>
+    </div>
+    
+    <div class="panel p4">p4</div>
 
-        <div class="panel p5">
-            <div class="bar-container">
-                <canvas
-                baseChart
-                class="chart"
-                [data]="barChartData"
-                [options]="barOptions"
-                type="bar"
-                >
-                </canvas>
-            </div>
-        </div>
-        
+    <div class="panel p5">
+      <div class="bar-container">
+        <canvas
+          baseChart
+          class="chart"
+          [data]="barChartData"
+          [options]="barOptions"
+          type="bar">
+        </canvas>
       </div>
+    </div>
+  </div>
 </div>
