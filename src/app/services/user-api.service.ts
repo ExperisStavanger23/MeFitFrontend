@@ -67,6 +67,7 @@ export class UserApiService {
     const user = await firstValueFrom(
       this.http.get<User>(`${this.apiUrlBase}/User/${claims.sub}`).pipe(
         map(user => {
+          this._user$.next(user)
           return user
         })
       )

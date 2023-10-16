@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core"
 import { ChartConfiguration, ChartData } from "chart.js"
-import { EMPTY, Observable } from "rxjs"
+import { EMPTY, Observable, firstValueFrom } from "rxjs"
 import { UserApiService } from "src/app/services/user-api.service"
 import { User } from "src/interfaces"
 
@@ -14,7 +14,7 @@ export class DashboardPage implements OnInit {
   // Doughnut
   public doughnutChartData: ChartData<"doughnut"> = {
     labels: ["Completed", "Remaining"],
-    datasets: [{ data: [3, 7], backgroundColor: ["#41C17C", "#DF6565"] }],
+    datasets: [{ data: [7, 7], backgroundColor: ["#41C17C", "#DF6565"] }],
   }
 
   public barChartData: ChartData<"bar"> = {
@@ -34,12 +34,49 @@ export class DashboardPage implements OnInit {
   }
 
   user: Observable<User> = EMPTY
-  constructor(private apiUserService: UserApiService) {
-    // this.apiUserService.setUser(apiUserService._user$.value.id!)
-    this.user = apiUserService.user$
-  }
+  constructor(private apiUserService: UserApiService) {}
 
   async ngOnInit(): Promise<void> {
-    console.log("oninitn dashboard")
+    await this.apiUserService.setUser()
+    this.user = this.apiUserService.user$
+
+    const user = await firstValueFrom(this.user)
+    const [start, end] = getStartAndEndOfWeek()
+    const doneWorkoutDates: Date[] = new Array<Date>(0)
+    let doneThisWeek = 0
+    for (const uw of user.userWorkouts!) {
+      if (uw.doneDate !== null) {
+        doneWorkoutDates.push(new Date(uw.doneDate))
+        if (new Date(uw.doneDate) > start && new Date(uw.doneDate) < end) {
+          doneThisWeek++
+        }
+      }
+    }
+
+    // Update doughnutChart data
+    this.doughnutChartData = {
+      labels: ["Completed", "Remaining"],
+      datasets: [
+        {
+          data: [doneThisWeek, user.workoutGoal! - doneThisWeek],
+          backgroundColor: ["#41C17C", "#DF6565"],
+        },
+      ],
+    }
   }
+}
+
+function getStartAndEndOfWeek() {
+  // Get current date
+  const today = new Date()
+
+  // Get the difference
+  const diff = today.getDate() - today.getDay()
+
+  // Get the current week's start date
+  const startDate = new Date(today.setDate(diff))
+  // Get the current week's end date
+  const endDate = new Date(today.setDate(diff + 6))
+
+  return [startDate, endDate]
 }
