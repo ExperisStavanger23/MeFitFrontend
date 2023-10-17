@@ -46,7 +46,7 @@
           then loggedInS;
           else loggedOutS
         "></ng-container>
-        
+
       <ng-template #loggedInS>
         <a routerLink="/profile" mat-menu-item routerLinkActive="selected"
           >Profile</a
@@ -84,18 +84,14 @@
         </button>
       </mat-menu>
     </ng-template>
-    
+
     <ng-template #loggedOut>
       <button class="login-btn" mat-raised-button (click)="login()">
         Login
       </button>
     </ng-template>
   </div>
-
-  <img
-    *ngIf="user | async as user"
-    class="pfp"
-    src="{{ user.profilePicture }}"
-    alt="pfp"
-    width="50px" />
+  <div class="image-container" *ngIf="user | async as user">
+    <img class="pfp" src="{{ user.profilePicture }}" alt="pfp" width="50px" />
+  </div>
 </mat-toolbar>
