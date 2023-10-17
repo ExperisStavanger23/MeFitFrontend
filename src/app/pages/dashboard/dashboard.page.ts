@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core"
 import { ChartConfiguration, ChartData } from "chart.js"
 import { EMPTY, Observable, firstValueFrom } from "rxjs"
 import { UserApiService } from "src/app/services/user-api.service"
-import { User } from "src/interfaces"
+import { User, UserWorkout } from "src/interfaces"
 
 @Component({
   selector: "app-dashboard",
@@ -11,6 +11,8 @@ import { User } from "src/interfaces"
   styleUrls: ["./dashboard.page.css"],
 })
 export class DashboardPage implements OnInit {
+  doneThisWeek = 0
+
   // Doughnut
   public doughnutChartData: ChartData<"doughnut"> = {
     labels: ["Completed", "Remaining"],
@@ -49,11 +51,11 @@ export class DashboardPage implements OnInit {
 
     const user = await firstValueFrom(this.user)
     const [start, end] = getStartAndEndOfWeek()
-    let doneThisWeek = 0
+
     for (const uw of user.userWorkouts!) {
       if (uw.doneDate !== null) {
         if (new Date(uw.doneDate) > start && new Date(uw.doneDate) < end) {
-          doneThisWeek++
+          this.doneThisWeek++
         }
       }
     }
@@ -64,9 +66,6 @@ export class DashboardPage implements OnInit {
       const wEnd = new Date()
       wStart.setDate(wStart.getDate() - i)
       wEnd.setDate(wEnd.getDate() - (i - 7))
-      console.log(wStart)
-      console.log(wEnd)
-
       let doneThatWeek = 0
 
       for (const uw of user.userWorkouts!) {
@@ -78,14 +77,13 @@ export class DashboardPage implements OnInit {
       }
       doneEachWeek.push(doneThatWeek)
     }
-    console.log(doneEachWeek)
 
     // Update doughnutChart data
     this.doughnutChartData = {
       labels: ["Completed", "Remaining"],
       datasets: [
         {
-          data: [doneThisWeek, user.workoutGoal! - doneThisWeek],
+          data: [this.doneThisWeek, user.workoutGoal! - this.doneThisWeek],
           backgroundColor: ["#41C17C", "#DF6565"],
         },
       ],
@@ -114,6 +112,25 @@ export class DashboardPage implements OnInit {
         },
       },
     }
+    console.log(this.doneThisWeek)
+  }
+
+  async markDone(userWorkout: UserWorkout) {
+    console.log(this.doneThisWeek)
+    userWorkout.doneDate = dateFormatter(new Date())
+    console.log(userWorkout)
+    this.apiUserService.updateUserWorkout(userWorkout)
+    const user = await firstValueFrom(this.user)
+    this.doneThisWeek += 1
+    this.doughnutChartData = {
+      labels: ["Completed", "Remaining"],
+      datasets: [
+        {
+          data: [this.doneThisWeek, user.workoutGoal! - this.doneThisWeek],
+          backgroundColor: ["#41C17C", "#DF6565"],
+        },
+      ],
+    }
   }
 }
 
@@ -130,4 +147,11 @@ function getStartAndEndOfWeek() {
   const endDate = new Date(today.setDate(diff + 6))
 
   return [startDate, endDate]
+}
+
+function dateFormatter(date: Date): string {
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = date.getDate().toString().padStart(2, "0")
+  return `${year}-${month}-${day}`
 }
