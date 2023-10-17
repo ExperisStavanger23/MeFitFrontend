@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core"
-import { Exercise } from "src/types"
+import { Exercise } from "src/interfaces"
 @Component({
   selector: "app-exercise-info-card",
   templateUrl: "./exercise-info-card.component.html",
@@ -9,7 +9,7 @@ export class ExerciseInfoCardComponent {
   @Input() canAdd = false
   @Input() exercise!: Exercise
 
-  @Output() emitterId = new EventEmitter<number>() //TODO: replace with exercise
+  @Output() emitterId = new EventEmitter<number>()
 
   add() {
     throw new Error("Method not implemented.")

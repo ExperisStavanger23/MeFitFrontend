@@ -3,9 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { MatSnackBar } from "@angular/material/snack-bar"
 import { ApiExercisesService } from "src/app/services/api-exercises.service"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
-import { PostWorkout, SetReps } from "src/interfaces"
-import { Exercise, ExerciseSetRep } from "src/types"
-
+import { PostWorkout, SetReps, Exercise, ExerciseSetRep } from "src/interfaces"
 @Component({
   selector: "app-workout-creation-form",
   templateUrl: "./workout-creation-form.component.html",
@@ -14,7 +12,7 @@ import { Exercise, ExerciseSetRep } from "src/types"
 export class WorkoutCreationFormComponent implements OnInit {
   form: FormGroup
   creating = false
-  selectedExercisesSetRep: ExerciseSetRep[] = []
+  selectedExercisesSetRep: any[] = []
 
   //TODO: replace with data from database/api
   experienceLevels = ["Beginner", "Intermediate", "Advanced"]

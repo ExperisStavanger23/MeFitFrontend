@@ -6,10 +6,20 @@
     <div class="info-container">
       <h3>{{ exercise.name }} {{ exercise.id }}</h3>
       <p>{{ exercise.description }}</p>
+      <div>
+        <h4>Muscle Groups used</h4>
+        <div class="muscle-list">
+          <ul>
+            <li *ngFor="let muscle of exercise.muscleGroups">
+              {{ muscle.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
       <div class="media-container">
         <iframe
-          width="640"
-          height="360"
+          width="640/4"
+          height="360/4"
           [src]="exercise.video | safe"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

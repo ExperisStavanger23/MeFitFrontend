@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { Observable, of } from "rxjs"
-import { Exercise } from "src/types"
+import { Exercise } from "src/interfaces"
 import { catchError, map } from "rxjs/operators"
 import { MuscleGroup } from "src/interfaces"
 
