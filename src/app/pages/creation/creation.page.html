@@ -2,43 +2,38 @@
   <div>
     <h1>Welcome to the creation page</h1>
     <p>
-      Underneath you can create a program or an workout. Please start by
-      choosing the type you want to create
+      Underneath you can create a program, a workout, or an exercise. Please
+      start by choosing the type you want to create
     </p>
   </div>
   <div>
-    <mat-checkbox
-      class="example-margin"
-      [checked]="createProgram"
-      (change)="setCreateProgram($event.checked)">
-      Program
-    </mat-checkbox>
-    <mat-checkbox
-      class="example-margin"
-      [checked]="createWorkout"
-      (change)="setCreateWorkout($event.checked)">
-      Workout
-    </mat-checkbox>
-    <mat-checkbox
-      class="example-margin"
-      [checked]="createExercise"
-      (change)="setCreateExercise($event.checked)">
-      Exercise
-    </mat-checkbox>
+    <mat-radio-group
+      [(ngModel)]="selectedOption"
+      (change)="onRadioChange($event)">
+      <mat-radio-button class="example-margin" value="program"
+        >Program</mat-radio-button
+      >
+      <mat-radio-button class="example-margin" value="workout"
+        >Workout</mat-radio-button
+      >
+      <mat-radio-button class="example-margin" value="exercise"
+        >Exercise</mat-radio-button
+      >
+    </mat-radio-group>
   </div>
 
   <div id="create-program">
-    <ng-container *ngIf="createProgram">
+    <ng-container *ngIf="selectedOption === 'program'">
       <h2>Create program</h2>
-      <app-program-creation-form class="creation-form">
-      </app-program-creation-form>
+      <app-program-creation-form
+        class="creation-form"></app-program-creation-form>
     </ng-container>
-    <ng-container *ngIf="createWorkout">
+    <ng-container *ngIf="selectedOption === 'workout'">
       <h2>Create workout</h2>
       <app-workout-creation-form
         class="creation-form"></app-workout-creation-form>
     </ng-container>
-    <ng-container *ngIf="createExercise">
+    <ng-container *ngIf="selectedOption === 'exercise'">
       <h2>Create exercise</h2>
       <app-exercise-creation-form
         class="creation-form"></app-exercise-creation-form>
