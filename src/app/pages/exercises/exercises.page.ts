@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
 import { Observable } from "rxjs/internal/Observable"
 import { ApiExercisesService } from "src/app/services/api-exercises.service"
-import { Exercise } from "src/types"
+import { Exercise } from "src/interfaces"
 
 @Component({
   selector: "app-exercises",

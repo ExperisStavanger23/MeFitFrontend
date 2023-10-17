@@ -60,6 +60,23 @@ button {
   width: 20%;
 }
 
+.muscle-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.muscle-list li {
+  width: calc(33.33% - 20px);
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.new-row {
+  clear: left;
+}
+
 @media (max-width: 768px) {
   .details-container {
     margin: 10px;

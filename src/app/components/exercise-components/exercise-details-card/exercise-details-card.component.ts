@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 import { ApiExercisesService } from "src/app/services/api-exercises.service"
-import { Exercise } from "src/types"
+import { Exercise, MuscleGroup } from "src/interfaces"
 
 @Component({
   selector: "app-exercise-details-card",
@@ -21,26 +21,27 @@ export class ExerciseDetailsCardComponent implements OnInit {
     description: "",
     image: "",
     video: "",
+    muscleGroups: [],
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params["id"]
+
     this.apiExercisesService
       .getExerciseById(this.id)
-      .subscribe((exercise: Exercise) => {
+      .subscribe((exercise: any) => {
+        const muscleGroups: MuscleGroup[] = []
+        exercise.exerciseMuscleGroups.forEach((element: any) => {
+          muscleGroups.push(element.muscleGroup)
+        })
         this.exercise = {
           id: exercise.id,
           name: exercise.name,
           description: exercise.description,
           image: exercise.image,
           video: exercise.video,
+          muscleGroups: muscleGroups,
         }
       })
   }
 }
-
-//TODO: for video url need to change to embed url
-//original
-//https://www.youtube.com/watch?v=rxD321l2svE
-//embed
-//https://www.youtube.com/embed/rxD321l2svE
