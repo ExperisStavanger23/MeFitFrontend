@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { User } from "src/interfaces"
+import { User, UserWorkout } from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
 import {
   BehaviorSubject,
@@ -22,6 +22,7 @@ import { getTokenClaims } from "src/helper-functions"
 })
 export class UserApiService {
   apiUrlBase = "http://localhost:5212/api/v1"
+
   private _user$ = new BehaviorSubject<User>({})
   private _userExists$ = new BehaviorSubject<boolean>(false)
 
@@ -39,18 +40,14 @@ export class UserApiService {
   }
 
   async getUser(): Promise<User> {
-    console.log("user service: getUser")
     const userId = getTokenClaims(await this.keycloak.getToken()).sub
     const user = this.http.get<User>(`${this.apiUrlBase}/User/${userId}`)
     return firstValueFrom(user)
   }
 
-  postUser(userToPost: User): void {
+  async postUser(userToPost: User): Promise<void> {
     const body = JSON.stringify(userToPost)
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-    })
-
+    const headers = await this.getHeader()
     this.http
       .post<User>(`${this.apiUrlBase}/User`, body, {
         headers,
@@ -76,10 +73,8 @@ export class UserApiService {
     this._user$.next(user)
   }
 
-  updateUser(user: User): void {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-    })
+  async updateUser(user: User): Promise<void> {
+    const headers = await this.getHeader()
 
     const body = JSON.stringify(user)
     this.http
@@ -105,7 +100,7 @@ export class UserApiService {
     return userExists
   }
 
-  addProgram(programId: number): void {
+  async addProgram(programId: number): Promise<void> {
     const programIdArray: number[] = new Array<number>(0)
 
     if (this._user$.value.userPrograms !== undefined) {
@@ -118,9 +113,7 @@ export class UserApiService {
     programIdArray.push(programId)
 
     // Update User's programs backend
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-    })
+    const headers = await this.getHeader()
 
     const body = JSON.stringify(programIdArray)
 
@@ -133,7 +126,23 @@ export class UserApiService {
       .subscribe(() => this.setUser())
   }
 
-  // getUserPrograms(userId: string): Observable<UserProgram[]> {
-  //   return this.http.
-  // }
+  async updateUserWorkout(userWorkout: UserWorkout) {
+    const headers = await this.getHeader()
+
+    const body = JSON.stringify(userWorkout)
+    this.http
+      .put(
+        `${this.apiUrlBase}/User/${this._user$.value.id}/userworkout/${userWorkout.id}/workoutgoal?done=${userWorkout.doneDate}`,
+        body,
+        { headers }
+      )
+      .subscribe(() => this.setUser())
+  }
+
+  async getHeader(): Promise<HttpHeaders> {
+    return new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await this.keycloak.getToken()}`,
+    })
+  }
 }
