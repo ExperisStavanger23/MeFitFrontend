@@ -26,10 +26,12 @@ jobs:
           echo "NG_APP_keycloakUrl=${{ secrets.NG_APP_keycloakUrl }}" >> .env.production
           echo "NG_APP_keycloakRealm=${{ secrets.NG_APP_keycloakRealm }}" >> .env.production
           echo "NG_APP_keycloakClientId=${{ secrets.NG_APP_keycloakClientId }}" >> .env.production
+          echo "NG_APP_API_URL=${{ secrets.NG_APP_API_URL }}" >> .env.production
         env:
           NG_APP_keycloakUrl: ${{ secrets.NG_APP_keycloakUrl }}
           NG_APP_keycloakRealm: ${{ secrets.NG_APP_keycloakRealm }}
           NG_APP_keycloakClientId: ${{ secrets.NG_APP_keycloakClientId }}
+          NG_APP_API_URL: ${{ secrets.NG_APP_API_URL }}
 
       - name: Build Angular App
         run: npm run build --prod

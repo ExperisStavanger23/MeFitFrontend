@@ -7,7 +7,7 @@ import { PostProgram, Program } from "src/interfaces"
   providedIn: "root",
 })
 export class ApiProgramService {
-  apiUrlBase = "http://localhost:5212/api/v1"
+  apiUrlBase = import.meta.env["NG_APP_API_URL"]
   constructor(private http: HttpClient) {}
 
   getAllPrograms(): Observable<Program[]> {

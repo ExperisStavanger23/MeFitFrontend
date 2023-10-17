@@ -9,7 +9,7 @@ import { MuscleGroup } from "src/interfaces"
   providedIn: "root",
 })
 export class ApiExercisesService {
-  apiUrlBase = "http://localhost:5212/api/v1"
+  apiUrlBase = import.meta.env["NG_APP_API_URL"]
 
   constructor(private http: HttpClient) {}
 

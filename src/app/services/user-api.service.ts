@@ -21,7 +21,7 @@ import { getTokenClaims } from "src/helper-functions"
   providedIn: "root",
 })
 export class UserApiService {
-  apiUrlBase = "http://localhost:5212/api/v1"
+  apiUrlBase = import.meta.env["NG_APP_API_URL"]
   private _user$ = new BehaviorSubject<User>({})
   private _userExists$ = new BehaviorSubject<boolean>(false)
 

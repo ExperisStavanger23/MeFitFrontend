@@ -8,7 +8,7 @@ import { catchError, map } from "rxjs/operators"
   providedIn: "root",
 })
 export class ApiWorkoutService {
-  apiUrlBase = "http://localhost:5212/api/v1"
+  apiUrlBase = import.meta.env["NG_APP_API_URL"]
   constructor(private http: HttpClient) {}
 
   getAllWorkouts(): Observable<Workout[]> {
