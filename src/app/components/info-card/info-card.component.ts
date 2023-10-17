@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core"
 })
 export class InfoCardComponent {
   @Input() id = 1
+  @Input() canAdd = false
   @Output() emitterId = new EventEmitter<number>()
   // TODO: replace with data from API
   name = "Running"

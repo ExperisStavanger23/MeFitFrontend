@@ -1,7 +1,8 @@
 <div class="container">
-  <ng-container *ngFor="let id of ids">
-    <app-info-card
-      [id]="id"
-      (emitterId)="setSelectedId($event)"></app-info-card>
+  <ng-container *ngFor="let workout of workouts$ | async">
+    <app-workout-info-card
+      [workout]="workout"
+      (emitterId)="setSelectedId($event)"
+      [canAdd]="false"></app-workout-info-card>
   </ng-container>
 </div>

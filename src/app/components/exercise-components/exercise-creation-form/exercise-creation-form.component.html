@@ -1,0 +1,44 @@
+<form class="program-form" [formGroup]="form" (submit)="handleSubmit($event)">
+  <mat-form-field>
+    <mat-label>Exercise name</mat-label>
+    <input matInput type="text" name="Name" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Exercise description</mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="10"
+      formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Image (insert image url)</mat-label>
+    <input matInput type="text" name="ImageUrl" formControlName="imageUrl" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Video (insert video url)</mat-label>
+    <input matInput type="text" name="VideoUrl" formControlName="videoUrl" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Muscle Groups</mat-label>
+    <mat-select matInput type="text" formControlName="muscleGroup" multiple>
+      <mat-option *ngFor="let option of muscleGroups" [value]="option">
+        {{ option.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    color="accent"
+    type="submit"
+    [disabled]="creating || form.invalid">
+    Submit
+  </button>
+</form>

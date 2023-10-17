@@ -1,0 +1,136 @@
+.details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px;
+}
+.information-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  & > .image-container {
+    width: 20%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    & > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.info-container {
+  margin: 0 10px 0 10px;
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto;
+}
+.stat-container {
+  flex-grow: 1;
+}
+.stat-info {
+  width: 20%;
+  margin: 20px 10px 20px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stat {
+  font-weight: bold;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 2px solid #e0e0e0;
+  & > p {
+    margin: 0;
+  }
+}
+button {
+  width: 20%;
+}
+
+.media-container {
+}
+.exercise-container {
+  background-color: lightgray;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  gap: 5px;
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  & * {
+    margin: 0;
+  }
+}
+
+.information {
+  margin: 1em 10px 0 0;
+  & > div {
+    font-weight: bold;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+}
+
+@media (max-width: 768px) {
+  .details-container {
+    margin: 10px;
+  }
+  .information-container {
+    margin: 0;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    & > .image-container {
+      width: 100%;
+      height: 50%;
+      max-height: 200px;
+    }
+  }
+  .info-container {
+    max-height: 300px;
+  }
+  .stat-info {
+    width: 100%;
+  }
+  .stat {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .media-container {
+    width: 100%;
+  }
+  .exercise-container {
+    width: 90%;
+  }
+  .information {
+    margin: 1em;
+  }
+  .exercises {
+    width: 90%;
+  }
+  button {
+    width: 100%;
+  }
+}

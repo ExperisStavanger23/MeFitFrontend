@@ -26,7 +26,23 @@ import { MatTableModule } from "@angular/material/table"
 import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { NgChartsModule } from "ng2-charts"
 import { DetailsCardComponent } from "./components/details-card/details-card.component"
-import { WorkoutDetailsCardComponent } from "./components/workout-details-card/workout-details-card.component"
+import { WorkoutDetailsCardComponent } from "./components/workout-components/workout-details-card/workout-details-card.component"
+import { HttpClientModule } from "@angular/common/http"
+import { CreationPage } from "./pages/creation/creation.page"
+import { MatCheckboxModule } from "@angular/material/checkbox"
+import { MatDialogModule } from "@angular/material/dialog"
+import { ProfileEditPage } from "./pages/profile-edit/profile-edit.page"
+import { ProgramCreationFormComponent } from "./components/program-components/program-creation-form/program-creation-form.component"
+import { WorkoutCreationFormComponent } from "./components/workout-components/workout-creation-form/workout-creation-form.component"
+import { ExerciseCreationFormComponent } from "./components/exercise-components/exercise-creation-form/exercise-creation-form.component"
+import { ExerciseDetailsCardComponent } from "./components/exercise-components/exercise-details-card/exercise-details-card.component"
+import { ExerciseInfoCardComponent } from "./components/exercise-components/exercise-info-card/exercise-info-card.component"
+import { WorkoutInfoCardComponent } from "./components/workout-components/workout-info-card/workout-info-card.component"
+import { SafePipeService } from "./services/safe-pipe.service"
+import { MatMenuModule } from "@angular/material/menu"
+import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
+import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
+import { MatSnackBarModule } from "@angular/material/snack-bar"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   console.log(import.meta.env["NG_APP_keycloakUrl"])
@@ -61,6 +77,17 @@ function initializeKeycloak(keycloak: KeycloakService) {
     DashboardPage,
     DetailsCardComponent,
     WorkoutDetailsCardComponent,
+    CreationPage,
+    ProgramCreationFormComponent,
+    WorkoutCreationFormComponent,
+    ExerciseCreationFormComponent,
+    ExerciseDetailsCardComponent,
+    ExerciseInfoCardComponent,
+    ProfileEditPage,
+    WorkoutInfoCardComponent,
+    SafePipeService,
+    ProgramInfoCardComponent,
+    ProgramDetailsCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +108,12 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatCardModule,
     MatTableModule,
     NgChartsModule,
+    HttpClientModule,
+    MatCheckboxModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

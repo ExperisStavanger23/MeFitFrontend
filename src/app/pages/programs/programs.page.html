@@ -1,7 +1,8 @@
 <div class="container">
-  <ng-container *ngFor="let id of ids">
-    <app-info-card
-      [id]="id"
-      (emitterId)="setSelectedId($event)"></app-info-card>
+  <ng-container *ngFor="let program of programs$ | async">
+    <app-program-info-card
+      [program]="program"
+      (emitterId)="setSelectedId($event)"
+      [canAdd]="false"></app-program-info-card>
   </ng-container>
 </div>

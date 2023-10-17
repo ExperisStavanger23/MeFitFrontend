@@ -19,6 +19,10 @@
 .navbar {
   padding-left: 50px;
   padding-right: 50px;
+  @media (max-width: 768px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 .logo {
@@ -44,6 +48,56 @@
   --mdc-protected-button-container-color: #2d7556;
 }
 
-.user-icon {
-  margin-left: 30px;
+.pfp {
+  border-radius: 50%;
+}
+
+.menu {
+  margin-right: 10px;
+  background-color: #38926b;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.menu:hover {
+  cursor: pointer;
+  background-color: #2d7556;
+}
+
+.menu-button {
+  display: none;
+}
+.user-container {
+  display: flex;
+  color: #fff;
+  & > a {
+    font-size: 1rem;
+    color: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-buttons {
+    display: none;
+  }
+
+  .menu-button {
+    display: block;
+  }
+  .user-container {
+    display: none;
+  }
+}
+
+.user-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: content;
+  align-items: center;
+}
+.logout-hamburger {
+  color: rgb(255, 84, 84);
+  & > span {
+    color: rgb(255, 84, 84);
+  }
 }

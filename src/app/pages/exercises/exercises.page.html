@@ -1,1 +1,8 @@
-<p>exercises works!</p>
+<div class="container">
+  <ng-container *ngFor="let exercise of exercises$ | async">
+    <app-exercise-info-card
+      [exercise]="exercise"
+      (emitterId)="setSelectedId($event)"
+      [canAdd]="false"></app-exercise-info-card>
+  </ng-container>
+</div>
