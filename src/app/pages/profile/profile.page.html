@@ -22,26 +22,30 @@
     </div>
   </div>
   <div class="profile-card">
-    <p>Goal in progress</p>
-    <p>4 workouts per week</p>
+    <p>Workout Goal</p>
+    <p>{{user.workoutGoal}} workouts per week</p>
   </div>
 
-  <div class="profile-dropdown" (click)="handleWhOpen()">
+  <div class="profile-dropdown">
     <div class="dropdown-header">
       <p>Workout history</p>
-      <p>40 total workouts</p>
-      <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock"
+      <p *ngIf="user.userWorkouts; else nullWorkouts">{{user.userWorkouts.length}} total workouts</p>
+      <ng-template #nullWorkouts>
+        <p>0 total workouts</p>
+      </ng-template>
+
+      <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock" (click)="handleWhOpen()"
         >expand_less</mat-icon
       >
       <ng-template #elseBlock>
-        <mat-icon class="a-icon">expand_more</mat-icon>
+        <mat-icon class="a-icon" (click)="handleWhOpen()">expand_more</mat-icon>
       </ng-template>
     </div>
-    <div *ngIf="whOpen">workouts here list down</div>
-  </div>
-
-  <div class="profile-card">
-    <p>Goals history</p>
-    <p>12 goal Completed</p>
+    <div *ngIf="whOpen" class="workout-history-container">
+      <div *ngFor="let uw of user.userWorkouts" class="workout" >
+        <p>{{uw.workout.name}}</p>
+        <p>Completed at: {{uw.doneDate | date:'dd-MM-yyyy'}}</p>
+      </div>
+    </div>
   </div>
 </div>

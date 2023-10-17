@@ -78,11 +78,6 @@ a {
   border-radius: 10px;
 }
 
-.profile-dropdown:hover {
-  background-color: lightgray;
-  cursor: pointer;
-}
-
 .dropdown-header {
   display: flex;
   flex-direction: row;
@@ -109,8 +104,35 @@ a {
 
 .a-icon {
   position: absolute;
-  right: -35px;
-  top: -3px;
+  right: -38px;
+  top: -4px;
+  background-color: #d4d4d4;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.a-icon:hover {
+  cursor: pointer;
+  background-color: #b3b3b3;
+}
+
+.workout-history-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.workout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f4f5f7;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 50%;
 }
 
 @media (max-width: 768px) {
@@ -121,7 +143,8 @@ a {
   .profile-page {
     padding: 10px;
   }
-  .profile-card {
+
+  .profile-card:first-child {
     align-items: center;
     padding: 10px;
     flex-direction: column;
