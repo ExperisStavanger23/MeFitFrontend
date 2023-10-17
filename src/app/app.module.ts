@@ -43,6 +43,7 @@ import { MatMenuModule } from "@angular/material/menu"
 import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 import { MatSnackBarModule } from "@angular/material/snack-bar"
+import { MatRadioModule } from "@angular/material/radio"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -110,6 +111,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDialogModule,
     MatMenuModule,
     MatSnackBarModule,
+    MatRadioModule,
   ],
   providers: [
     {
