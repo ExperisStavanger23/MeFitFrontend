@@ -12,7 +12,7 @@ import { User, UserWorkout } from "src/interfaces"
 })
 export class DashboardPage implements OnInit {
   doneThisWeek = 0
-
+  doneEachWeek: number[] = new Array<number>(0)
   // Doughnut
   public doughnutChartData: ChartData<"doughnut"> = {
     labels: ["Completed", "Remaining"],
@@ -59,8 +59,7 @@ export class DashboardPage implements OnInit {
         }
       }
     }
-
-    const doneEachWeek: number[] = new Array<number>(0)
+    this.doneEachWeek = []
     for (let i = 30; i >= 0; i = i - 7) {
       const wStart = new Date()
       const wEnd = new Date()
@@ -75,31 +74,35 @@ export class DashboardPage implements OnInit {
           }
         }
       }
-      doneEachWeek.push(doneThatWeek)
+      this.doneEachWeek.push(doneThatWeek)
     }
 
-    // Update doughnutChart data
-    this.doughnutChartData = {
-      labels: ["Completed", "Remaining"],
-      datasets: [
-        {
-          data: [this.doneThisWeek, user.workoutGoal! - this.doneThisWeek],
-          backgroundColor: ["#41C17C", "#DF6565"],
-        },
-      ],
-    }
+    this.updateDoughnutChart()
+    this.updateBarChart()
+  }
 
+  async markDone(userWorkout: UserWorkout) {
+    userWorkout.doneDate = dateFormatter(new Date())
+    this.apiUserService.updateUserWorkout(userWorkout)
+
+    this.doneThisWeek += 1
+    this.updateDoughnutChart()
+
+    this.doneEachWeek[4] += 1
+    this.updateBarChart()
+  }
+
+  async updateBarChart() {
     this.barChartData = {
       labels: ["01", "02", "03", "04", "05", "06", "07"],
       datasets: [
         {
-          data: doneEachWeek,
+          data: this.doneEachWeek,
           label: "Done Workouts",
           backgroundColor: "#324B9B",
         },
       ],
     }
-
     this.barOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -108,25 +111,24 @@ export class DashboardPage implements OnInit {
           ticks: {
             stepSize: 1,
           },
-          max: Math.max(...doneEachWeek) + 1,
+          max: Math.max(...this.doneEachWeek) + 1,
         },
       },
     }
-    console.log(this.doneThisWeek)
   }
 
-  async markDone(userWorkout: UserWorkout) {
-    console.log(this.doneThisWeek)
-    userWorkout.doneDate = dateFormatter(new Date())
-    console.log(userWorkout)
-    this.apiUserService.updateUserWorkout(userWorkout)
+  async updateDoughnutChart() {
     const user = await firstValueFrom(this.user)
-    this.doneThisWeek += 1
     this.doughnutChartData = {
       labels: ["Completed", "Remaining"],
       datasets: [
         {
-          data: [this.doneThisWeek, user.workoutGoal! - this.doneThisWeek],
+          data: [
+            this.doneThisWeek,
+            user.workoutGoal! - this.doneThisWeek <= 0
+              ? 0
+              : user.workoutGoal! - this.doneThisWeek,
+          ],
           backgroundColor: ["#41C17C", "#DF6565"],
         },
       ],
