@@ -71,6 +71,7 @@ export class OnboardingPage implements OnInit {
           Validators.pattern("^([1-9]|[1-1][0-9]|[2-2][0-1])$"),
         ],
       ],
+      creator: ["No"],
     })
   }
 
@@ -107,14 +108,19 @@ export class OnboardingPage implements OnInit {
     const claims = getTokenClaims(await this.keycloak.getToken())
 
     const birthday = dateformater(this.form.value.birthday)
+    const userRoles: number[] = new Array<number>()
+    userRoles.push(3)
+    if (this.form.value.creator === "Yes") {
+      userRoles.push(2)
+    }
 
     const userToPost: User = {
       ...this.form.value,
       birthday: birthday,
       id: claims.sub,
       experienceLvl: parseInt(this.form.value.experienceLvl),
+      userRoleIds: userRoles,
     }
-
     this.userApi.postUser(userToPost)
 
     setTimeout(() => {

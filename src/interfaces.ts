@@ -67,16 +67,16 @@ export interface User {
   weight?: number
   height?: number
   birthday?: string
-  role?: Role
+  userRoles?: UserRole[]
   created?: number[]
   userExercises?: number[]
   userWorkouts?: UserWorkout[]
   userPrograms?: UserProgram[]
 }
 
-export interface Role {
-  id: number
-  roleTitle: string
+export interface UserRole {
+  userId: string
+  roleId: number
 }
 
 export interface UserProgram {
