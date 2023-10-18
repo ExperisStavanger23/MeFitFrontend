@@ -69,3 +69,29 @@ The project uses the following dependencies:
 - [Keycloak-angular](https://www.npmjs.com/package/keycloak-angular) For authentication and keycloak integration and management
 - [ngx-env/builder](https://www.npmjs.com/package/@ngx-env/builder) For environment variables in .env file
 - [ng2-charts](https://www.npmjs.com/package/ng2-charts) for displaying data charts
+
+## Project structure
+
+The project is structured as follows:
+
+```
+src (contains all the source code for the project )
+├── app (contains all the logic for the app)
+│   ├── components (contains all the components for the project)
+│   │  ├── exercise-components
+│   │  ├── nav-bar
+│   │  ├── program-components
+│   │  ├── workout-components
+│   ├── guard (contains th auth guard configuration for the project)
+│   ├── pages (contains all the pages for the project)
+│   ├── services (contains all the services for the project)
+├── assets (contains all the assets for the project. logo and theming)
+.env (contains the environment variables for the project)
+eslintrc.json (contains the eslint configuration for the project)
+prettierrc (contains the prettier configuration for the project)
+angular.json (contains the angular configuration for the project)
+```
+
+```
+
+```

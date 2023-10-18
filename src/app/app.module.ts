@@ -20,12 +20,10 @@ import { ProgramsPage } from "./pages/programs/programs.page"
 import { WorkoutsPage } from "./pages/workouts/workouts.page"
 import { ExercisesPage } from "./pages/exercises/exercises.page"
 import { ProfilePage } from "./pages/profile/profile.page"
-import { InfoCardComponent } from "./components/info-card/info-card.component"
 import { MatCardModule } from "@angular/material/card"
 import { MatTableModule } from "@angular/material/table"
 import { DashboardPage } from "./pages/dashboard/dashboard.page"
 import { NgChartsModule } from "ng2-charts"
-import { DetailsCardComponent } from "./components/details-card/details-card.component"
 import { WorkoutDetailsCardComponent } from "./components/workout-components/workout-details-card/workout-details-card.component"
 import { HttpClientModule } from "@angular/common/http"
 import { CreationPage } from "./pages/creation/creation.page"
@@ -70,9 +68,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     WorkoutsPage,
     ExercisesPage,
     ProfilePage,
-    InfoCardComponent,
     DashboardPage,
-    DetailsCardComponent,
     WorkoutDetailsCardComponent,
     CreationPage,
     ProgramCreationFormComponent,
