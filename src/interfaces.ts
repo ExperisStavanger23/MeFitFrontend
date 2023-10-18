@@ -118,6 +118,24 @@ export interface Workout {
   exercises: SetReps[]
 }
 
+export interface WorkoutExercises {
+  workoutId: number
+  exerciseId: number
+  sets: number
+  reps: number
+  exercise: Exercise
+}
+export interface WorkoutGet {
+  id: number
+  name: string
+  description: string
+  category: string
+  recommendedLevel: string
+  duration: number
+  image: string
+  workoutExercises: WorkoutExercises[]
+}
+
 export interface PostWorkout {
   name: string
   description: string
