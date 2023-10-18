@@ -21,7 +21,8 @@
 
         <mat-form-field>
             <mat-label>Bio</mat-label>
-            <input matInput type="text" name="Bio" formControlName="bio" >
+            <textarea matInput type="text" name="Bio" formControlName="bio" ></textarea>
+            <mat-error *ngIf="this.form.get('bio')?.hasError('maxlength')">Bio to long</mat-error>
         </mat-form-field>
 
         <mat-form-field>

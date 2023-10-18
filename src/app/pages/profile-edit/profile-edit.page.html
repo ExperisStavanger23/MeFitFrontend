@@ -3,6 +3,8 @@
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput type="text" name="Name" formControlName="name" >
+            <mat-error *ngIf="this.form.get('name')?.hasError('maxlength')">Name To Long</mat-error>
+            <mat-error *ngIf="this.form.get('name')?.hasError('minlength')">Name To Short</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -32,7 +34,7 @@
 
         <mat-form-field>
             <mat-label>Bio</mat-label>
-            <input matInput type="text" formControlName="bio">
+            <textarea matInput type="text" formControlName="bio"></textarea>
             <mat-error *ngIf="this.form.get('bio')?.hasError('maxlength')">Bio to long max length 250</mat-error>
         </mat-form-field>
 
