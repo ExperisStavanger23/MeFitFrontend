@@ -45,7 +45,6 @@ export class ProfileEditPage implements OnInit {
   async handleSubmit(event: SubmitEvent): Promise<void> {
     event.preventDefault()
     if (this.form.invalid) {
-      console.log("form is invalid")
       return
     }
     const user = this.userService.user$

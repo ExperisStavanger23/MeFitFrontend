@@ -36,7 +36,6 @@ export class ProgramDetailsCardComponent implements OnInit {
   disableBtn = false
 
   async ngOnInit(): Promise<void> {
-    console.log("programDetails onInit")
     this.id = this.route.snapshot.params["id"]
     this.apiProgramService
       .getProgramById(this.id)

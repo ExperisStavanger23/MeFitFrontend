@@ -32,8 +32,6 @@ export class ApiWorkoutService {
       })
       .pipe(
         map((response: Workout) => {
-          console.log("Response:", response)
-
           const success = Object.prototype.hasOwnProperty.call(response, "name")
 
           return success

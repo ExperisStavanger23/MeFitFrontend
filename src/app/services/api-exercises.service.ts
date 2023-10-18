@@ -26,8 +26,6 @@ export class ApiExercisesService {
       })
       .pipe(
         map((response: Exercise) => {
-          console.log("Response:", response)
-
           const success = response === null
 
           return success
