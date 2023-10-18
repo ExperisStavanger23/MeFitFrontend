@@ -1,38 +1,51 @@
 <div class="dashboard">
   <div class="container">
-
     <div class="panel p1">
-        <h3>Workouts this week</h3>
-        <div class="doughnut-container">
-            <canvas
-            baseChart
-            class="chart"
-            [data]="doughnutChartData"
-            type="doughnut"
-            >
-            </canvas>
-        </div>
+      <h3>Workouts this week</h3>
+      <div class="doughnut-container">
+        <canvas
+          baseChart
+          class="chart"
+          [data]="doughnutChartData"
+          type="doughnut">
+        </canvas>
+      </div>
     </div>
 
-    
     <div class="panel p2">
-        <h3>Current Programs</h3>
-        <div *ngIf="user | async as user" class="programs-container">
-            <a *ngFor="let up of user.userPrograms" class="program" routerLink="/programs/{{up.program.id}}" mat-button>
-                {{up.program.name}}
-            </a>
-        </div>
+      <h3>Current Programs</h3>
+      <div *ngIf="user | async as user" class="programs-container">
+        <ng-container *ngFor="let up of user.userPrograms">
+          <a
+            *ngIf="currentDate <= toDateFromString(up.endDate)"
+            class="program"
+            routerLink="/programs/{{up.program.id}}"
+            mat-button>
+            {{up.program.name}}
+          </a>
+        </ng-container>
+      </div>
     </div>
-    
+
     <div class="panel p3">
-        <h3>Current Workouts</h3>
-        <div *ngIf="user | async as user" class="workouts-container">
-            <a *ngFor="let uw of user.userWorkouts" class="workout" routerLink="/workouts/{{uw.workout.id}}" mat-button>
-                {{uw.workout.name}}
+      <h3>Current Workouts</h3>
+      <div *ngIf="user | async as user" class="workouts-container">
+        <ng-container *ngFor="let uw of user.userWorkouts">
+          <div *ngIf="uw.doneDate == null " class="workout-container">
+            <a
+              class="workout"
+              routerLink="/workouts/{{uw.workout.id}}"
+              mat-button>
+              {{uw.workout.name}}
             </a>
-        </div>
+            <button class="menu-button" mat-icon-button (click)="markDone(uw)">
+              <mat-icon>done</mat-icon>
+            </button>
+          </div>
+        </ng-container>
+      </div>
     </div>
-    
+
     <div class="panel p4">p4</div>
 
     <div class="panel p5">

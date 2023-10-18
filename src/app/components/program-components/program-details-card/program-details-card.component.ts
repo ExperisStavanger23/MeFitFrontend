@@ -64,9 +64,8 @@ export class ProgramDetailsCardComponent implements OnInit {
     this.router.navigate(["/workouts", id])
   }
 
-  handleAdd(programId: number): void {
-    console.log(`handle add program: ${programId}`)
-    this.apiUserService.addProgram(programId)
+  handleAdd(program: Program): void {
+    this.apiUserService.addProgram(program.id, program.duration)
     this.disableBtn = true
   }
 
