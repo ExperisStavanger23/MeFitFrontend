@@ -168,3 +168,9 @@ export interface PostProgram {
   duration: number
   workoutIds: number[]
 }
+
+export interface ProgramWithDate {
+  id: number
+  startDate: string
+  endDate: string
+}

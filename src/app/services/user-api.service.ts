@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { User, UserWorkout } from "src/interfaces"
+import { ProgramWithDate, User, UserWorkout } from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
 import {
   BehaviorSubject,
@@ -16,6 +16,7 @@ import {
 } from "rxjs"
 import { ApiProgramService } from "./api-program.service"
 import { getTokenClaims } from "src/helper-functions"
+import { dateFormatter } from "../app.component"
 
 @Injectable({
   providedIn: "root",
@@ -100,22 +101,39 @@ export class UserApiService {
     return userExists
   }
 
-  async addProgram(programId: number): Promise<void> {
-    const programIdArray: number[] = new Array<number>(0)
+  async addProgram(programId: number, duration: number): Promise<void> {
+    const programsToPost: ProgramWithDate[] = new Array<ProgramWithDate>(0)
 
     if (this._user$.value.userPrograms !== undefined) {
       console.log("UserApiService: user programs is undefined")
       for (const userProgram of this._user$.value.userPrograms) {
-        programIdArray.push(userProgram.programId)
+        const program: ProgramWithDate = {
+          id: userProgram.programId,
+          startDate: userProgram.startDate,
+          endDate: userProgram.endDate,
+        }
+        programsToPost.push(program)
       }
     }
 
-    programIdArray.push(programId)
+    const dateNow = new Date()
+    const startDate: string = dateFormatter(dateNow)
+    dateNow.setDate(dateNow.getDate() + duration)
+    const endDate: string = dateFormatter(dateNow)
+
+    const newProgram: ProgramWithDate = {
+      id: programId,
+      startDate,
+      endDate,
+    }
+    programsToPost.push(newProgram)
 
     // Update User's programs backend
     const headers = await this.getHeader()
 
-    const body = JSON.stringify(programIdArray)
+    const body = JSON.stringify(programsToPost)
+
+    console.log(body)
 
     this.http
       .put(

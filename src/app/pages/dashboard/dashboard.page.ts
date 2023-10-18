@@ -2,6 +2,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ChartConfiguration, ChartData } from "chart.js"
 import { EMPTY, Observable, firstValueFrom } from "rxjs"
+import { dateFormatter } from "src/app/app.component"
 import { UserApiService } from "src/app/services/user-api.service"
 import { User, UserWorkout } from "src/interfaces"
 
@@ -13,6 +14,8 @@ import { User, UserWorkout } from "src/interfaces"
 export class DashboardPage implements OnInit {
   doneThisWeek = 0
   doneEachWeek: number[] = new Array<number>(0)
+  currentDate: Date = new Date()
+
   // Doughnut
   public doughnutChartData: ChartData<"doughnut"> = {
     labels: ["Completed", "Remaining"],
@@ -134,6 +137,10 @@ export class DashboardPage implements OnInit {
       ],
     }
   }
+
+  toDateFromString(date: string): Date {
+    return new Date(date)
+  }
 }
 
 function getStartAndEndOfWeek() {
@@ -149,11 +156,4 @@ function getStartAndEndOfWeek() {
   const endDate = new Date(today.setDate(diff + 6))
 
   return [startDate, endDate]
-}
-
-function dateFormatter(date: Date): string {
-  const year = date.getFullYear()
-  const month = (date.getMonth() + 1).toString().padStart(2, "0")
-  const day = date.getDate().toString().padStart(2, "0")
-  return `${year}-${month}-${day}`
 }
