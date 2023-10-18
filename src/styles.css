@@ -39,6 +39,10 @@ body {
   }
 }
 
+a {
+  text-decoration: none;
+}
+
 textarea {
   min-height: 75px;
 }
