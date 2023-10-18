@@ -92,8 +92,8 @@ export interface Program {
   id: number
   name: string
   description: string
-  category: number
-  recommendedLevel: number
+  category: string
+  recommendedLevel: string
   duration: number
   image: string
   workouts: Workout[]
