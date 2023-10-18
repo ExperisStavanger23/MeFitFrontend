@@ -1,5 +1,11 @@
 import { Component, OnInit } from "@angular/core"
-import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from "@angular/forms"
 import { KeycloakService } from "keycloak-angular"
 import { User } from "src/interfaces"
 import { UserApiService } from "src/app/services/user-api.service"
@@ -16,6 +22,7 @@ export class OnboardingPage implements OnInit {
   minDate = new Date(1950, 1, 1)
   maxDate = new Date().getFullYear()
   loading = true
+  minBday = new Date()
 
   constructor(
     private fb: FormBuilder,
@@ -23,25 +30,47 @@ export class OnboardingPage implements OnInit {
     private userApi: UserApiService,
     private router: Router
   ) {
+    const currentDate = new Date()
+    this.minBday.setFullYear(currentDate.getFullYear() - 13)
     this.form = fb.group({
-      name: ["", Validators.required],
+      name: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ],
+      ],
+
       email: ["", [Validators.required, Validators.email]],
       experienceLvl: [null, Validators.required],
       gender: [null, Validators.required],
       height: [
         null,
-        Validators.required,
-        Validators.pattern("^([5-9][0-9]|[1-2][0-9]{2}|300)$"),
+        [
+          Validators.required,
+          Validators.pattern("^([5-9][0-9]|[1-2][0-9]{2}|300)$"),
+        ],
       ],
+
       weight: [
         null,
-        Validators.required,
-        Validators.pattern("^([2-9][0-9]|[1-9][0-9][0-9])$"),
+        [
+          Validators.required,
+          Validators.pattern("^([2-9][0-9]|[1-9][0-9][0-9])$"),
+        ],
       ],
-      birthday: [null, Validators.required],
+
+      birthday: [null, [Validators.required, dateValidator]],
       bio: ["", Validators.maxLength(250)],
       profilePicture: [""],
-      workoutGoal: [null, Validators.required],
+      workoutGoal: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern("^([1-9]|[1-1][0-9]|[2-2][0-1])$"),
+        ],
+      ],
     })
   }
 
@@ -73,7 +102,6 @@ export class OnboardingPage implements OnInit {
   async handleSubmit(event: SubmitEvent): Promise<void> {
     event.preventDefault()
     if (this.form.invalid) {
-      console.log("Form invalid")
       return
     }
     const claims = getTokenClaims(await this.keycloak.getToken())
@@ -86,6 +114,7 @@ export class OnboardingPage implements OnInit {
       id: claims.sub,
       experienceLvl: parseInt(this.form.value.experienceLvl),
     }
+
     this.userApi.postUser(userToPost)
 
     setTimeout(() => {
@@ -99,4 +128,19 @@ function dateformater(date: Date): string {
   const month = (date.getMonth() + 1).toString().padStart(2, "0")
   const day = date.getDate().toString().padStart(2, "0")
   return `${year}-${month}-${day}`
+}
+
+function dateValidator(control: AbstractControl): ValidationErrors | null {
+  let valid: boolean
+  const maxBday = new Date()
+  maxBday.setFullYear(maxBday.getFullYear() - 15)
+  const bDay = control.value
+
+  if (bDay <= maxBday) {
+    valid = true
+  } else {
+    valid = false
+  }
+
+  return valid ? null : { invalidDate: true }
 }

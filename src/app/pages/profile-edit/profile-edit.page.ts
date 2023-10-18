@@ -62,9 +62,6 @@ export class ProfileEditPage implements OnInit {
 
     this.userService.updateUser(userToUpdate)
     this.loading = true
-    // TODO better waiting
-    // setTimeout(() => {
     this.router.navigate(["/profile"])
-    // }, 500)
   }
 }

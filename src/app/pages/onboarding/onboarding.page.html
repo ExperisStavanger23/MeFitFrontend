@@ -8,11 +8,15 @@
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput type="text" name="Name" formControlName="name" >
+            <mat-error *ngIf="this.form.get('name')?.hasError('maxlength')">Name To Long</mat-error>
+            <mat-error *ngIf="this.form.get('name')?.hasError('minlength')">Name To Short</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="this.form.get('email')?.hasError('email')">Invalid email format</mat-error>
+            
         </mat-form-field>
 
         <mat-form-field>
@@ -37,6 +41,7 @@
         <mat-form-field>
             <mat-label>Workout Goal (workouts per week)</mat-label>
             <input matInput type="text" formControlName="workoutGoal">
+            <mat-error *ngIf="this.form.get('workoutGoal')?.hasError('pattern')">Invalid Goal</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -51,11 +56,14 @@
         <mat-form-field>
             <mat-label>Weight (kg)</mat-label>
             <input matInput type="text" formControlName="weight">
+            <mat-error *ngIf="this.form.get('weight')?.hasError('pattern')">Invalid Weight</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Height (cm)</mat-label>
             <input matInput type="text" formControlName="height">
+            <mat-error *ngIf="this.form.get('height')?.hasError('pattern')">Invalid Hight</mat-error>
+
         </mat-form-field>
 
         <mat-form-field>
@@ -63,6 +71,8 @@
             <input matInput [matDatepicker]="picker" placeholder="MM/dd/yyyy" formControlName="birthday">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="this.form.get('birthday')?.hasError('invalidDate')">Invalid Age</mat-error>
+            
         </mat-form-field>
 
         <button mat-flat-button color="accent" type="submit">Submit</button>
