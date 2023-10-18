@@ -4,6 +4,7 @@ import { ChartConfiguration, ChartData } from "chart.js"
 import { EMPTY, Observable, firstValueFrom } from "rxjs"
 import { dateFormatter } from "src/app/app.component"
 import { UserApiService } from "src/app/services/user-api.service"
+import { randomFitnessQuote } from "src/assets/quotes"
 import { User, UserWorkout } from "src/interfaces"
 
 @Component({
@@ -15,6 +16,7 @@ export class DashboardPage implements OnInit {
   doneThisWeek = 0
   doneEachWeek: number[] = new Array<number>(0)
   currentDate: Date = new Date()
+  quote = randomFitnessQuote
 
   // Doughnut
   public doughnutChartData: ChartData<"doughnut"> = {
@@ -23,7 +25,7 @@ export class DashboardPage implements OnInit {
   }
 
   public barChartData: ChartData<"bar"> = {
-    labels: ["01", "02", "03", "04", "05", "06", "07"],
+    labels: ["01", "02", "03", "04"],
     datasets: [
       {
         data: [2, 5, 3, 8, 4, 5, 1],
@@ -97,7 +99,7 @@ export class DashboardPage implements OnInit {
 
   async updateBarChart() {
     this.barChartData = {
-      labels: ["01", "02", "03", "04", "05", "06", "07"],
+      labels: ["01", "02", "03", "04", "05"],
       datasets: [
         {
           data: this.doneEachWeek,
