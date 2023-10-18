@@ -18,7 +18,14 @@ export class ProfileEditPage implements OnInit {
     private router: Router
   ) {
     this.form = fb.group({
-      name: ["", Validators.required],
+      name: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ],
+      ],
       email: ["", [Validators.required, Validators.email]],
       bio: [null, Validators.maxLength(250)],
       height: [null, Validators.pattern("^([5-9][0-9]|[1-2][0-9]{2}|300)$")],
@@ -61,9 +68,6 @@ export class ProfileEditPage implements OnInit {
 
     this.userService.updateUser(userToUpdate)
     this.loading = true
-    // TODO better waiting
-    // setTimeout(() => {
     this.router.navigate(["/profile"])
-    // }, 500)
   }
 }

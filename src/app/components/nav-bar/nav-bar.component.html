@@ -14,7 +14,7 @@
     <a routerLink="/exercises" mat-button routerLinkActive="selected"
       >Exercises</a
     >
-    <a routerLink="/creation" mat-button routerLinkActive="selected"
+    <a routerLink="/creation" mat-button routerLinkActive="selected" *ngIf="this.userRolesID.includes(2)"
       >Creation</a
     >
   </div>

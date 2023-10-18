@@ -71,6 +71,7 @@ a {
 
 .p5 {
   grid-area: p5;
+  min-height: 300px;
 }
 
 .programs-container,
