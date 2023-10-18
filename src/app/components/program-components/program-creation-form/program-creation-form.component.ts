@@ -67,7 +67,6 @@ export class ProgramCreationFormComponent implements OnInit {
         parseInt(workoutId, 10)
       ),
     }
-    console.log("Program to post:", programToPost)
     this.apiProgramService
       .postProgram(programToPost)
       .subscribe((response: boolean) => {

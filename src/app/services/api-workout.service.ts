@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { Observable, of } from "rxjs"
-import { PostWorkout, Workout } from "src/interfaces"
+import { PostWorkout, Workout, WorkoutGet } from "src/interfaces"
 import { catchError, map } from "rxjs/operators"
 
 @Injectable({
@@ -15,8 +15,8 @@ export class ApiWorkoutService {
     return this.http.get<Workout[]>(`${this.apiUrlBase}/Workout`)
   }
 
-  getWorkoutById(id: number): Observable<Workout> {
-    return this.http.get<Workout>(`${this.apiUrlBase}/Workout/${id}`)
+  getWorkoutById(id: number): Observable<WorkoutGet> {
+    return this.http.get<WorkoutGet>(`${this.apiUrlBase}/Workout/${id}`)
   }
 
   postWorkout(workout: PostWorkout): Observable<boolean> {
@@ -32,9 +32,7 @@ export class ApiWorkoutService {
       })
       .pipe(
         map((response: Workout) => {
-          console.log("Response:", response)
-
-          const success = Object.prototype.hasOwnProperty.call(response, "id")
+          const success = Object.prototype.hasOwnProperty.call(response, "name")
 
           return success
         }),

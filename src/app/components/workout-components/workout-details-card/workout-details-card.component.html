@@ -27,11 +27,11 @@
       </div>
       <div>
         <p>Category:</p>
-        <p>{{ workout.category }}</p>
+        <p>{{ workout.category | camelCaseToSpace }}</p>
       </div>
       <div>
         <p>Duration:</p>
-        <p>{{ workout.duration }}</p>
+        <p>{{ workout.duration }} minutes</p>
       </div>
     </div>
   </div>
