@@ -27,8 +27,8 @@ export class ProgramDetailsCardComponent implements OnInit {
     id: 0,
     name: "",
     description: "",
-    category: 0,
-    recommendedLevel: 0,
+    category: "",
+    recommendedLevel: "",
     duration: 0,
     image: "",
     workouts: [],
@@ -36,7 +36,6 @@ export class ProgramDetailsCardComponent implements OnInit {
   disableBtn = false
 
   async ngOnInit(): Promise<void> {
-    console.log("programDetails onInit")
     this.id = this.route.snapshot.params["id"]
     this.apiProgramService
       .getProgramById(this.id)

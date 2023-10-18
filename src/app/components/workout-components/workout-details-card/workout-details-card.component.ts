@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, Router } from "@angular/router"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
-import { Workout } from "src/interfaces"
+import { SetReps, Workout, WorkoutGet } from "src/interfaces"
 
 @Component({
   selector: "app-workout-details-card",
@@ -31,7 +31,18 @@ export class WorkoutDetailsCardComponent implements OnInit {
     this.id = this.route.snapshot.params["id"]
     this.apiWorkoutService
       .getWorkoutById(this.id)
-      .subscribe((workout: Workout) => {
+      .subscribe((workout: WorkoutGet) => {
+        const setsReps: SetReps[] = []
+        workout.workoutExercises.forEach(workoutExercise => {
+          const setReps: SetReps = {
+            workoutId: workoutExercise.workoutId,
+            exerciseId: workoutExercise.exerciseId,
+            sets: workoutExercise.sets,
+            reps: workoutExercise.reps,
+            name: workoutExercise.exercise.name,
+          }
+          setsReps.push(setReps)
+        })
         this.workout = {
           id: workout.id,
           name: workout.name,
@@ -40,7 +51,7 @@ export class WorkoutDetailsCardComponent implements OnInit {
           category: workout.category,
           recommendedLevel: workout.recommendedLevel,
           duration: workout.duration,
-          exercises: workout.exercises,
+          exercises: setsReps,
         }
       })
   }

@@ -21,11 +21,11 @@
       </div>
       <div>
         <p>Category:</p>
-        <p>{{ program.category }}</p>
+        <p>{{ program.category | camelCaseToSpace }}</p>
       </div>
       <div>
         <p>Duration:</p>
-        <p>{{ program.duration }}</p>
+        <p>{{ program.duration }} days</p>
       </div>
       <div>
         <p>Workouts:</p>

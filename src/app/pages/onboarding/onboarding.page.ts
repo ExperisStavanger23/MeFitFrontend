@@ -73,7 +73,6 @@ export class OnboardingPage implements OnInit {
   async handleSubmit(event: SubmitEvent): Promise<void> {
     event.preventDefault()
     if (this.form.invalid) {
-      console.log("Form invalid")
       return
     }
     const claims = getTokenClaims(await this.keycloak.getToken())

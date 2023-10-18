@@ -41,7 +41,8 @@ import { MatMenuModule } from "@angular/material/menu"
 import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 import { MatSnackBarModule } from "@angular/material/snack-bar"
-import { MatRadioModule } from "@angular/material/radio"
+import { MatRadioModule } from "@angular/material/radio";
+import { CamelCaseToSpacePipe } from './services/pipes/camel-case-to-space.pipe'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -81,6 +82,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     SafePipeService,
     ProgramInfoCardComponent,
     ProgramDetailsCardComponent,
+    CamelCaseToSpacePipe,
   ],
   imports: [
     BrowserModule,
