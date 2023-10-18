@@ -53,7 +53,6 @@ export class WorkoutDetailsCardComponent implements OnInit {
           duration: workout.duration,
           exercises: setsReps,
         }
-        console.log(this.workout)
       })
   }
 
