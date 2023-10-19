@@ -36,7 +36,7 @@ import { ExerciseCreationFormComponent } from "./components/exercise-components/
 import { ExerciseDetailsCardComponent } from "./components/exercise-components/exercise-details-card/exercise-details-card.component"
 import { ExerciseInfoCardComponent } from "./components/exercise-components/exercise-info-card/exercise-info-card.component"
 import { WorkoutInfoCardComponent } from "./components/workout-components/workout-info-card/workout-info-card.component"
-import { SafePipeService } from "./services/safe-pipe.service"
+import { SafePipeService } from "./services/pipes/safe-pipe.service"
 import { MatMenuModule } from "@angular/material/menu"
 import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
