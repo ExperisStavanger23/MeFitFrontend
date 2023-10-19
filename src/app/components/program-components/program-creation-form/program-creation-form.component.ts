@@ -17,7 +17,17 @@ export class ProgramCreationFormComponent implements OnInit {
 
   //TODO: replace with data from database/api
   experienceLevels = ["Beginner", "Intermediate", "Advanced"]
-  programCategories = ["Strength", "Cardio", "CrossFit"]
+  programCategories = [
+    "GeneralFitness",
+    "MuscleGain",
+    "Strength",
+    "Cardio",
+    "WeightManagement",
+    "FlexibilityAndMobility",
+    "FunctionalFitness",
+    "CrossFit",
+    "SportsSpecific",
+  ]
 
   workouts: Workout[] = []
 
@@ -46,12 +56,19 @@ export class ProgramCreationFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Gets all the workouts from the API and stores them in the workouts array. To be used in the form.
+   */
   ngOnInit(): void {
     this.apiWorkoutService.getAllWorkouts().subscribe((workouts: Workout[]) => {
       this.workouts = workouts
     })
   }
 
+  /**
+   * Creates a new program from the form data. Then sends the program to the API. Displays a success or failure message depending on the response form API.
+   * @param event - The event that triggered the form submission.
+   */
   handleSubmit(event: SubmitEvent): void {
     this.creating = true
     event.preventDefault()

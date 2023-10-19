@@ -22,6 +22,9 @@ export class NavBarComponent implements OnInit {
     private router: Router
   ) {}
 
+  /**
+   * Checks if the user is logged in. If the user is logged in, set the current user. else redirect to the onboarding page.
+   */
   async ngOnInit(): Promise<void> {
     if (await this.isLoggedIn) {
       const claims = getTokenClaims(await this.keycloak.getToken())
