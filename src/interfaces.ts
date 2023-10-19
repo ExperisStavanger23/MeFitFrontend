@@ -192,3 +192,8 @@ export interface ProgramWithDate {
   startDate: string
   endDate: string
 }
+
+export interface PostUserWorkout {
+  id: number
+  doneDate: string | null
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, Router } from "@angular/router"
 import { ApiWorkoutService } from "src/app/services/api-workout.service"
+import { UserApiService } from "src/app/services/user-api.service"
 import { SetReps, Workout, WorkoutGet } from "src/interfaces"
 
 @Component({
@@ -12,8 +13,10 @@ export class WorkoutDetailsCardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiWorkoutService: ApiWorkoutService
+    private apiWorkoutService: ApiWorkoutService,
+    private apiUserService: UserApiService
   ) {}
+  disableBtn = false
 
   id!: number
   workout: Workout = {
@@ -58,5 +61,10 @@ export class WorkoutDetailsCardComponent implements OnInit {
 
   goToDetails(exerciseId: number) {
     this.router.navigate(["/exercises", exerciseId])
+  }
+
+  handleAdd(workout: Workout): void {
+    this.apiUserService.addWorkout(workout)
+    this.disableBtn = true
   }
 }

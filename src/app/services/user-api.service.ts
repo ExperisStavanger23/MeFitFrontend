@@ -4,7 +4,13 @@ import {
   HttpHeaders,
 } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { ProgramWithDate, User, UserWorkout } from "src/interfaces"
+import {
+  PostUserWorkout,
+  ProgramWithDate,
+  User,
+  UserWorkout,
+  Workout,
+} from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
 import {
   BehaviorSubject,
@@ -133,8 +139,6 @@ export class UserApiService {
 
     const body = JSON.stringify(programsToPost)
 
-    console.log(body)
-
     this.http
       .put(
         `${this.apiUrlBase}/User/${this._user$.value.id}/userprogram`,
@@ -162,5 +166,40 @@ export class UserApiService {
       "Content-Type": "application/json",
       Authorization: `Bearer ${await this.keycloak.getToken()}`,
     })
+  }
+
+  async addWorkout(workout: Workout) {
+    const workoutIdList: PostUserWorkout[] = new Array<PostUserWorkout>(0)
+
+    if (this._user$.value.userWorkouts !== undefined) {
+      console.log("UserApiService: user programs is undefined")
+      for (const userWorkout of this._user$.value.userWorkouts) {
+        const workout: PostUserWorkout = {
+          id: userWorkout.workoutId,
+          doneDate: userWorkout.doneDate,
+        }
+        workoutIdList.push(workout)
+      }
+    }
+
+    const newWorkout: PostUserWorkout = {
+      id: workout.id,
+      doneDate: null,
+    }
+    workoutIdList.push(newWorkout)
+
+    const headers = await this.getHeader()
+
+    const body = JSON.stringify(workoutIdList)
+
+    console.log(body)
+
+    this.http
+      .put(
+        `${this.apiUrlBase}/User/${this._user$.value.id}/userworkout`,
+        body,
+        { headers }
+      )
+      .subscribe(() => this.setUser())
   }
 }
