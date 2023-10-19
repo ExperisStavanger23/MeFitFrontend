@@ -38,13 +38,14 @@ export class ProfileEditPage implements OnInit {
   async ngOnInit(): Promise<void> {
     const user = this.userService.user$
     const data = await firstValueFrom(user)
+    console.log(data.experienceLvl)
     this.form.setValue({
       name: data.name,
       email: data.email,
       bio: data.bio,
       weight: data.weight,
       height: data.height,
-      experienceLvl: data.experienceLvl,
+      experienceLvl: data.experienceLvl?.toString(),
       profilePicture: data.profilePicture,
     })
   }
