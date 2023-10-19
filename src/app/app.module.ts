@@ -43,6 +43,7 @@ import { MatMenuModule } from "@angular/material/menu"
 import { ProgramInfoCardComponent } from "./components/program-components/program-info-card/program-info-card.component"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 import { MatSnackBarModule } from "@angular/material/snack-bar"
+import { HashLocationStrategy, LocationStrategy } from "@angular/common"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   console.log(import.meta.env["NG_APP_keycloakUrl"])
@@ -121,6 +122,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
     },
   ],
   bootstrap: [AppComponent],
