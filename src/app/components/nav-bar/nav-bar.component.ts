@@ -38,7 +38,6 @@ export class NavBarComponent implements OnInit {
       for (const ur of user.userRoles!) {
         this.userRolesID.push(ur.roleId)
       }
-      console.log(this.userRolesID)
       this.userRolesID.includes(3)
     }
   }

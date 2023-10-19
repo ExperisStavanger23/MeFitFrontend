@@ -1,8 +1,4 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from "@angular/common/http"
+import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import {
   PostUserWorkout,
@@ -59,9 +55,7 @@ export class UserApiService {
       .post<User>(`${this.apiUrlBase}/User`, body, {
         headers,
       })
-      .subscribe(user => {
-        console.log(user)
-      })
+      .subscribe()
 
     this._user$.next(userToPost)
   }
@@ -97,8 +91,7 @@ export class UserApiService {
           this._user$.next(user)
           return true
         }),
-        catchError((err: HttpErrorResponse) => {
-          console.log(err)
+        catchError(() => {
           return of(false)
         })
       )
@@ -111,7 +104,6 @@ export class UserApiService {
     const programsToPost: ProgramWithDate[] = new Array<ProgramWithDate>(0)
 
     if (this._user$.value.userPrograms !== undefined) {
-      console.log("UserApiService: user programs is undefined")
       for (const userProgram of this._user$.value.userPrograms) {
         const program: ProgramWithDate = {
           id: userProgram.programId,
@@ -172,7 +164,6 @@ export class UserApiService {
     const workoutIdList: PostUserWorkout[] = new Array<PostUserWorkout>(0)
 
     if (this._user$.value.userWorkouts !== undefined) {
-      console.log("UserApiService: user programs is undefined")
       for (const userWorkout of this._user$.value.userWorkouts) {
         const workout: PostUserWorkout = {
           id: userWorkout.workoutId,
@@ -191,8 +182,6 @@ export class UserApiService {
     const headers = await this.getHeader()
 
     const body = JSON.stringify(workoutIdList)
-
-    console.log(body)
 
     this.http
       .put(
