@@ -44,6 +44,11 @@ export class ExerciseCreationFormComponent implements OnInit {
       })
   }
 
+  /**
+   * Handles the form submission. Creates a new exercise from the form data.Then sends the exercise to the API.
+   * Displays a success or failure message depending on the response form API.
+   * @param event - The event that triggered the form submission.
+   */
   handleSubmit(event: SubmitEvent): void {
     this.creating = true
     event.preventDefault()
@@ -74,6 +79,13 @@ export class ExerciseCreationFormComponent implements OnInit {
     this.creating = false
   }
 
+  /**
+   * Converts a YouTube URL to an embedded YouTube URL. By switching out watch with embed.
+   * Youtube video URLs are in the format https://www.youtube.com/watch?v=VIDEO_ID or https://youtu.be/VIDEO_ID.
+   * Embedded URLs are in the format https://www.youtube.com/embed/VIDEO_ID.
+   * @param originalURL - The original YouTube URL.
+   * @returns - The embedded YouTube URL or a blank string if the URL is invalid.
+   */
   private embedYouTubeURL(originalURL: string) {
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]+)/
