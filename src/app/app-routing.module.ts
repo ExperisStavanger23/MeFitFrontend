@@ -15,7 +15,7 @@ import { ProgramDetailsCardComponent } from "./components/program-components/pro
 
 const routes: Routes = [
   { path: "onboarding", component: OnboardingPage },
-  { path: "dashboard", component: DashboardPage },
+  { path: "dashboard", component: DashboardPage, canActivate: [AuthGuard] },
   { path: "programs", component: ProgramsPage },
   { path: "programs/:id", component: ProgramDetailsCardComponent },
   { path: "workouts", component: WorkoutsPage },

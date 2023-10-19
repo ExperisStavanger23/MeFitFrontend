@@ -1,5 +1,5 @@
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .dashboard {
@@ -45,7 +45,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-    flex-direction: column;
+  flex-direction: column;
   @media (max-width: 1000px) {
     height: 40vh;
   }
@@ -56,13 +56,13 @@ a {
 }
 
 .p2 {
-    grid-area: p2;
-    justify-content: unset;
+  grid-area: p2;
+  justify-content: unset;
 }
 
 .p3 {
-    grid-area: p3;
-    justify-content: unset;
+  grid-area: p3;
+  justify-content: unset;
 }
 
 .p4 {
@@ -71,19 +71,28 @@ a {
 
 .p5 {
   grid-area: p5;
+  min-height: 300px;
 }
 
-.programs-container, .workouts-container {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.programs-container,
+.workouts-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.program, .workout { 
-    background-color: #F4F5F7;
-    padding: 10px;
-    border-radius: 10px;
+.workout-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.program,
+.workout {
+  background-color: #f4f5f7;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .bar-container {
@@ -93,4 +102,7 @@ a {
 .doughnut-container {
   max-height: 500px;
   height: 75%;
+}
+.completed {
+  text-decoration: line-through;
 }

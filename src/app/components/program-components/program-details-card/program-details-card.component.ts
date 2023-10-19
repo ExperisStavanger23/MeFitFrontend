@@ -27,8 +27,8 @@ export class ProgramDetailsCardComponent implements OnInit {
     id: 0,
     name: "",
     description: "",
-    category: 0,
-    recommendedLevel: 0,
+    category: "",
+    recommendedLevel: "",
     duration: 0,
     image: "",
     workouts: [],
@@ -36,7 +36,6 @@ export class ProgramDetailsCardComponent implements OnInit {
   disableBtn = false
 
   async ngOnInit(): Promise<void> {
-    console.log("programDetails onInit")
     this.id = this.route.snapshot.params["id"]
     this.apiProgramService
       .getProgramById(this.id)
@@ -64,15 +63,8 @@ export class ProgramDetailsCardComponent implements OnInit {
     this.router.navigate(["/workouts", id])
   }
 
-  handleAdd(programId: number): void {
-    console.log(`handle add program: ${programId}`)
-    this.apiUserService.addProgram(programId)
+  handleAdd(program: Program): void {
+    this.apiUserService.addProgram(program.id, program.duration)
     this.disableBtn = true
-  }
-
-  private isImageUrlValid(url: string): boolean {
-    const pattern =
-      /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
-    return pattern.test(url)
   }
 }

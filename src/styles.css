@@ -39,6 +39,14 @@ body {
   }
 }
 
+a {
+  text-decoration: none;
+}
+
+textarea {
+  min-height: 75px;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 20px;

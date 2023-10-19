@@ -17,6 +17,9 @@
 }
 
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   padding-left: 50px;
   padding-right: 50px;
   @media (max-width: 768px) {
@@ -48,8 +51,16 @@
   --mdc-protected-button-container-color: #2d7556;
 }
 
-.pfp {
+.image-container {
   border-radius: 50%;
+  overflow: hidden;
+  height: 70%;
+  aspect-ratio: 1/1;
+}
+.pfp {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .menu {

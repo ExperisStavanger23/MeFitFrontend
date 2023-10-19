@@ -18,7 +18,14 @@ export class ProfileEditPage implements OnInit {
     private router: Router
   ) {
     this.form = fb.group({
-      name: ["", Validators.required],
+      name: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ],
+      ],
       email: ["", [Validators.required, Validators.email]],
       bio: [null, Validators.maxLength(250)],
       height: [null, Validators.pattern("^([5-9][0-9]|[1-2][0-9]{2}|300)$")],
@@ -31,13 +38,14 @@ export class ProfileEditPage implements OnInit {
   async ngOnInit(): Promise<void> {
     const user = this.userService.user$
     const data = await firstValueFrom(user)
+    console.log(data.experienceLvl)
     this.form.setValue({
       name: data.name,
       email: data.email,
       bio: data.bio,
       weight: data.weight,
       height: data.height,
-      experienceLvl: data.experienceLvl,
+      experienceLvl: data.experienceLvl?.toString(),
       profilePicture: data.profilePicture,
     })
   }
@@ -45,7 +53,6 @@ export class ProfileEditPage implements OnInit {
   async handleSubmit(event: SubmitEvent): Promise<void> {
     event.preventDefault()
     if (this.form.invalid) {
-      console.log("form is invalid")
       return
     }
     const user = this.userService.user$
@@ -62,9 +69,6 @@ export class ProfileEditPage implements OnInit {
 
     this.userService.updateUser(userToUpdate)
     this.loading = true
-    // TODO better waiting
-    // setTimeout(() => {
     this.router.navigate(["/profile"])
-    // }, 500)
   }
 }

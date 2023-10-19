@@ -4,7 +4,13 @@ import {
   HttpHeaders,
 } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { User } from "src/interfaces"
+import {
+  PostUserWorkout,
+  ProgramWithDate,
+  User,
+  UserWorkout,
+  Workout,
+} from "src/interfaces"
 import { KeycloakService } from "keycloak-angular"
 import {
   BehaviorSubject,
@@ -16,6 +22,7 @@ import {
 } from "rxjs"
 import { ApiProgramService } from "./api-program.service"
 import { getTokenClaims } from "src/helper-functions"
+import { dateFormatter } from "../app.component"
 
 @Injectable({
   providedIn: "root",
@@ -39,18 +46,14 @@ export class UserApiService {
   }
 
   async getUser(): Promise<User> {
-    console.log("user service: getUser")
     const userId = getTokenClaims(await this.keycloak.getToken()).sub
     const user = this.http.get<User>(`${this.apiUrlBase}/User/${userId}`)
     return firstValueFrom(user)
   }
 
-  postUser(userToPost: User): void {
+  async postUser(userToPost: User): Promise<void> {
     const body = JSON.stringify(userToPost)
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-    })
-
+    const headers = await this.getHeader()
     this.http
       .post<User>(`${this.apiUrlBase}/User`, body, {
         headers,
@@ -76,10 +79,8 @@ export class UserApiService {
     this._user$.next(user)
   }
 
-  updateUser(user: User): void {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-    })
+  async updateUser(user: User): Promise<void> {
+    const headers = await this.getHeader()
 
     const body = JSON.stringify(user)
     this.http
@@ -105,24 +106,37 @@ export class UserApiService {
     return userExists
   }
 
-  addProgram(programId: number): void {
-    const programIdArray: number[] = new Array<number>(0)
+  async addProgram(programId: number, duration: number): Promise<void> {
+    const programsToPost: ProgramWithDate[] = new Array<ProgramWithDate>(0)
 
     if (this._user$.value.userPrograms !== undefined) {
       console.log("UserApiService: user programs is undefined")
       for (const userProgram of this._user$.value.userPrograms) {
-        programIdArray.push(userProgram.programId)
+        const program: ProgramWithDate = {
+          id: userProgram.programId,
+          startDate: userProgram.startDate,
+          endDate: userProgram.endDate,
+        }
+        programsToPost.push(program)
       }
     }
 
-    programIdArray.push(programId)
+    const dateNow = new Date()
+    const startDate: string = dateFormatter(dateNow)
+    dateNow.setDate(dateNow.getDate() + duration)
+    const endDate: string = dateFormatter(dateNow)
+
+    const newProgram: ProgramWithDate = {
+      id: programId,
+      startDate,
+      endDate,
+    }
+    programsToPost.push(newProgram)
 
     // Update User's programs backend
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-    })
+    const headers = await this.getHeader()
 
-    const body = JSON.stringify(programIdArray)
+    const body = JSON.stringify(programsToPost)
 
     this.http
       .put(
@@ -133,7 +147,58 @@ export class UserApiService {
       .subscribe(() => this.setUser())
   }
 
-  // getUserPrograms(userId: string): Observable<UserProgram[]> {
-  //   return this.http.
-  // }
+  async updateUserWorkout(userWorkout: UserWorkout) {
+    const headers = await this.getHeader()
+
+    const body = JSON.stringify(userWorkout)
+    this.http
+      .put(
+        `${this.apiUrlBase}/User/${this._user$.value.id}/userworkout/${userWorkout.id}/workoutgoal?done=${userWorkout.doneDate}`,
+        body,
+        { headers }
+      )
+      .subscribe(() => this.setUser())
+  }
+
+  async getHeader(): Promise<HttpHeaders> {
+    return new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await this.keycloak.getToken()}`,
+    })
+  }
+
+  async addWorkout(workout: Workout) {
+    const workoutIdList: PostUserWorkout[] = new Array<PostUserWorkout>(0)
+
+    if (this._user$.value.userWorkouts !== undefined) {
+      console.log("UserApiService: user programs is undefined")
+      for (const userWorkout of this._user$.value.userWorkouts) {
+        const workout: PostUserWorkout = {
+          id: userWorkout.workoutId,
+          doneDate: userWorkout.doneDate,
+        }
+        workoutIdList.push(workout)
+      }
+    }
+
+    const newWorkout: PostUserWorkout = {
+      id: workout.id,
+      doneDate: null,
+    }
+    workoutIdList.push(newWorkout)
+
+    const headers = await this.getHeader()
+
+    const body = JSON.stringify(workoutIdList)
+
+    console.log(body)
+
+    this.http
+      .put(
+        `${this.apiUrlBase}/User/${this._user$.value.id}/userworkout`,
+        body,
+        { headers }
+      )
+      .subscribe(() => this.setUser())
+  }
 }

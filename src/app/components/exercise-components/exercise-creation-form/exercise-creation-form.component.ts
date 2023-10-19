@@ -47,7 +47,6 @@ export class ExerciseCreationFormComponent implements OnInit {
   handleSubmit(event: SubmitEvent): void {
     this.creating = true
     event.preventDefault()
-    console.log(this.form.value.muscleGroup)
     const exercise: Exercise = {
       id: 0,
       name: this.form.value.name,

@@ -1,6 +1,7 @@
 img {
+  height: 100%;
   width: 100%;
-  border-radius: 50%;
+  object-fit: cover;
 }
 
 a {
@@ -46,6 +47,7 @@ a {
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 .profile-info {
@@ -76,6 +78,7 @@ a {
   flex-direction: column;
   padding: 50px;
   border-radius: 10px;
+  text-align: center;
 }
 
 .dropdown-header {
@@ -83,6 +86,7 @@ a {
   flex-direction: row;
   position: relative;
   justify-content: space-between;
+  align-items: center;
 }
 
 .dropdown-header > p {
@@ -103,9 +107,6 @@ a {
 }
 
 .a-icon {
-  position: absolute;
-  right: -38px;
-  top: -4px;
   background-color: #d4d4d4;
   border-radius: 50%;
   padding: 3px;
@@ -133,6 +134,21 @@ a {
   padding-left: 20px;
   padding-right: 20px;
   width: 50%;
+}
+
+.workout:hover {
+  background-color: #d4d4d4;
+}
+
+.expand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.expand > p {
+  margin: 0;
 }
 
 @media (max-width: 768px) {

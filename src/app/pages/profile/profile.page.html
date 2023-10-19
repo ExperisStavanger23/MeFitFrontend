@@ -29,23 +29,26 @@
   <div class="profile-dropdown">
     <div class="dropdown-header">
       <p>Workout history</p>
-      <p *ngIf="user.userWorkouts; else nullWorkouts">{{user.userWorkouts.length}} total workouts</p>
-      <ng-template #nullWorkouts>
-        <p>0 total workouts</p>
-      </ng-template>
-
-      <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock" (click)="handleWhOpen()"
-        >expand_less</mat-icon
-      >
-      <ng-template #elseBlock>
-        <mat-icon class="a-icon" (click)="handleWhOpen()">expand_more</mat-icon>
-      </ng-template>
+      <div class="expand">
+        <p *ngIf="user.userWorkouts; else nullWorkouts">{{user.userWorkouts.length}} total workouts</p>
+        <ng-template #nullWorkouts>
+          <p>0 total workouts</p>
+        </ng-template>
+  
+        <mat-icon class="a-icon" *ngIf="whOpen; else elseBlock" (click)="handleWhOpen()"
+          >expand_less</mat-icon
+        >
+        <ng-template #elseBlock>
+          <mat-icon class="a-icon" (click)="handleWhOpen()">expand_more</mat-icon>
+        </ng-template>
+      </div>
     </div>
+
     <div *ngIf="whOpen" class="workout-history-container">
-      <div *ngFor="let uw of user.userWorkouts" class="workout" >
+      <a *ngFor="let uw of user.userWorkouts" class="workout" routerLink="/workouts/{{uw.workoutId}}">
         <p>{{uw.workout.name}}</p>
         <p>Completed at: {{uw.doneDate | date:'dd-MM-yyyy'}}</p>
-      </div>
+      </a>
     </div>
   </div>
 </div>

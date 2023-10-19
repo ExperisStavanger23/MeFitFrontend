@@ -67,16 +67,16 @@ export interface User {
   weight?: number
   height?: number
   birthday?: string
-  role?: Role
+  userRoles?: UserRole[]
   created?: number[]
   userExercises?: number[]
   userWorkouts?: UserWorkout[]
   userPrograms?: UserProgram[]
 }
 
-export interface Role {
-  id: number
-  roleTitle: string
+export interface UserRole {
+  userId: string
+  roleId: number
 }
 
 export interface UserProgram {
@@ -92,8 +92,8 @@ export interface Program {
   id: number
   name: string
   description: string
-  category: number
-  recommendedLevel: number
+  category: string
+  recommendedLevel: string
   duration: number
   image: string
   workouts: Workout[]
@@ -116,6 +116,24 @@ export interface Workout {
   duration: number
   image: string
   exercises: SetReps[]
+}
+
+export interface WorkoutExercises {
+  workoutId: number
+  exerciseId: number
+  sets: number
+  reps: number
+  exercise: Exercise
+}
+export interface WorkoutGet {
+  id: number
+  name: string
+  description: string
+  category: string
+  recommendedLevel: string
+  duration: number
+  image: string
+  workoutExercises: WorkoutExercises[]
 }
 
 export interface PostWorkout {
@@ -167,4 +185,15 @@ export interface PostProgram {
   image: "string"
   duration: number
   workoutIds: number[]
+}
+
+export interface ProgramWithDate {
+  id: number
+  startDate: string
+  endDate: string
+}
+
+export interface PostUserWorkout {
+  id: number
+  doneDate: string | null
 }

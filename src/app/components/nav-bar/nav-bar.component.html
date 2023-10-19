@@ -1,5 +1,7 @@
 <mat-toolbar color="primary" class="navbar">
-  <img class="logo" src="/assets/logo.png" alt="logo" width="50px" />
+  <a routerLink="/">
+    <img class="logo" src="/assets/logo.png" alt="logo" width="50px" />
+  </a>
   <h1 class="nav-title">MeFit</h1>
   <div class="nav-buttons">
     <a routerLink="/dashboard" mat-button routerLinkActive="selected"
@@ -14,7 +16,7 @@
     <a routerLink="/exercises" mat-button routerLinkActive="selected"
       >Exercises</a
     >
-    <a routerLink="/creation" mat-button routerLinkActive="selected"
+    <a routerLink="/creation" mat-button routerLinkActive="selected" *ngIf="this.userRolesID.includes(2)"
       >Creation</a
     >
   </div>
@@ -46,7 +48,7 @@
           then loggedInS;
           else loggedOutS
         "></ng-container>
-        
+
       <ng-template #loggedInS>
         <a routerLink="/profile" mat-menu-item routerLinkActive="selected"
           >Profile</a
@@ -84,18 +86,14 @@
         </button>
       </mat-menu>
     </ng-template>
-    
+
     <ng-template #loggedOut>
       <button class="login-btn" mat-raised-button (click)="login()">
         Login
       </button>
     </ng-template>
   </div>
-
-  <img
-    *ngIf="user | async as user"
-    class="pfp"
-    src="{{ user.profilePicture }}"
-    alt="pfp"
-    width="50px" />
+  <a class="image-container" *ngIf="user | async as user" routerLink="/profile" >
+    <img class="pfp" src="{{ user.profilePicture }}" alt="pfp" width="50px" />
+  </a>
 </mat-toolbar>

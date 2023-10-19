@@ -27,13 +27,19 @@
       </div>
       <div>
         <p>Category:</p>
-        <p>{{ workout.category }}</p>
+        <p>{{ workout.category | camelCaseToSpace }}</p>
       </div>
       <div>
         <p>Duration:</p>
-        <p>{{ workout.duration }}</p>
+        <p>{{ workout.duration }} minutes</p>
       </div>
     </div>
   </div>
-  <button mat-raised-button color="primary">Add</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="handleAdd(workout)"
+    [disabled]="disableBtn">
+    Add
+  </button>
 </div>

@@ -2,8 +2,10 @@
 import { Component, OnInit } from "@angular/core"
 import { ChartConfiguration, ChartData } from "chart.js"
 import { EMPTY, Observable, firstValueFrom } from "rxjs"
+import { dateFormatter } from "src/app/app.component"
 import { UserApiService } from "src/app/services/user-api.service"
-import { User } from "src/interfaces"
+import { randomFitnessQuote } from "src/assets/quotes"
+import { User, UserWorkout } from "src/interfaces"
 
 @Component({
   selector: "app-dashboard",
@@ -11,6 +13,11 @@ import { User } from "src/interfaces"
   styleUrls: ["./dashboard.page.css"],
 })
 export class DashboardPage implements OnInit {
+  doneThisWeek = 0
+  doneEachWeek: number[] = new Array<number>(0)
+  currentDate: Date = new Date()
+  quote = randomFitnessQuote
+
   // Doughnut
   public doughnutChartData: ChartData<"doughnut"> = {
     labels: ["Completed", "Remaining"],
@@ -18,7 +25,7 @@ export class DashboardPage implements OnInit {
   }
 
   public barChartData: ChartData<"bar"> = {
-    labels: ["01", "02", "03", "04", "05", "06", "07"],
+    labels: ["01", "02", "03", "04"],
     datasets: [
       {
         data: [2, 5, 3, 8, 4, 5, 1],
@@ -49,24 +56,20 @@ export class DashboardPage implements OnInit {
 
     const user = await firstValueFrom(this.user)
     const [start, end] = getStartAndEndOfWeek()
-    let doneThisWeek = 0
+
     for (const uw of user.userWorkouts!) {
       if (uw.doneDate !== null) {
         if (new Date(uw.doneDate) > start && new Date(uw.doneDate) < end) {
-          doneThisWeek++
+          this.doneThisWeek++
         }
       }
     }
-
-    const doneEachWeek: number[] = new Array<number>(0)
+    this.doneEachWeek = []
     for (let i = 30; i >= 0; i = i - 7) {
       const wStart = new Date()
       const wEnd = new Date()
       wStart.setDate(wStart.getDate() - i)
       wEnd.setDate(wEnd.getDate() - (i - 7))
-      console.log(wStart)
-      console.log(wEnd)
-
       let doneThatWeek = 0
 
       for (const uw of user.userWorkouts!) {
@@ -76,32 +79,35 @@ export class DashboardPage implements OnInit {
           }
         }
       }
-      doneEachWeek.push(doneThatWeek)
-    }
-    console.log(doneEachWeek)
-
-    // Update doughnutChart data
-    this.doughnutChartData = {
-      labels: ["Completed", "Remaining"],
-      datasets: [
-        {
-          data: [doneThisWeek, user.workoutGoal! - doneThisWeek],
-          backgroundColor: ["#41C17C", "#DF6565"],
-        },
-      ],
+      this.doneEachWeek.push(doneThatWeek)
     }
 
+    this.updateDoughnutChart()
+    this.updateBarChart()
+  }
+
+  async markDone(userWorkout: UserWorkout) {
+    userWorkout.doneDate = dateFormatter(new Date())
+    this.apiUserService.updateUserWorkout(userWorkout)
+
+    this.doneThisWeek += 1
+    this.updateDoughnutChart()
+
+    this.doneEachWeek[4] += 1
+    this.updateBarChart()
+  }
+
+  async updateBarChart() {
     this.barChartData = {
-      labels: ["01", "02", "03", "04", "05", "06", "07"],
+      labels: ["01", "02", "03", "04", "05"],
       datasets: [
         {
-          data: doneEachWeek,
+          data: this.doneEachWeek,
           label: "Done Workouts",
           backgroundColor: "#324B9B",
         },
       ],
     }
-
     this.barOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -110,10 +116,32 @@ export class DashboardPage implements OnInit {
           ticks: {
             stepSize: 1,
           },
-          max: Math.max(...doneEachWeek) + 1,
+          max: Math.max(...this.doneEachWeek) + 1,
         },
       },
     }
+  }
+
+  async updateDoughnutChart() {
+    const user = await firstValueFrom(this.user)
+    this.doughnutChartData = {
+      labels: ["Completed", "Remaining"],
+      datasets: [
+        {
+          data: [
+            this.doneThisWeek,
+            user.workoutGoal! - this.doneThisWeek <= 0
+              ? 0
+              : user.workoutGoal! - this.doneThisWeek,
+          ],
+          backgroundColor: ["#41C17C", "#DF6565"],
+        },
+      ],
+    }
+  }
+
+  toDateFromString(date: string): Date {
+    return new Date(date)
   }
 }
 
