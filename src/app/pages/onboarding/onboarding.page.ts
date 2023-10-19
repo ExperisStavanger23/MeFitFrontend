@@ -48,7 +48,7 @@ export class OnboardingPage implements OnInit {
   async ngOnInit(): Promise<void> {
     if (!(await this.keycloak.isLoggedIn())) {
       this.keycloak.login({
-        redirectUri: window.location.origin + "/onboarding",
+        redirectUri: window.location.origin + "/#/onboarding",
       })
       return
     }
