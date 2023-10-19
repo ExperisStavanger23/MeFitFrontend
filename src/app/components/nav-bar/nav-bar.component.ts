@@ -37,7 +37,7 @@ export class NavBarComponent implements OnInit {
 
   login(): void {
     this.keycloak.login({
-      redirectUri: window.location.origin + "/onboarding",
+      redirectUri: window.location.origin + "/#/onboarding",
     })
   }
 
