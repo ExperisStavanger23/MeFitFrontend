@@ -1,5 +1,7 @@
 <mat-toolbar color="primary" class="navbar">
-  <img class="logo" src="/assets/logo.png" alt="logo" width="50px" />
+  <a routerLink="/">
+    <img class="logo" src="/assets/logo.png" alt="logo" width="50px" />
+  </a>
   <h1 class="nav-title">MeFit</h1>
   <div class="nav-buttons">
     <a routerLink="/dashboard" mat-button routerLinkActive="selected"
@@ -91,7 +93,7 @@
       </button>
     </ng-template>
   </div>
-  <div class="image-container" *ngIf="user | async as user">
+  <a class="image-container" *ngIf="user | async as user" routerLink="/profile" >
     <img class="pfp" src="{{ user.profilePicture }}" alt="pfp" width="50px" />
-  </div>
+  </a>
 </mat-toolbar>
