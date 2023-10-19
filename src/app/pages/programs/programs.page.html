@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="programs$ | async; else noPrograms">
   <ng-container *ngFor="let program of programs$ | async">
     <app-program-info-card
       [program]="program"
@@ -6,3 +6,6 @@
       [canAdd]="false"></app-program-info-card>
   </ng-container>
 </div>
+<ng-template #noPrograms>
+  Loading...
+</ng-template>
