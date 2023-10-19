@@ -67,10 +67,4 @@ export class ProgramDetailsCardComponent implements OnInit {
     this.apiUserService.addProgram(program.id, program.duration)
     this.disableBtn = true
   }
-
-  private isImageUrlValid(url: string): boolean {
-    const pattern =
-      /(http(s?):\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tif|tiff))/i
-    return pattern.test(url)
-  }
 }
