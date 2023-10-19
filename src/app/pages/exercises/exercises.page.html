@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="exercises$ | async; else noExercises">
   <ng-container *ngFor="let exercise of exercises$ | async">
     <app-exercise-info-card
       [exercise]="exercise"
@@ -6,3 +6,6 @@
       [canAdd]="false"></app-exercise-info-card>
   </ng-container>
 </div>
+<ng-template #noExercises>
+  Loading...
+</ng-template>
