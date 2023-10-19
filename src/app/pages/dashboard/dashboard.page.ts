@@ -50,6 +50,9 @@ export class DashboardPage implements OnInit {
   user: Observable<User> = EMPTY
   constructor(private apiUserService: UserApiService) {}
 
+  /**
+   * Gets the user and sets the doneThisWeek and doneEachWeek variables.Then updates the chars
+   */
   async ngOnInit(): Promise<void> {
     await this.apiUserService.setUser()
     this.user = this.apiUserService.user$
