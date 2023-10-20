@@ -35,6 +35,9 @@ export class ProgramDetailsCardComponent implements OnInit {
   }
   disableBtn = false
 
+  /**
+   * Gets the program id from the route params. Then gets the program from the API and stores it in the program variable.
+   */
   async ngOnInit(): Promise<void> {
     this.id = this.route.snapshot.params["id"]
     this.apiProgramService
@@ -63,6 +66,10 @@ export class ProgramDetailsCardComponent implements OnInit {
     this.router.navigate(["/workouts", id])
   }
 
+  /**
+   * Add a program to the user's programs.
+   * @param program - The program to be added to the user's programs.
+   */
   handleAdd(program: Program): void {
     this.apiUserService.addProgram(program.id, program.duration)
     this.disableBtn = true

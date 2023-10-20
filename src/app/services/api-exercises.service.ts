@@ -8,11 +8,19 @@ import { MuscleGroup } from "src/interfaces"
 @Injectable({
   providedIn: "root",
 })
+/**
+ * Class responsible for managing exercise-related API interactions.
+ */
 export class ApiExercisesService {
   apiUrlBase = import.meta.env["NG_APP_API_URL"]
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Create a new exercise.
+   * @param exercise - The exercise to be created.
+   * @returns A boolean indicating whether the exercise was successfully created.
+   */
   postExercise(exercise: Exercise): Observable<boolean> {
     const body = JSON.stringify(exercise)
 
@@ -26,7 +34,7 @@ export class ApiExercisesService {
       })
       .pipe(
         map((response: Exercise) => {
-          const success = response === null
+          const success = Object.prototype.hasOwnProperty.call(response, "id")
 
           return success
         }),
@@ -37,14 +45,27 @@ export class ApiExercisesService {
       )
   }
 
+  /**
+   * Gets all the exercises.
+   * @returns An observable of all exercises.
+   */
   getAllExercises(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(`${this.apiUrlBase}/Exercise`)
   }
 
+  /**
+   * Gets an exercise by its id.
+   * @param id - The id of the exercise to get.
+   * @returns An observable of the exercise.
+   */
   getExerciseById(id: number): Observable<Exercise> {
     return this.http.get<Exercise>(`${this.apiUrlBase}/Exercise/${id}`)
   }
 
+  /**
+   * Gets all the muscle groups.
+   * @returns An observable of all muscle groups.
+   */
   getMuscleGroups(): Observable<MuscleGroup[]> {
     return this.http.get<MuscleGroup[]>(`${this.apiUrlBase}/Musclegroup`)
   }

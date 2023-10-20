@@ -50,6 +50,9 @@ export class DashboardPage implements OnInit {
   user: Observable<User> = EMPTY
   constructor(private apiUserService: UserApiService) {}
 
+  /**
+   * Gets the user and sets the doneThisWeek and doneEachWeek variables.Then updates the chars
+   */
   async ngOnInit(): Promise<void> {
     await this.apiUserService.setUser()
     this.user = this.apiUserService.user$
@@ -99,7 +102,13 @@ export class DashboardPage implements OnInit {
 
   async updateBarChart() {
     this.barChartData = {
-      labels: ["01", "02", "03", "04", "05"],
+      labels: [
+        "Four weeks ago",
+        "Three weeks ago",
+        "Two weeks ago",
+        "Last week",
+        "This week",
+      ],
       datasets: [
         {
           data: this.doneEachWeek,

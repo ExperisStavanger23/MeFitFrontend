@@ -1,4 +1,4 @@
-<div class="dashboard">
+<div class="dashboard" *ngIf="user | async; else noUser">
   <div class="container">
     <div class="panel p1">
       <h3>Workouts this week</h3>
@@ -52,6 +52,7 @@
     </div>
 
     <div class="panel p5">
+      <h3>Workouts done per week</h3>
       <div class="bar-container">
         <canvas
           baseChart
@@ -64,3 +65,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #noUser>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+</ng-template>

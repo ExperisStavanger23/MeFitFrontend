@@ -24,6 +24,9 @@ export class ExerciseDetailsCardComponent implements OnInit {
     muscleGroups: [],
   }
 
+  /**
+   * Gets the id of the exercise from the route parameters. Then gets the exercise from the API.
+   */
   ngOnInit(): void {
     this.id = this.route.snapshot.params["id"]
 

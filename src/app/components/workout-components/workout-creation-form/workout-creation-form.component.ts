@@ -16,7 +16,23 @@ export class WorkoutCreationFormComponent implements OnInit {
 
   //TODO: replace with data from database/api
   experienceLevels = ["Beginner", "Intermediate", "Advanced"]
-  workoutCategories = ["StressReduction", "MuscleGain", "Bulking"]
+  workoutCategories = [
+    "StressReduction",
+    "Rehabilitation",
+    "MuscleGain",
+    "Bulking",
+    "PowerLifting",
+    "StrongmanTraning",
+    "GeneralStrengthTraining",
+    "Running",
+    "HIIT",
+    "WeightLoss",
+    "FatLoss",
+    "WeightMaintenance",
+    "BodyWeightTraining",
+    "Yoga",
+    "SportsPerformance",
+  ]
 
   exercises: Exercise[] = []
 
@@ -45,6 +61,9 @@ export class WorkoutCreationFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Gets all the exercises from the API and stores them in the exercises array. To be used in the form.
+   */
   ngOnInit(): void {
     this.apiExerciseService
       .getAllExercises()
@@ -53,6 +72,10 @@ export class WorkoutCreationFormComponent implements OnInit {
       })
   }
 
+  /**
+   * Sets the selected exercises with their default sets and reps depending on what the user selected.
+   * @param selectedExerciseIds - The ids of the selected exercises
+   */
   addSelectedExercise(selectedExerciseIds: number[]) {
     this.selectedExercisesSetRep = []
     selectedExerciseIds.forEach(exerciseId => {
@@ -72,10 +95,18 @@ export class WorkoutCreationFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Remove an exercise from the selected exercises array
+   * @param index - The index of the exercise to be removed from the selected exercises array
+   */
   removeExercise(index: number) {
     this.selectedExercisesSetRep.splice(index, 1)
   }
 
+  /**
+   * Creates a new workout from the form data. Then sends the workout to the API. Displays a success or failure message depending on the response form API.
+   * @param event - The event that triggered the form submission.
+   */
   handleSubmit(event: Event): void {
     this.creating = true
     event.preventDefault()

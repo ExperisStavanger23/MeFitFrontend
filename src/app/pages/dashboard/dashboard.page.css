@@ -98,6 +98,7 @@ a {
 .bar-container {
   max-height: 500px;
   height: 75%;
+  width: 90%;
 }
 .doughnut-container {
   max-height: 500px;
