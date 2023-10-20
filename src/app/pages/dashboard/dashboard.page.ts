@@ -102,7 +102,13 @@ export class DashboardPage implements OnInit {
 
   async updateBarChart() {
     this.barChartData = {
-      labels: ["01", "02", "03", "04", "05"],
+      labels: [
+        "Four weeks ago",
+        "Three weeks ago",
+        "Two weeks ago",
+        "Last week",
+        "This week",
+      ],
       datasets: [
         {
           data: this.doneEachWeek,
