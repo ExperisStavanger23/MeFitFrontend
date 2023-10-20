@@ -1,8 +1,14 @@
-<div class="container">
+<div class="container" *ngIf="programs$ | async; else noPrograms">
   <ng-container *ngFor="let program of programs$ | async">
     <app-program-info-card
+      class="card"
       [program]="program"
       (emitterId)="setSelectedId($event)"
       [canAdd]="false"></app-program-info-card>
   </ng-container>
 </div>
+<ng-template #noPrograms>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+</ng-template>
