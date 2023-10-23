@@ -7,27 +7,39 @@
         workout goals and maintain a consistent exercise routine.
       </h3>
       <div class="button-container">
-        <button mat-raised-button color="primary" class="btn btn-primary">
+        <button
+          mat-raised-button
+          color="primary"
+          class="btn btn-primary"
+          (click)="navigateToPrograms()">
           Brows Workout Programs
         </button>
-        <button mat-raised-button color="accent" class="btn btn-primary">
+        <button
+          mat-raised-button
+          color="accent"
+          class="btn btn-primary"
+          (click)="navigateToUser()">
           Create a user
         </button>
       </div>
     </div>
   </div>
   <div class="content">
-    <div class="program card">
+    <div class="program card" (click)="navigateToPrograms()">
       <h3>Multiple Programs to chose from</h3>
       <button mat-raised-button color="accent">Discover them all here</button>
     </div>
     <div class="workout card">
       <h3>Workouts for everybody</h3>
-      <button mat-raised-button color="accent">Discover them all here</button>
+      <button mat-raised-button color="accent" (click)="navigateToWorkouts()">
+        Discover them all here
+      </button>
     </div>
     <div class="exercise card">
       <h3>Multiple Exercises to try out</h3>
-      <button mat-raised-button color="accent">Discover them all here</button>
+      <button mat-raised-button color="accent" (click)="navigateToExercises()">
+        Discover them all here
+      </button>
     </div>
   </div>
 </div>
