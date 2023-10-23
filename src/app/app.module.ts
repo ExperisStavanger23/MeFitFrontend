@@ -42,7 +42,8 @@ import { ProgramInfoCardComponent } from "./components/program-components/progra
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 import { MatSnackBarModule } from "@angular/material/snack-bar"
 import { MatRadioModule } from "@angular/material/radio"
-import { CamelCaseToSpacePipe } from "./services/pipes/camel-case-to-space.pipe"
+import { CamelCaseToSpacePipe } from "./services/pipes/camel-case-to-space.pipe";
+import { LandingPage } from './pages/landing/landing.page'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -83,6 +84,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProgramInfoCardComponent,
     ProgramDetailsCardComponent,
     CamelCaseToSpacePipe,
+    LandingPage,
   ],
   imports: [
     BrowserModule,

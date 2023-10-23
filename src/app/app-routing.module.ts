@@ -12,8 +12,10 @@ import { ExerciseDetailsCardComponent } from "./components/exercise-components/e
 import { WorkoutDetailsCardComponent } from "./components/workout-components/workout-details-card/workout-details-card.component"
 import { AuthGuard } from "./guard/auth.guard"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
+import { LandingPage } from "./pages/landing/landing.page"
 
 const routes: Routes = [
+  { path: "", component: LandingPage },
   { path: "onboarding", component: OnboardingPage },
   { path: "dashboard", component: DashboardPage, canActivate: [AuthGuard] },
   { path: "programs", component: ProgramsPage },
