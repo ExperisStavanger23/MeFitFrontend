@@ -1,32 +1,33 @@
 .landing-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
-.image-container {
-  width: 80%;
-  margin-left: 20%;
-  height: 60vh;
-  overflow: hidden;
+.hero-text {
+  margin: 0 10% 0 10%;
 }
-img {
-  width: 100%;
-  object-fit: cover;
+.mat-mdc-raised-button:not(:disabled) {
+  color: #fff;
 }
+
 .hero {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  height: 60%;
-  margin: 0 10% 0 10%;
+  height: 70vh;
   z-index: 2;
+  background-image: url("https://i1.pickpik.com/photos/981/336/896/people-diet-fit-fitness-preview.jpg");
+  background-size: 100%;
+  background-position: top right;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
+
 .content {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 40%;
+  height: 20vh;
   width: 100%;
   justify-content: center;
 }
@@ -36,13 +37,33 @@ img {
   gap: 1rem;
 }
 .card {
+  text-align: center;
   width: 30%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   & > button {
-    width: 50%;
+    width: 60%;
+    color: white;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    justify-content: center;
+    height: 30vh;
+    padding: 20px 0 20px 0;
+  }
+  .content {
+    flex-direction: column;
+    height: auto;
+  }
+  .card {
+    width: 90%;
+    gap: 20px;
+    height: 200px;
+    justify-content: center;
   }
 }
