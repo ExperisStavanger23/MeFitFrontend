@@ -1,0 +1,48 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.image-container {
+  width: 80%;
+  margin-left: 20%;
+  height: 60vh;
+  overflow: hidden;
+}
+img {
+  width: 100%;
+  object-fit: cover;
+}
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 60%;
+  margin: 0 10% 0 10%;
+  z-index: 2;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40%;
+  width: 100%;
+  justify-content: center;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.card {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & > button {
+    width: 50%;
+  }
+}
