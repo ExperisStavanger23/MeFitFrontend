@@ -1,0 +1,69 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+}
+.hero-text {
+  margin: 0 10% 0 10%;
+}
+.mat-mdc-raised-button:not(:disabled) {
+  color: #fff;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 70vh;
+  z-index: 2;
+  background-image: url("https://i1.pickpik.com/photos/981/336/896/people-diet-fit-fitness-preview.jpg");
+  background-size: 100%;
+  background-position: top right;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 20vh;
+  width: 100%;
+  justify-content: center;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.card {
+  text-align: center;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  & > button {
+    width: 60%;
+    color: white;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    justify-content: center;
+    height: 30vh;
+    padding: 20px 0 20px 0;
+  }
+  .content {
+    flex-direction: column;
+    height: auto;
+  }
+  .card {
+    width: 90%;
+    gap: 20px;
+    height: 200px;
+    justify-content: center;
+  }
+}

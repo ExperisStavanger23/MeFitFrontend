@@ -1,43 +1,47 @@
-<div class="details-container">
-  <div class="information-container">
-    <div class="image-container">
-      <img src="{{ program.image }}" />
-    </div>
-    <div class="info-container">
-      <h3>{{ program.name }}</h3>
-      <p>{{ program.description }}</p>
-      <ng-container *ngFor="let workout of program.workouts">
-        <div class="exercise-container" (click)="goToDetails(workout.id)">
-          <h4>{{ workout.name }}</h4>
-          <p>Description: {{ workout.description }}</p>
-          <p>Duration: {{ workout.duration }}</p>
+<div class="page">
+  <div class="details-container">
+    <div class="information-container">
+      <div class="image-container">
+        <img src="{{ program.image }}" />
+      </div>
+      <div class="info-container">
+        <h3>{{ program.name }}</h3>
+        <p>{{ program.description }}</p>
+        <div class="workouts">
+          <ng-container *ngFor="let workout of program.workouts">
+            <div class="exercise-container" (click)="goToDetails(workout.id)">
+              <h4>{{ workout.name }}</h4>
+              <p>Description: {{ workout.description }}</p>
+              <p>Duration: {{ workout.duration }}</p>
+            </div>
+          </ng-container>
         </div>
-      </ng-container>
+      </div>
+      <div class="information">
+        <div>
+          <p>Recommended level:</p>
+          <p>{{ program.recommendedLevel }}</p>
+        </div>
+        <div>
+          <p>Category:</p>
+          <p>{{ program.category | camelCaseToSpace }}</p>
+        </div>
+        <div>
+          <p>Duration:</p>
+          <p>{{ program.duration }} days</p>
+        </div>
+        <div>
+          <p>Workouts:</p>
+          <p>{{ program.workouts.length }}</p>
+        </div>
+      </div>
     </div>
-    <div class="information">
-      <div>
-        <p>Recommended level:</p>
-        <p>{{ program.recommendedLevel }}</p>
-      </div>
-      <div>
-        <p>Category:</p>
-        <p>{{ program.category | camelCaseToSpace }}</p>
-      </div>
-      <div>
-        <p>Duration:</p>
-        <p>{{ program.duration }} days</p>
-      </div>
-      <div>
-        <p>Workouts:</p>
-        <p>{{ program.workouts.length }}</p>
-      </div>
-    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="handleAdd(program)"
+      [disabled]="disableBtn">
+      Add
+    </button>
   </div>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="handleAdd(program)"
-    [disabled]="disableBtn">
-    Add
-  </button>
 </div>

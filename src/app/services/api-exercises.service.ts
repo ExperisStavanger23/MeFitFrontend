@@ -34,7 +34,10 @@ export class ApiExercisesService {
       })
       .pipe(
         map((response: Exercise) => {
-          const success = Object.prototype.hasOwnProperty.call(response, "id")
+          const success = Object.prototype.hasOwnProperty.call(
+            response,
+            "description"
+          )
 
           return success
         }),

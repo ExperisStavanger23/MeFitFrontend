@@ -44,6 +44,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar"
 import { MatRadioModule } from "@angular/material/radio"
 import { CamelCaseToSpacePipe } from "./services/pipes/camel-case-to-space.pipe"
 import { HashLocationStrategy, LocationStrategy } from "@angular/common"
+import { LandingPage } from "./pages/landing/landing.page"
+import { NotFoundPage } from "./pages/not-found/not-found.page"
 
 function initializeKeycloak(keycloak: KeycloakService) {
   console.log(import.meta.env["NG_APP_keycloakUrl"])
@@ -88,6 +90,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProgramInfoCardComponent,
     ProgramDetailsCardComponent,
     CamelCaseToSpacePipe,
+    LandingPage,
+    NotFoundPage,
   ],
   imports: [
     BrowserModule,

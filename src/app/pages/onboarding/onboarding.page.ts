@@ -63,7 +63,7 @@ export class OnboardingPage implements OnInit {
 
       birthday: [null, [Validators.required, dateValidator]],
       bio: ["", Validators.maxLength(250)],
-      profilePicture: [""],
+      profilePicture: [null],
       workoutGoal: [
         null,
         [
@@ -121,6 +121,7 @@ export class OnboardingPage implements OnInit {
       experienceLvl: parseInt(this.form.value.experienceLvl),
       userRoleIds: userRoles,
     }
+    console.log(userToPost)
     this.userApi.postUser(userToPost)
 
     setTimeout(() => {
