@@ -50,6 +50,9 @@ export class UserApiService {
    * @returns A promise that resolves to the user data.
    */
   async getUser(): Promise<User> {
+    if (!(await this.keycloak.isLoggedIn())) {
+      return new Promise<User>(resolve => resolve({} as User))
+    }
     const userId = getTokenClaims(await this.keycloak.getToken()).sub
     const user = this.http.get<User>(`${this.apiUrlBase}/User/${userId}`)
     return firstValueFrom(user)
