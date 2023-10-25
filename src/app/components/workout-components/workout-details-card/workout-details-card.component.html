@@ -1,45 +1,47 @@
-<div class="details-container">
-  <div class="information-container">
-    <div class="image-container">
-      <img src="{{ workout.image }}" />
-    </div>
-    <div class="info-container">
-      <h3>{{ workout.name }}</h3>
-      <p>{{ workout.description }}</p>
-      <div class="exercises">
-        <ng-container *ngFor="let exercise of workout.exercises">
-          <div
-            class="exercise-container"
-            (click)="goToDetails(exercise.exerciseId)">
-            <h4>{{ exercise.name }}</h4>
-            <div>
-              <p>Reps: {{ exercise.reps }}</p>
-              <p>Sets: {{ exercise.sets }}</p>
+<div class="page">
+  <div class="details-container">
+    <div class="information-container">
+      <div class="image-container">
+        <img src="{{ workout.image }}" />
+      </div>
+      <div class="info-container">
+        <h3>{{ workout.name }}</h3>
+        <p>{{ workout.description }}</p>
+        <div class="exercises">
+          <ng-container *ngFor="let exercise of workout.exercises">
+            <div
+              class="exercise-container"
+              (click)="goToDetails(exercise.exerciseId)">
+              <h4>{{ exercise.name }}</h4>
+              <div>
+                <p>Reps: {{ exercise.reps }}</p>
+                <p>Sets: {{ exercise.sets }}</p>
+              </div>
             </div>
-          </div>
-        </ng-container>
+          </ng-container>
+        </div>
+      </div>
+      <div class="information">
+        <div>
+          <p>Recommended level:</p>
+          <p>{{ workout.recommendedLevel }}</p>
+        </div>
+        <div>
+          <p>Category:</p>
+          <p>{{ workout.category | camelCaseToSpace }}</p>
+        </div>
+        <div>
+          <p>Duration:</p>
+          <p>{{ workout.duration }} minutes</p>
+        </div>
       </div>
     </div>
-    <div class="information">
-      <div>
-        <p>Recommended level:</p>
-        <p>{{ workout.recommendedLevel }}</p>
-      </div>
-      <div>
-        <p>Category:</p>
-        <p>{{ workout.category | camelCaseToSpace }}</p>
-      </div>
-      <div>
-        <p>Duration:</p>
-        <p>{{ workout.duration }} minutes</p>
-      </div>
-    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="handleAdd(workout)"
+      [disabled]="disableBtn">
+      Add
+    </button>
   </div>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="handleAdd(workout)"
-    [disabled]="disableBtn">
-    Add
-  </button>
 </div>
