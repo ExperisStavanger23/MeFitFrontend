@@ -56,6 +56,11 @@ export class ProgramDetailsCardComponent implements OnInit {
       })
 
     const user = await this.apiUserService.getUser()
+    if (Object.keys(user).length <= 0) {
+      this.disableBtn = true
+      return
+    }
+
     const up = user.userPrograms?.find(up => up.programId == this.id)
     if (up) {
       this.disableBtn = true

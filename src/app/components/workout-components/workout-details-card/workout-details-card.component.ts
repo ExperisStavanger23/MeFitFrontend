@@ -33,7 +33,7 @@ export class WorkoutDetailsCardComponent implements OnInit {
   /**
    * Gets the workout id from the route params. Then gets the workout from the API and stores it in the workout variable.
    */
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.id = this.route.snapshot.params["id"]
     this.apiWorkoutService
       .getWorkoutById(this.id)
@@ -60,6 +60,11 @@ export class WorkoutDetailsCardComponent implements OnInit {
           exercises: setsReps,
         }
       })
+    const user = await this.apiUserService.getUser()
+    if (Object.keys(user).length <= 0) {
+      this.disableBtn = true
+      return
+    }
   }
 
   goToDetails(exerciseId: number) {
