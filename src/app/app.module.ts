@@ -43,7 +43,8 @@ import { ProgramDetailsCardComponent } from "./components/program-components/pro
 import { MatSnackBarModule } from "@angular/material/snack-bar"
 import { MatRadioModule } from "@angular/material/radio"
 import { CamelCaseToSpacePipe } from "./services/pipes/camel-case-to-space.pipe";
-import { LandingPage } from './pages/landing/landing.page'
+import { LandingPage } from './pages/landing/landing.page';
+import { NotFoundPage } from './pages/not-found/not-found.page'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -85,6 +86,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProgramDetailsCardComponent,
     CamelCaseToSpacePipe,
     LandingPage,
+    NotFoundPage,
   ],
   imports: [
     BrowserModule,
