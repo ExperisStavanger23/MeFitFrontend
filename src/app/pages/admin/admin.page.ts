@@ -4,6 +4,9 @@ import { User } from "src/interfaces"
 import { MatDialog } from "@angular/material/dialog"
 import { DialogComponent } from "src/app/components/dialog/dialog.component"
 import { MatTable } from "@angular/material/table"
+import { KeycloakService } from "keycloak-angular"
+import { getTokenClaims } from "src/helper-functions"
+import { Router } from "@angular/router"
 
 @Component({
   selector: "app-admin",
@@ -15,11 +18,23 @@ export class AdminPage implements OnInit {
   displayedColumns: string[] = ["id", "name", "email", "edit", "delete"]
   constructor(
     private apiUserService: UserApiService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private keycloak: KeycloakService,
+    private route: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.users = await this.apiUserService.getUsers()
+    const claims = getTokenClaims(await this.keycloak.getToken())
+    try {
+      const roles = claims.resource_access.MeFit.roles
+      if (!roles.includes("Admin")) {
+        console.log(roles)
+        this.route.navigate(["/not-found"])
+      }
+    } catch (error) {
+      this.route.navigate(["/not-found"])
+    }
   }
 
   @ViewChild(MatTable) table!: MatTable<User>
