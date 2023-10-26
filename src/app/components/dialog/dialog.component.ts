@@ -16,7 +16,6 @@ export class DialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { user: User },
     private fb: FormBuilder
   ) {
-    console.log(data)
     this.user = data.user
 
     this.form = fb.group({
