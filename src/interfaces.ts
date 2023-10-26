@@ -31,8 +31,12 @@ export interface RealmAccess {
 export interface ResourceAccess {
   "realm-management": RealmManagement
   account: Account
+  MeFit: MeFit
 }
 
+export interface MeFit {
+  roles: string[]
+}
 export interface RealmManagement {
   roles: string[]
 }
