@@ -28,7 +28,6 @@ import { WorkoutDetailsCardComponent } from "./components/workout-components/wor
 import { HttpClientModule } from "@angular/common/http"
 import { CreationPage } from "./pages/creation/creation.page"
 import { MatCheckboxModule } from "@angular/material/checkbox"
-import { MatDialogModule } from "@angular/material/dialog"
 import { ProfileEditPage } from "./pages/profile-edit/profile-edit.page"
 import { ProgramCreationFormComponent } from "./components/program-components/program-creation-form/program-creation-form.component"
 import { WorkoutCreationFormComponent } from "./components/workout-components/workout-creation-form/workout-creation-form.component"
@@ -42,9 +41,12 @@ import { ProgramInfoCardComponent } from "./components/program-components/progra
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 import { MatSnackBarModule } from "@angular/material/snack-bar"
 import { MatRadioModule } from "@angular/material/radio"
-import { CamelCaseToSpacePipe } from "./services/pipes/camel-case-to-space.pipe";
-import { LandingPage } from './pages/landing/landing.page';
-import { NotFoundPage } from './pages/not-found/not-found.page'
+import { CamelCaseToSpacePipe } from "./services/pipes/camel-case-to-space.pipe"
+import { LandingPage } from "./pages/landing/landing.page"
+import { NotFoundPage } from "./pages/not-found/not-found.page"
+import { AdminPage } from "./pages/admin/admin.page"
+import { MatDialogModule } from "@angular/material/dialog";
+import { DialogComponent } from './components/dialog/dialog.component'
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -87,6 +89,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CamelCaseToSpacePipe,
     LandingPage,
     NotFoundPage,
+    AdminPage,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,

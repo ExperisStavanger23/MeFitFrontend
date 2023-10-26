@@ -58,6 +58,11 @@ export class UserApiService {
     return firstValueFrom(user)
   }
 
+  async getUsers(): Promise<User[]> {
+    const user = this.http.get<User[]>(`${this.apiUrlBase}/User`)
+    return firstValueFrom(user)
+  }
+
   /**
    * Create a new user.
    * @param userToPost - The user to be created.

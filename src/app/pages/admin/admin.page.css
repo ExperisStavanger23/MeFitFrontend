@@ -1,0 +1,11 @@
+.admin-page {
+    display: flex;
+    justify-content: center;
+}
+
+.table {
+    margin: 20px;
+    max-width: 1000px;
+    width: 90vw;
+    min-width: 200px;
+}

@@ -14,6 +14,7 @@ import { AuthGuard } from "./guard/auth.guard"
 import { ProgramDetailsCardComponent } from "./components/program-components/program-details-card/program-details-card.component"
 import { LandingPage } from "./pages/landing/landing.page"
 import { NotFoundPage } from "./pages/not-found/not-found.page"
+import { AdminPage } from "./pages/admin/admin.page"
 
 const routes: Routes = [
   { path: "", component: LandingPage },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: "profile", component: ProfilePage, canActivate: [AuthGuard] },
   { path: "profile/edit", component: ProfileEditPage },
   { path: "creation", component: CreationPage },
+  { path: "admin", component: AdminPage },
   { path: "**", component: NotFoundPage },
 ]
 
