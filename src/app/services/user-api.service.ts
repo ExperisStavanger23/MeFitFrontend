@@ -57,6 +57,11 @@ export class UserApiService {
     return firstValueFrom(user)
   }
 
+  async getUsers(): Promise<User[]> {
+    const user = this.http.get<User[]>(`${this.apiUrlBase}/User`)
+    return firstValueFrom(user)
+  }
+
   /**
    * Create a new user.
    * @param userToPost - The user to be created.
@@ -231,5 +236,14 @@ export class UserApiService {
         { headers }
       )
       .subscribe(() => this.setUser())
+  }
+
+  /**
+   * Delete a user.
+   * @param id - The ID of the user to delete.
+   */
+  async deleteUser(id: string) {
+    const headers = await this.getHeader()
+    this.http.delete(`${this.apiUrlBase}/User/${id}`, { headers }).subscribe()
   }
 }
