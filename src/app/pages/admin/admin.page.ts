@@ -44,6 +44,12 @@ export class AdminPage implements OnInit {
   }
 
   handleDelete(user: User): void {
-    console.log(user)
+    const index = this.users.findIndex(u => u.id === user.id)
+    this.users.splice(index, 1)
+
+    if (user.id === undefined) return
+    this.apiUserService.deleteUser(user.id)
+
+    this.table.renderRows()
   }
 }

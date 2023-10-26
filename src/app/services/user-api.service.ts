@@ -238,4 +238,13 @@ export class UserApiService {
       )
       .subscribe(() => this.setUser())
   }
+
+  /**
+   * Delete a user.
+   * @param id - The ID of the user to delete.
+   */
+  async deleteUser(id: string) {
+    const headers = await this.getHeader()
+    this.http.delete(`${this.apiUrlBase}/User/${id}`, { headers }).subscribe()
+  }
 }
